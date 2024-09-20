@@ -1,0 +1,16 @@
+# Changes here will be overwritten by Copier; NEVER EDIT MANUALLY
+_commit: 0.1.1
+_src_path: gh:radio-aktywne/template-app-next
+accountname: radio-aktywne
+appname: webrecords
+description: Emission recordings web UI 📼
+docs: true
+docsurl: https://radio-aktywne.github.io/app-webrecords
+envprefix: WEBRECORDS
+imagename: apps/webrecords
+keyprefix: webrecords
+port: 38000
+registry: true
+releases: true
+reponame: app-webrecords
+repourl: https://github.com/radio-aktywne/app-webrecords
