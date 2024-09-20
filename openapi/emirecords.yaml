@@ -1,0 +1,532 @@
+info:
+  title: emirecords app
+openapi: 3.1.0
+paths:
+  /ping:
+    get:
+      summary: Ping
+      description: Ping.
+      operationId: PingPing
+      responses:
+        "204":
+          description: Request fulfilled, nothing follows
+          headers:
+            cache-control:
+              schema:
+                type: string
+              required: false
+              deprecated: false
+              allowEmptyValue: false
+              allowReserved: false
+          content:
+            application/json:
+              schema:
+                type: "null"
+      deprecated: false
+    head:
+      summary: Ping headers
+      description: Ping headers.
+      operationId: PingHeadping
+      responses:
+        "204":
+          description: Request fulfilled, nothing follows
+          headers:
+            cache-control:
+              schema:
+                type: string
+              required: false
+              deprecated: false
+              allowEmptyValue: false
+              allowReserved: false
+          content:
+            application/json:
+              schema:
+                type: "null"
+      deprecated: false
+  /records/{event}/{start}:
+    get:
+      summary: Download record
+      description: Download a record.
+      operationId: RecordsEventStartDownload
+      parameters:
+        - name: event
+          in: path
+          schema:
+            type: string
+            format: uuid
+            description: Identifier of the event.
+          description: Identifier of the event.
+          required: true
+          deprecated: false
+          allowEmptyValue: false
+          allowReserved: false
+        - name: start
+          in: path
+          schema:
+            type: string
+            description: Start time of the event instance in event timezone.
+          description: Start time of the event instance in event timezone.
+          required: true
+          deprecated: false
+          allowEmptyValue: false
+          allowReserved: false
+      responses:
+        "200":
+          description: Stream Response
+          headers:
+            content-length:
+              schema:
+                type: string
+              description: File size in bytes
+              required: false
+              deprecated: false
+              allowEmptyValue: false
+              allowReserved: false
+            last-modified:
+              schema:
+                type: string
+                format: date-time
+              description: Last modified data-time in RFC 2822 format
+              required: false
+              deprecated: false
+              allowEmptyValue: false
+              allowReserved: false
+            etag:
+              schema:
+                type: string
+              description: Entity tag
+              required: false
+              deprecated: false
+              allowEmptyValue: false
+              allowReserved: false
+            Last-Modified:
+              description: Last modified.
+              required: false
+              deprecated: false
+              allowEmptyValue: false
+              allowReserved: false
+            Content-Length:
+              description: Content length.
+              required: false
+              deprecated: false
+              allowEmptyValue: false
+              allowReserved: false
+            ETag:
+              description: Entity tag.
+              required: false
+              deprecated: false
+              allowEmptyValue: false
+              allowReserved: false
+            Content-Type:
+              description: Content type.
+              required: false
+              deprecated: false
+              allowEmptyValue: false
+              allowReserved: false
+          content:
+            "":
+              schema:
+                type: string
+                contentMediaType: application/octet-stream
+        "400":
+          description: Bad request syntax or unsupported method
+          content:
+            application/json:
+              schema:
+                properties:
+                  status_code:
+                    type: integer
+                  detail:
+                    type: string
+                  extra:
+                    additionalProperties: {}
+                    type:
+                      - "null"
+                      - object
+                      - array
+                type: object
+                required:
+                  - detail
+                  - status_code
+                description: Validation Exception
+                examples:
+                  - status_code: 400
+                    detail: Bad Request
+                    extra: {}
+      deprecated: false
+    put:
+      summary: Upload record
+      description: Upload a record.
+      operationId: RecordsEventStartUpload
+      parameters:
+        - name: event
+          in: path
+          schema:
+            type: string
+            format: uuid
+            description: Identifier of the event.
+          description: Identifier of the event.
+          required: true
+          deprecated: false
+          allowEmptyValue: false
+          allowReserved: false
+        - name: start
+          in: path
+          schema:
+            type: string
+            format: date-time
+            description: Start time of the event instance in event timezone.
+          description: Start time of the event instance in event timezone.
+          required: true
+          deprecated: false
+          allowEmptyValue: false
+          allowReserved: false
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+            description: Type of the record data.
+          description: Type of the record data.
+          required: true
+          deprecated: false
+          allowEmptyValue: false
+          allowReserved: false
+      responses:
+        "204":
+          description: Request fulfilled, nothing follows
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: "null"
+        "400":
+          description: Bad request syntax or unsupported method
+          content:
+            application/json:
+              schema:
+                properties:
+                  status_code:
+                    type: integer
+                  detail:
+                    type: string
+                  extra:
+                    additionalProperties: {}
+                    type:
+                      - "null"
+                      - object
+                      - array
+                type: object
+                required:
+                  - detail
+                  - status_code
+                description: Validation Exception
+                examples:
+                  - status_code: 400
+                    detail: Bad Request
+                    extra: {}
+      deprecated: false
+    delete:
+      summary: Delete record
+      description: Delete a record.
+      operationId: RecordsEventStartDelete
+      parameters:
+        - name: event
+          in: path
+          schema:
+            type: string
+            format: uuid
+            description: Identifier of the event.
+          description: Identifier of the event.
+          required: true
+          deprecated: false
+          allowEmptyValue: false
+          allowReserved: false
+        - name: start
+          in: path
+          schema:
+            type: string
+            description: Start time of the event instance in event timezone.
+          description: Start time of the event instance in event timezone.
+          required: true
+          deprecated: false
+          allowEmptyValue: false
+          allowReserved: false
+      responses:
+        "204":
+          description: Request fulfilled, nothing follows
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: "null"
+        "400":
+          description: Bad request syntax or unsupported method
+          content:
+            application/json:
+              schema:
+                properties:
+                  status_code:
+                    type: integer
+                  detail:
+                    type: string
+                  extra:
+                    additionalProperties: {}
+                    type:
+                      - "null"
+                      - object
+                      - array
+                type: object
+                required:
+                  - detail
+                  - status_code
+                description: Validation Exception
+                examples:
+                  - status_code: 400
+                    detail: Bad Request
+                    extra: {}
+      deprecated: false
+    head:
+      summary: Download record headers
+      description: Download record headers.
+      operationId: RecordsEventStartHeaddownload
+      parameters:
+        - name: event
+          in: path
+          schema:
+            type: string
+            format: uuid
+            description: Identifier of the event.
+          description: Identifier of the event.
+          required: true
+          deprecated: false
+          allowEmptyValue: false
+          allowReserved: false
+        - name: start
+          in: path
+          schema:
+            type: string
+            description: Start time of the event instance in event timezone.
+          description: Start time of the event instance in event timezone.
+          required: true
+          deprecated: false
+          allowEmptyValue: false
+          allowReserved: false
+      responses:
+        "200":
+          description: Request fulfilled, document follows
+          headers:
+            Last-Modified:
+              description: Last modified.
+              required: false
+              deprecated: false
+              allowEmptyValue: false
+              allowReserved: false
+            Content-Length:
+              description: Content length.
+              required: false
+              deprecated: false
+              allowEmptyValue: false
+              allowReserved: false
+            ETag:
+              description: Entity tag.
+              required: false
+              deprecated: false
+              allowEmptyValue: false
+              allowReserved: false
+            Content-Type:
+              description: Content type.
+              required: false
+              deprecated: false
+              allowEmptyValue: false
+              allowReserved: false
+          content:
+            application/json:
+              schema:
+                type: "null"
+        "400":
+          description: Bad request syntax or unsupported method
+          content:
+            application/json:
+              schema:
+                properties:
+                  status_code:
+                    type: integer
+                  detail:
+                    type: string
+                  extra:
+                    additionalProperties: {}
+                    type:
+                      - "null"
+                      - object
+                      - array
+                type: object
+                required:
+                  - detail
+                  - status_code
+                description: Validation Exception
+                examples:
+                  - status_code: 400
+                    detail: Bad Request
+                    extra: {}
+      deprecated: false
+  /records/{event}:
+    get:
+      summary: List records
+      description: List records.
+      operationId: RecordsEventList
+      parameters:
+        - name: event
+          in: path
+          schema:
+            type: string
+            format: uuid
+            description: Identifier of the event to list records for.
+          description: Identifier of the event to list records for.
+          required: true
+          deprecated: false
+          allowEmptyValue: false
+          allowReserved: false
+        - name: after
+          in: query
+          schema:
+            oneOf:
+              - type: "null"
+              - type: string
+                format: date-time
+            description: Only list records after this time (in event timezone).
+          description: Only list records after this time (in event timezone).
+          required: false
+          deprecated: false
+          allowEmptyValue: false
+          allowReserved: false
+        - name: before
+          in: query
+          schema:
+            oneOf:
+              - type: "null"
+              - type: string
+                format: date-time
+            description: Only list records before this time (in event timezone).
+          description: Only list records before this time (in event timezone).
+          required: false
+          deprecated: false
+          allowEmptyValue: false
+          allowReserved: false
+        - name: limit
+          in: query
+          schema:
+            oneOf:
+              - type: "null"
+              - type: integer
+                default: 10
+            description: Maximum number of records to return.
+            default: 10
+          description: Maximum number of records to return.
+          required: false
+          deprecated: false
+          allowEmptyValue: false
+          allowReserved: false
+        - name: offset
+          in: query
+          schema:
+            oneOf:
+              - type: "null"
+              - type: integer
+            description: Number of records to skip.
+          description: Number of records to skip.
+          required: false
+          deprecated: false
+          allowEmptyValue: false
+          allowReserved: false
+        - name: order
+          in: query
+          schema:
+            type:
+              - "null"
+              - string
+            enum:
+              - asc
+              - desc
+              - null
+            description: Order to apply to the results.
+          description: Order to apply to the results.
+          required: false
+          deprecated: false
+          allowEmptyValue: false
+          allowReserved: false
+      responses:
+        "200":
+          description: Request fulfilled, document follows
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RecordList"
+        "400":
+          description: Bad request syntax or unsupported method
+          content:
+            application/json:
+              schema:
+                properties:
+                  status_code:
+                    type: integer
+                  detail:
+                    type: string
+                  extra:
+                    additionalProperties: {}
+                    type:
+                      - "null"
+                      - object
+                      - array
+                type: object
+                required:
+                  - detail
+                  - status_code
+                description: Validation Exception
+                examples:
+                  - status_code: 400
+                    detail: Bad Request
+                    extra: {}
+      deprecated: false
+components:
+  schemas:
+    Record:
+      properties:
+        event:
+          type: string
+          format: uuid
+          description: Identifier of the event.
+        start:
+          type: string
+          format: date-time
+          description: Start time of the event instance in event timezone.
+      type: object
+      required:
+        - event
+        - start
+      title: Record
+    RecordList:
+      properties:
+        count:
+          type: integer
+          description: Total number of records that match the request.
+        limit:
+          oneOf:
+            - type: "null"
+            - type: integer
+          description: Maximum number of returned records.
+        offset:
+          oneOf:
+            - type: "null"
+            - type: integer
+          description: Number of skipped records.
+        records:
+          items:
+            $ref: "#/components/schemas/Record"
+          type: array
+          description: List of records.
+      type: object
+      required:
+        - count
+        - records
+      title: RecordList
