@@ -12,7 +12,7 @@ You can configure the app at runtime using various environment variables:
   (default: `0.0.0.0`)
 - `MAGNOLIA__SERVER__PORT` -
   port to run the server on
-  (default: `38000`)
+  (default: `10720`)
 - `MAGNOLIA__BEAVER__HTTP__SCHEME`
   scheme of the HTTP API of the beaver service
   (default: `http`)
@@ -21,7 +21,7 @@ You can configure the app at runtime using various environment variables:
   (default: `localhost`)
 - `MAGNOLIA__BEAVER__HTTP__PORT`
   port of the HTTP API of the beaver service
-  (default: `35000`)
+  (default: `10500`)
 - `MAGNOLIA__BEAVER__HTTP__PATH`
   path of the HTTP API of the beaver service
   (default: ``)
@@ -33,7 +33,7 @@ You can configure the app at runtime using various environment variables:
   (default: `localhost`)
 - `MAGNOLIA__GECKO__HTTP__PORT`
   port of the HTTP API of the gecko service
-  (default: `31000`)
+  (default: `10700`)
 - `MAGNOLIA__GECKO__HTTP__PATH`
   path of the HTTP API of the gecko service
   (default: ``)

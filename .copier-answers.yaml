@@ -9,7 +9,7 @@ docsurl: https://radio-aktywne.github.io/magnolia
 envprefix: MAGNOLIA
 imagename: apps/magnolia
 keyprefix: magnolia
-port: 38000
+port: 10720
 registry: true
 releases: true
 reponame: magnolia
