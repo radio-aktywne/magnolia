@@ -1,6 +1,6 @@
 "use server";
 
-import { emishows } from "../../api";
+import { beaver } from "../../api";
 import { ListEventsData, ListEventsProps } from "./types";
 
 const errorMessage = "Listing events failed.";
@@ -14,7 +14,7 @@ export async function listEvents({
   order,
 }: ListEventsProps = {}) {
   try {
-    const { data, error, response } = await emishows.GET("/events", {
+    const { data, error, response } = await beaver.GET("/events", {
       params: {
         query: { limit, offset, where, query, include, order },
       },

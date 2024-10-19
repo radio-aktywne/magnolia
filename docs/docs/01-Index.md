@@ -3,10 +3,10 @@ slug: /
 title: Index
 ---
 
-# webrecords
+# magnolia
 
 Broadcast recordings app 📼
 
 ## 💡 About
 
-`webrecords` is a web app for managing recordings of live broadcasts.
+`magnolia` is a web app for managing recordings of live broadcasts.

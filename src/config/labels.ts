@@ -9,28 +9,28 @@ export const labels = {
   },
   pages: {
     index: {
-      title: "webrecords",
-      description: "webrecords",
+      title: "magnolia",
+      description: "magnolia",
     },
     events: {
-      title: "Events • webrecords",
-      description: "webrecords",
+      title: "Events • magnolia",
+      description: "magnolia",
     },
     records: {
-      title: "Records • webrecords",
-      description: "webrecords",
+      title: "Records • magnolia",
+      description: "magnolia",
     },
     recordsEventNotFound: {
       text: "Event not found",
     },
     notFound: {
-      title: "Not Found • webrecords",
-      description: "webrecords",
+      title: "Not Found • magnolia",
+      description: "magnolia",
       text: "Page not found",
     },
     error: {
-      title: "Error • webrecords",
-      description: "webrecords",
+      title: "Error • magnolia",
+      description: "magnolia",
       text: "Something went wrong",
       buttons: {
         retry: {

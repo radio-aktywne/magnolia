@@ -1,4 +1,4 @@
-import { components } from "../../api/emirecords";
+import { components } from "../../api/gecko";
 
 export type ListRecordsData = components["schemas"]["RecordList"];
 

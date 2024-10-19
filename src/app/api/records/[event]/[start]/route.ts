@@ -1,4 +1,4 @@
-import { emirecords } from "../../../../../api";
+import { gecko } from "../../../../../api";
 
 type Params = {
   event: string;
@@ -25,7 +25,7 @@ function createNotFoundResponse(error?: string) {
 
 export async function GET(request: Request, { params }: Context) {
   try {
-    const { data, error, response } = await emirecords.GET(
+    const { data, error, response } = await gecko.GET(
       "/records/{event}/{start}",
       {
         params: {

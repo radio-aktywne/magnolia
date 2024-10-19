@@ -2,15 +2,15 @@
 _commit: 0.2.0
 _src_path: gh:radio-aktywne/template-app-next
 accountname: radio-aktywne
-appname: webrecords
+appname: magnolia
 description: Broadcast recordings app 📼
 docs: true
-docsurl: https://radio-aktywne.github.io/webrecords
-envprefix: WEBRECORDS
-imagename: apps/webrecords
-keyprefix: webrecords
+docsurl: https://radio-aktywne.github.io/magnolia
+envprefix: MAGNOLIA
+imagename: apps/magnolia
+keyprefix: magnolia
 port: 38000
 registry: true
 releases: true
-reponame: webrecords
-repourl: https://github.com/radio-aktywne/webrecords
+reponame: magnolia
+repourl: https://github.com/radio-aktywne/magnolia
