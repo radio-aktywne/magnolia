@@ -3,10 +3,10 @@ slug: /
 title: Index
 ---
 
-# webrecords app
+# webrecords
 
-Emission recordings web UI 📼
+Broadcast recordings app 📼
 
 ## 💡 About
 
-`webrecords` is a web application for managing recordings of live audio streams.
+`webrecords` is a web app for managing recordings of live broadcasts.
