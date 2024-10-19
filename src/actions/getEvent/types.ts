@@ -1,4 +1,4 @@
-import { components } from "../../api/emishows";
+import { components } from "../../api/beaver";
 
 export type GetEventData = components["schemas"]["events_models_Event"];
 

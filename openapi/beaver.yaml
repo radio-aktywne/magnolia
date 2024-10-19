@@ -1,5 +1,5 @@
 info:
-  title: emishows app
+  title: beaver
 openapi: 3.1.0
 paths:
   /events:

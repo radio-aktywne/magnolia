@@ -1,6 +1,6 @@
 "use server";
 
-import { emirecords } from "../../api";
+import { gecko } from "../../api";
 import { ListRecordsData, ListRecordsProps } from "./types";
 
 const errorMessage = "Listing records failed.";
@@ -14,7 +14,7 @@ export async function listRecords({
   order,
 }: ListRecordsProps) {
   try {
-    const { data, error, response } = await emirecords.GET("/records/{event}", {
+    const { data, error, response } = await gecko.GET("/records/{event}", {
       params: {
         path: { event },
         query: { after, before, limit, offset, order },
