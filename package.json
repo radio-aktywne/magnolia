@@ -2,8 +2,8 @@
   "name": "magnolia",
   "private": true,
   "scripts": {
-    "dev": "next dev --hostname \"${MAGNOLIA__SERVER__HOST:-0.0.0.0}\" --port \"${MAGNOLIA__SERVER__PORT:-38000}\"",
-    "run": "next start --hostname \"${MAGNOLIA__SERVER__HOST:-0.0.0.0}\" --port \"${MAGNOLIA__SERVER__PORT:-38000}\"",
+    "dev": "next dev --hostname \"${MAGNOLIA__SERVER__HOST:-0.0.0.0}\" --port \"${MAGNOLIA__SERVER__PORT:-10720}\"",
+    "run": "next start --hostname \"${MAGNOLIA__SERVER__HOST:-0.0.0.0}\" --port \"${MAGNOLIA__SERVER__PORT:-10720}\"",
     "build": "next build",
     "clean": "rm --recursive --force build/",
     "update": "ncu --peer --upgrade && npm i --no-audit --no-fund",
