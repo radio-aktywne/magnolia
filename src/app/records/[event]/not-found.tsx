@@ -1,6 +1,12 @@
-import { Title } from "@mantine/core";
-import { labels } from "../../../config/labels";
+import { RecordsEventNotFoundMetadata } from "../../../components/metadata/records/records-event-not-found-metadata";
+import { RecordsEventNotFoundView } from "../../../components/views/records/records-event-not-found-view";
+import { RecordsEventNotFoundInput } from "./types";
 
-export default function RecordsEventNotFound() {
-  return <Title>{labels.pages.recordsEventNotFound.text}</Title>;
+export default function RecordsEventNotFound({}: RecordsEventNotFoundInput) {
+  return (
+    <>
+      <RecordsEventNotFoundMetadata />
+      <RecordsEventNotFoundView />
+    </>
+  );
 }

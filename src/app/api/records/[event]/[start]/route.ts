@@ -1,62 +1,47 @@
-import { gecko } from "../../../../../api";
+import { NextRequest, NextResponse } from "next/server";
 
-type Params = {
-  event: string;
-  start: string;
-};
+import {
+  downloadRecord,
+  RecordNotFoundError,
+} from "../../../../../lib/gecko/download-record";
+import { errors } from "./constants";
+import { RouteContext } from "./types";
 
-type Context = {
-  params: Params;
-};
-
-function createGenericErrorResponse(error?: string) {
-  return Response.json(
-    { error: error || "Internal Server Error." },
-    { status: 500, statusText: "Internal Server Error" },
-  );
-}
-
-function createNotFoundResponse(error?: string) {
-  return Response.json(
-    { error: error || "Record not found." },
-    { status: 404, statusText: "Not Found" },
-  );
-}
-
-export async function GET(request: Request, { params }: Context) {
+export async function GET(
+  request: NextRequest,
+  context: RouteContext,
+): Promise<NextResponse> {
   try {
-    const { data, error, response } = await gecko.GET(
-      "/records/{event}/{start}",
-      {
-        params: {
-          path: { event: params.event, start: params.start },
-        },
-        parseAs: "stream",
-      },
-    );
+    const { event, start } = context.params;
 
-    if (error) {
-      if (response.status === 404) return createNotFoundResponse();
-      return createGenericErrorResponse("Downloading record failed.");
-    }
+    const { data, etag, length, modified, type } = await downloadRecord({
+      event: event,
+      start: start,
+    });
 
-    const headers = new Headers();
-    const keepHeaders = [
-      "Content-Length",
-      "Content-Type",
-      "ETag",
-      "Last-Modified",
-    ];
+    const headers = {
+      "Content-Length": length.toString(),
+      "Content-Type": type,
+      ETag: etag,
+      "Last-Modified": modified,
+    };
 
-    for (const key of keepHeaders) {
-      const value = response.headers.get(key);
-      if (value !== null) headers.set(key, value);
-    }
-
-    const options = { status: 200, statusText: "OK", headers: headers };
-
-    return new Response(data, options);
+    return new NextResponse(data, {
+      headers: headers,
+      status: 200,
+      statusText: "OK",
+    });
   } catch (error) {
-    return createGenericErrorResponse("Downloading record failed.");
+    if (error instanceof RecordNotFoundError) {
+      return NextResponse.json(
+        { error: errors.download.notFound },
+        { status: 404, statusText: "Not Found" },
+      );
+    }
+
+    return NextResponse.json(
+      { error: errors.download.generic },
+      { status: 500, statusText: "Internal Server Error" },
+    );
   }
 }

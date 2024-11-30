@@ -1,0 +1,131 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2024-11-09 16:23+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: @lingui/cli\n"
+"Language: en\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Plural-Forms: \n"
+
+#: src/actions/gecko/delete-record/constants.ts:4
+msgid "An error occurred while deleteing record."
+msgstr "An error occurred while deleteing record."
+
+#: src/app/api/records/[event]/[start]/constants.ts:5
+msgid "An error occurred while downloading the record."
+msgstr "An error occurred while downloading the record."
+
+#: src/actions/beaver/get-event/constants.ts:4
+msgid "An error occurred while fetching the event."
+msgstr "An error occurred while fetching the event."
+
+#: src/actions/beaver/list-events/constants.ts:4
+msgid "An error occurred while listing events."
+msgstr "An error occurred while listing events."
+
+#: src/actions/gecko/list-records/constants.ts:4
+msgid "An error occurred while listing records."
+msgstr "An error occurred while listing records."
+
+#: src/actions/beaver/list-schedules/constants.ts:4
+msgid "An error occurred while listing schedules."
+msgstr "An error occurred while listing schedules."
+
+#: src/hooks/use-toasts/main.tsx:19
+msgid "Error"
+msgstr "Error"
+
+#: src/components/metadata/root/root-error-metadata/main.tsx:14
+msgid "Error • magnolia"
+msgstr "Error • magnolia"
+
+#: src/components/metadata/records/records-event-not-found-metadata/main.tsx:14
+msgid "Event not found • magnolia"
+msgstr "Event not found • magnolia"
+
+#: src/actions/beaver/get-event/constants.ts:6
+#: src/actions/gecko/list-records/constants.ts:6
+#: src/components/views/records/records-event-not-found-view/main.tsx:12
+msgid "Event not found."
+msgstr "Event not found."
+
+#: src/app/events/page.tsx:18
+#: src/components/metadata/events/events-page-metadata/main.tsx:14
+msgid "Events • magnolia"
+msgstr "Events • magnolia"
+
+#: src/hooks/use-toasts/main.tsx:31
+msgid "Info"
+msgstr "Info"
+
+#: src/actions/beaver/get-event/constants.ts:5
+#: src/actions/beaver/list-events/constants.ts:5
+#: src/actions/beaver/list-schedules/constants.ts:5
+#: src/actions/gecko/delete-record/constants.ts:5
+#: src/actions/gecko/list-records/constants.ts:5
+msgid "Invalid input."
+msgstr "Invalid input."
+
+#: src/app/events/page.tsx:19
+#: src/app/layout.tsx:19
+#: src/app/layout.tsx:20
+#: src/app/records/[event]/page.tsx:19
+#: src/components/metadata/events/events-page-metadata/main.tsx:13
+#: src/components/metadata/records/records-event-not-found-metadata/main.tsx:13
+#: src/components/metadata/records/records-page-metadata/main.tsx:13
+#: src/components/metadata/root/root-error-metadata/main.tsx:13
+#: src/components/metadata/root/root-not-found-metadata/main.tsx:13
+msgid "magnolia"
+msgstr "magnolia"
+
+#: src/components/widgets/event-list-widget/main.tsx:37
+msgid "No events."
+msgstr "No events."
+
+#: src/components/widgets/record-list-widget/main.tsx:37
+msgid "No records."
+msgstr "No records."
+
+#: src/components/metadata/root/root-not-found-metadata/main.tsx:14
+msgid "Not Found • magnolia"
+msgstr "Not Found • magnolia"
+
+#: src/components/views/root/root-not-found-view/main.tsx:12
+msgid "Page not found"
+msgstr "Page not found"
+
+#: src/components/widgets/record-list-widget/components/record-tile/main.tsx:27
+msgid "Record deleted."
+msgstr "Record deleted."
+
+#: src/actions/gecko/delete-record/constants.ts:6
+#: src/app/api/records/[event]/[start]/constants.ts:8
+msgid "Record not found."
+msgstr "Record not found."
+
+#: src/app/records/[event]/page.tsx:18
+#: src/components/metadata/records/records-page-metadata/main.tsx:14
+msgid "Records • magnolia"
+msgstr "Records • magnolia"
+
+#: src/components/views/root/root-error-view/main.tsx:22
+msgid "Retry"
+msgstr "Retry"
+
+#: src/components/views/root/root-error-view/main.tsx:15
+msgid "Something went wrong"
+msgstr "Something went wrong"
+
+#: src/hooks/use-toasts/main.tsx:43
+msgid "Success"
+msgstr "Success"
+
+#: src/hooks/use-toasts/main.tsx:55
+msgid "Warning"
+msgstr "Warning"

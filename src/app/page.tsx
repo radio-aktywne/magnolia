@@ -1,5 +1,7 @@
 import { redirect } from "next/navigation";
 
-export default async function IndexPage() {
+import { RootPageInput } from "./types";
+
+export default function RootPage({}: RootPageInput) {
   redirect("/events");
 }
