@@ -1,77 +1,30 @@
-import { redirect } from "next/navigation";
-import { listEvents } from "../../actions";
-import { EventListWidget } from "../../components";
-import { createModifiedURLSearchParams } from "../../utils/url";
+import { i18n } from "@lingui/core";
+import { msg, t } from "@lingui/macro";
+import { Metadata } from "next";
 
-type EventsPageSearchParams = Readonly<{
-  page?: string | string[];
-}>;
-
-export type EventsPageProps = Readonly<{
-  searchParams: EventsPageSearchParams;
-}>;
+import { EventsPageMetadata } from "../../components/metadata/events/events-page-metadata";
+import { EventsPageView } from "../../components/views/events/events-page-view";
+import { getLanguage } from "../../lib/i18n/get-language";
+import { loadLocale } from "../../lib/i18n/load-locale";
+import { EventsPageInput } from "./types";
 
 export const dynamic = "force-dynamic";
 
-const perPage = 5;
+export async function generateMetadata(): Promise<Metadata> {
+  const { language } = getLanguage();
+  await loadLocale({ i18n, language });
 
-const eventFilter = { type: "live" };
-
-function redirectWithParams(params: URLSearchParams): never {
-  redirect("/events?" + params.toString());
+  return {
+    description: t(i18n)(msg({ message: "Events • magnolia" })),
+    title: t(i18n)(msg({ message: "magnolia" })),
+  };
 }
 
-async function validatePage(params: EventsPageSearchParams, where: string) {
-  const page = params.page;
-
-  if (page === undefined)
-    redirectWithParams(createModifiedURLSearchParams(params, { page: "1" }));
-
-  if (Array.isArray(page))
-    redirectWithParams(
-      createModifiedURLSearchParams(params, { page: page[0] }),
-    );
-
-  const parsedPage = parseInt(page, 10);
-
-  if (isNaN(parsedPage) || parsedPage < 1)
-    redirectWithParams(createModifiedURLSearchParams(params, { page: "1" }));
-
-  const { data: checkEvents, error: checkError } = await listEvents({
-    limit: 0,
-    where,
-  });
-
-  if (checkError !== undefined) throw new Error(checkError);
-
-  const offset = perPage * (parsedPage - 1);
-
-  if (checkEvents.count > 0 && offset >= checkEvents.count)
-    redirectWithParams(
-      createModifiedURLSearchParams(params, {
-        page: (Math.ceil(checkEvents.count / perPage) || 1).toString(),
-      }),
-    );
-
-  return parsedPage;
-}
-
-export default async function EventsPage({ searchParams }: EventsPageProps) {
-  const where = JSON.stringify(eventFilter);
-  const page = await validatePage(searchParams, where);
-  const limit = perPage;
-  const offset = perPage * (page - 1);
-
-  const { data: events, error } = await listEvents({ limit, offset, where });
-
-  if (error !== undefined) throw new Error(error);
-
+export default function EventsPage({}: EventsPageInput) {
   return (
-    <EventListWidget
-      events={events}
-      where={where}
-      page={page}
-      perPage={perPage}
-    />
+    <>
+      <EventsPageMetadata />
+      <EventsPageView />
+    </>
   );
 }
