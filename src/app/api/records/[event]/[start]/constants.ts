@@ -8,5 +8,8 @@ export const errors = {
     notFound: msg({
       message: "Record not found.",
     }),
+    unauthorized: msg({
+      message: "You are not authorized to download the record.",
+    }),
   },
 };

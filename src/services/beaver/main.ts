@@ -1,4 +1,4 @@
-import createClient from "openapi-fetch";
+import createClient, { ClientOptions } from "openapi-fetch";
 import "server-only";
 
 import type { paths } from "./types";
@@ -16,4 +16,8 @@ const path = (process.env.MAGNOLIA__BEAVER__HTTP__PATH || "")
   .replace(/\/+$/, "");
 const url = `${scheme}://${host}${port ? `:${port}` : ""}${path}`;
 
-export const beaver = createClient<paths>({ baseUrl: url });
+export const beaverConfig = {
+  baseUrl: url,
+} satisfies ClientOptions;
+
+export const beaver = createClient<paths>(beaverConfig);

@@ -37,6 +37,11 @@ msgstr "An error occurred while listing records."
 msgid "An error occurred while listing schedules."
 msgstr "An error occurred while listing schedules."
 
+#: src/app/auth/error/page.tsx:18
+#: src/components/metadata/auth/auth-error-page-metadata/main.tsx:14
+msgid "Auth error • magnolia"
+msgstr "Auth error • magnolia"
+
 #: src/hooks/use-toasts/main.tsx:19
 msgid "Error"
 msgstr "Error"
@@ -44,6 +49,10 @@ msgstr "Error"
 #: src/components/metadata/root/root-error-metadata/main.tsx:14
 msgid "Error • magnolia"
 msgstr "Error • magnolia"
+
+#: src/components/views/auth/auth-error-page-view/main.tsx:14
+msgid "Error in auth flow"
+msgstr "Error in auth flow"
 
 #: src/components/metadata/records/records-event-not-found-metadata/main.tsx:14
 msgid "Event not found • magnolia"
@@ -55,7 +64,7 @@ msgstr "Event not found • magnolia"
 msgid "Event not found."
 msgstr "Event not found."
 
-#: src/app/events/page.tsx:18
+#: src/app/(protected)/events/page.tsx:19
 #: src/components/metadata/events/events-page-metadata/main.tsx:14
 msgid "Events • magnolia"
 msgstr "Events • magnolia"
@@ -72,10 +81,16 @@ msgstr "Info"
 msgid "Invalid input."
 msgstr "Invalid input."
 
-#: src/app/events/page.tsx:19
+#: src/components/layouts/session-layout/components/user-menu/components/logout-button/main.tsx:23
+msgid "Logout"
+msgstr "Logout"
+
+#: src/app/(protected)/events/page.tsx:18
+#: src/app/(protected)/records/[event]/page.tsx:18
+#: src/app/auth/error/page.tsx:17
 #: src/app/layout.tsx:19
 #: src/app/layout.tsx:20
-#: src/app/records/[event]/page.tsx:19
+#: src/components/metadata/auth/auth-error-page-metadata/main.tsx:13
 #: src/components/metadata/events/events-page-metadata/main.tsx:13
 #: src/components/metadata/records/records-event-not-found-metadata/main.tsx:13
 #: src/components/metadata/records/records-page-metadata/main.tsx:13
@@ -109,7 +124,7 @@ msgstr "Record deleted."
 msgid "Record not found."
 msgstr "Record not found."
 
-#: src/app/records/[event]/page.tsx:18
+#: src/app/(protected)/records/[event]/page.tsx:19
 #: src/components/metadata/records/records-page-metadata/main.tsx:14
 msgid "Records • magnolia"
 msgstr "Records • magnolia"
@@ -129,3 +144,27 @@ msgstr "Success"
 #: src/hooks/use-toasts/main.tsx:55
 msgid "Warning"
 msgstr "Warning"
+
+#: src/actions/gecko/delete-record/constants.ts:7
+msgid "You are not authorized to delete the record."
+msgstr "You are not authorized to delete the record."
+
+#: src/app/api/records/[event]/[start]/constants.ts:11
+msgid "You are not authorized to download the record."
+msgstr "You are not authorized to download the record."
+
+#: src/actions/beaver/get-event/constants.ts:7
+msgid "You are not authorized to fetch the event."
+msgstr "You are not authorized to fetch the event."
+
+#: src/actions/beaver/list-events/constants.ts:6
+msgid "You are not authorized to list events."
+msgstr "You are not authorized to list events."
+
+#: src/actions/gecko/list-records/constants.ts:7
+msgid "You are not authorized to list records."
+msgstr "You are not authorized to list records."
+
+#: src/actions/beaver/list-schedules/constants.ts:6
+msgid "You are not authorized to list schedules."
+msgstr "You are not authorized to list schedules."

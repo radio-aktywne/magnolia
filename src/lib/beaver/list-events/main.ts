@@ -12,7 +12,7 @@ export async function listEvents({
   query,
   where,
 }: ListEventsInput = {}): Promise<ListEventsOutput> {
-  const { data, error } = await beaver.GET("/events", {
+  const { data, error, response } = await beaver.GET("/events", {
     params: {
       query: {
         include: include,
@@ -25,7 +25,7 @@ export async function listEvents({
     },
   });
 
-  if (error) throw new BeaverError();
+  if (error || !response.ok) throw new BeaverError();
 
   return { events: data };
 }

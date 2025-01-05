@@ -1,5 +1,6 @@
 "use server";
 
+import { auth } from "../../../auth";
 import {
   deleteRecord as internalDeleteRecord,
   RecordNotFoundError,
@@ -12,6 +13,9 @@ import { DeleteRecordInput, DeleteRecordOutput } from "./types";
 export async function deleteRecord(
   input: DeleteRecordInput,
 ): Promise<DeleteRecordOutput> {
+  const session = await auth.auth();
+  if (!session) return { error: errors.unauthorized };
+
   const parsed = inputSchema.safeParse(input);
   if (!parsed.success) return { error: errors.invalidInput };
 
