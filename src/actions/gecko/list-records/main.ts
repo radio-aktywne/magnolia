@@ -1,5 +1,6 @@
 "use server";
 
+import { auth } from "../../../auth";
 import { GeckoError } from "../../../lib/gecko/errors";
 import {
   EventNotFoundError,
@@ -12,6 +13,9 @@ import { ListRecordsInput, ListRecordsOutput } from "./types";
 export async function listRecords(
   input: ListRecordsInput,
 ): Promise<ListRecordsOutput> {
+  const session = await auth.auth();
+  if (!session) return { error: errors.unauthorized };
+
   const parsed = inputSchema.safeParse(input);
   if (!parsed.success) return { error: errors.invalidInput };
 

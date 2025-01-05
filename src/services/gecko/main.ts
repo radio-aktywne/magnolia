@@ -1,4 +1,4 @@
-import createClient from "openapi-fetch";
+import createClient, { ClientOptions } from "openapi-fetch";
 import "server-only";
 
 import type { paths } from "./types";
@@ -16,4 +16,8 @@ const path = (process.env.MAGNOLIA__GECKO__HTTP__PATH || "")
   .replace(/\/+$/, "");
 const url = `${scheme}://${host}${port ? `:${port}` : ""}${path}`;
 
-export const gecko = createClient<paths>({ baseUrl: url });
+export const geckoConfig = {
+  baseUrl: url,
+} satisfies ClientOptions;
+
+export const gecko = createClient<paths>(geckoConfig);

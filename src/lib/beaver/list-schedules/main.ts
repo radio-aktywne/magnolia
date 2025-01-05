@@ -13,7 +13,7 @@ export async function listSchedules({
   start,
   where,
 }: ListSchedulesInput = {}): Promise<ListSchedulesOutput> {
-  const { data, error } = await beaver.GET("/schedule", {
+  const { data, error, response } = await beaver.GET("/schedule", {
     params: {
       query: {
         end: end,
@@ -27,7 +27,7 @@ export async function listSchedules({
     },
   });
 
-  if (error) throw new BeaverError();
+  if (error || !response.ok) throw new BeaverError();
 
   return { schedules: data };
 }

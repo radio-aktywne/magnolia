@@ -16,7 +16,7 @@ export async function getEvent({
     },
   });
 
-  if (error) {
+  if (error || !response.ok) {
     if (response.status === 404) throw new EventNotFoundError();
     throw new BeaverError();
   }
