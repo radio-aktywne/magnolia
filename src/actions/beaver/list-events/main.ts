@@ -1,6 +1,6 @@
 "use server";
 
-import { auth } from "../../../auth";
+import { getSession } from "../../../lib/auth/get-session";
 import { BeaverError } from "../../../lib/beaver/errors";
 import { listEvents as internalListEvents } from "../../../lib/beaver/list-events";
 import { errors } from "./constants";
@@ -10,7 +10,7 @@ import { ListEventsInput, ListEventsOutput } from "./types";
 export async function listEvents(
   input: ListEventsInput,
 ): Promise<ListEventsOutput> {
-  const session = await auth.auth();
+  const { session } = await getSession();
   if (!session) return { error: errors.unauthorized };
 
   const parsed = inputSchema.safeParse(input);

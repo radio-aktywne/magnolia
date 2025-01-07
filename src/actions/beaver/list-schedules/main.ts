@@ -1,6 +1,6 @@
 "use server";
 
-import { auth } from "../../../auth";
+import { getSession } from "../../../lib/auth/get-session";
 import { BeaverError } from "../../../lib/beaver/errors";
 import { listSchedules as internalListSchedules } from "../../../lib/beaver/list-schedules";
 import { errors } from "./constants";
@@ -10,7 +10,7 @@ import { ListSchedulesInput, ListSchedulesOutput } from "./types";
 export async function listSchedules(
   input: ListSchedulesInput,
 ): Promise<ListSchedulesOutput> {
-  const session = await auth.auth();
+  const { session } = await getSession();
   if (!session) return { error: errors.unauthorized };
 
   const parsed = inputSchema.safeParse(input);
