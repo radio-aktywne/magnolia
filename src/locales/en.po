@@ -37,8 +37,8 @@ msgstr "An error occurred while listing records."
 msgid "An error occurred while listing schedules."
 msgstr "An error occurred while listing schedules."
 
-#: src/app/auth/error/page.tsx:18
 #: src/components/metadata/auth/auth-error-page-metadata/main.tsx:14
+#: src/app/auth/error/page.tsx:18
 msgid "Auth error • magnolia"
 msgstr "Auth error • magnolia"
 
@@ -58,14 +58,14 @@ msgstr "Error in auth flow"
 msgid "Event not found • magnolia"
 msgstr "Event not found • magnolia"
 
-#: src/actions/beaver/get-event/constants.ts:6
-#: src/actions/gecko/list-records/constants.ts:6
 #: src/components/views/records/records-event-not-found-view/main.tsx:12
+#: src/actions/gecko/list-records/constants.ts:6
+#: src/actions/beaver/get-event/constants.ts:6
 msgid "Event not found."
 msgstr "Event not found."
 
-#: src/app/(protected)/events/page.tsx:19
 #: src/components/metadata/events/events-page-metadata/main.tsx:14
+#: src/app/(protected)/events/page.tsx:19
 msgid "Events • magnolia"
 msgstr "Events • magnolia"
 
@@ -73,11 +73,11 @@ msgstr "Events • magnolia"
 msgid "Info"
 msgstr "Info"
 
-#: src/actions/beaver/get-event/constants.ts:5
-#: src/actions/beaver/list-events/constants.ts:5
-#: src/actions/beaver/list-schedules/constants.ts:5
-#: src/actions/gecko/delete-record/constants.ts:5
 #: src/actions/gecko/list-records/constants.ts:5
+#: src/actions/gecko/delete-record/constants.ts:5
+#: src/actions/beaver/list-schedules/constants.ts:5
+#: src/actions/beaver/list-events/constants.ts:5
+#: src/actions/beaver/get-event/constants.ts:5
 msgid "Invalid input."
 msgstr "Invalid input."
 
@@ -85,17 +85,17 @@ msgstr "Invalid input."
 msgid "Logout"
 msgstr "Logout"
 
-#: src/app/(protected)/events/page.tsx:18
-#: src/app/(protected)/records/[event]/page.tsx:18
-#: src/app/auth/error/page.tsx:17
+#: src/components/metadata/root/root-not-found-metadata/main.tsx:13
+#: src/components/metadata/root/root-error-metadata/main.tsx:13
+#: src/components/metadata/records/records-page-metadata/main.tsx:13
+#: src/components/metadata/records/records-event-not-found-metadata/main.tsx:13
+#: src/components/metadata/events/events-page-metadata/main.tsx:13
+#: src/components/metadata/auth/auth-error-page-metadata/main.tsx:13
 #: src/app/layout.tsx:19
 #: src/app/layout.tsx:20
-#: src/components/metadata/auth/auth-error-page-metadata/main.tsx:13
-#: src/components/metadata/events/events-page-metadata/main.tsx:13
-#: src/components/metadata/records/records-event-not-found-metadata/main.tsx:13
-#: src/components/metadata/records/records-page-metadata/main.tsx:13
-#: src/components/metadata/root/root-error-metadata/main.tsx:13
-#: src/components/metadata/root/root-not-found-metadata/main.tsx:13
+#: src/app/auth/error/page.tsx:17
+#: src/app/(protected)/records/[event]/page.tsx:18
+#: src/app/(protected)/events/page.tsx:18
 msgid "magnolia"
 msgstr "magnolia"
 
@@ -119,13 +119,13 @@ msgstr "Page not found"
 msgid "Record deleted."
 msgstr "Record deleted."
 
-#: src/actions/gecko/delete-record/constants.ts:6
 #: src/app/api/records/[event]/[start]/constants.ts:8
+#: src/actions/gecko/delete-record/constants.ts:6
 msgid "Record not found."
 msgstr "Record not found."
 
-#: src/app/(protected)/records/[event]/page.tsx:19
 #: src/components/metadata/records/records-page-metadata/main.tsx:14
+#: src/app/(protected)/records/[event]/page.tsx:19
 msgid "Records • magnolia"
 msgstr "Records • magnolia"
 

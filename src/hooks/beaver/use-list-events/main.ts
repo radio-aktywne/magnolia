@@ -36,7 +36,7 @@ export function useListEvents({
   const { start, stop } = useInterval(refresh, interval);
 
   useEffect(() => {
-    refresh();
+    void refresh();
   }, [refresh]);
 
   useEffect(() => {
