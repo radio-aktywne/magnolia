@@ -2,16 +2,16 @@
 
 import { msg } from "@lingui/core/macro";
 import { useLingui } from "@lingui/react";
-import { ActionIcon, Group, Title } from "@mantine/core";
-import { IconDownload, IconTrash } from "@tabler/icons-react";
+import { ActionIcon, Text } from "@mantine/core";
 import { useCallback } from "react";
+import { MdDelete, MdDownload } from "react-icons/md";
 
 import { deleteRecord } from "../../../../../actions/gecko/delete-record";
 import { useListRecords } from "../../../../../hooks/gecko/use-list-records";
 import { useToasts } from "../../../../../hooks/use-toasts";
-import { RecordTileInput } from "./types";
+import { RecordItemInput } from "./types";
 
-export function RecordTile({ record }: RecordTileInput) {
+export function RecordItem({ record }: RecordItemInput) {
   const { _ } = useLingui();
   const toasts = useToasts();
 
@@ -30,19 +30,27 @@ export function RecordTile({ record }: RecordTileInput) {
   }, [_, record, refresh, toasts]);
 
   return (
-    <Group>
-      <Title>{record.start}</Title>
+    <>
+      <Text fw="bold" size="xs">
+        {record.start}
+      </Text>
       <ActionIcon
         component="a"
         download={`${record.event}-${record.start}`}
         href={`/api/records/${record.event}/${record.start}`}
+        size="auto"
         variant="transparent"
       >
-        <IconDownload />
+        <MdDownload size="1em" />
       </ActionIcon>
-      <ActionIcon color="red" onClick={handleDelete} variant="transparent">
-        <IconTrash />
+      <ActionIcon
+        color="ra-red"
+        onClick={handleDelete}
+        size="auto"
+        variant="transparent"
+      >
+        <MdDelete size="1em" />
       </ActionIcon>
-    </Group>
+    </>
   );
 }

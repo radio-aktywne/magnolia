@@ -1,5 +1,5 @@
 import { ListEventsOutput } from "../../../../../lib/beaver/list-events";
 
-export type EventTileInput = {
+export type EventItemInput = {
   event: ListEventsOutput["events"]["events"][number];
 };

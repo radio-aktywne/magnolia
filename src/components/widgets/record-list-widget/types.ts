@@ -5,6 +5,5 @@ import {
 
 export type RecordListWidgetInput = {
   event: ListRecordsInput["event"];
-  perPage?: number;
   records: ListRecordsOutput["records"];
 };

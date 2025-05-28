@@ -64,8 +64,12 @@ msgstr "Event not found • magnolia"
 msgid "Event not found."
 msgstr "Event not found."
 
+#: src/components/widgets/event-list-widget/main.tsx:37
+msgid "Events"
+msgstr "Events"
+
 #: src/components/metadata/events/events-page-metadata/main.tsx:14
-#: src/app/(protected)/events/page.tsx:19
+#: src/app/(protected)/(explorer)/events/page.tsx:18
 msgid "Events • magnolia"
 msgstr "Events • magnolia"
 
@@ -81,7 +85,7 @@ msgstr "Info"
 msgid "Invalid input."
 msgstr "Invalid input."
 
-#: src/components/layouts/session-layout/components/user-menu/components/logout-button/main.tsx:23
+#: src/components/layouts/session-layout/main.tsx:30
 msgid "Logout"
 msgstr "Logout"
 
@@ -94,16 +98,16 @@ msgstr "Logout"
 #: src/app/layout.tsx:19
 #: src/app/layout.tsx:20
 #: src/app/auth/error/page.tsx:17
-#: src/app/(protected)/records/[event]/page.tsx:18
-#: src/app/(protected)/events/page.tsx:18
+#: src/app/(protected)/(explorer)/records/[event]/page.tsx:18
+#: src/app/(protected)/(explorer)/events/page.tsx:17
 msgid "magnolia"
 msgstr "magnolia"
 
-#: src/components/widgets/event-list-widget/main.tsx:37
+#: src/components/widgets/event-list-widget/main.tsx:30
 msgid "No events."
 msgstr "No events."
 
-#: src/components/widgets/record-list-widget/main.tsx:37
+#: src/components/widgets/record-list-widget/main.tsx:29
 msgid "No records."
 msgstr "No records."
 
@@ -115,7 +119,7 @@ msgstr "Not Found • magnolia"
 msgid "Page not found"
 msgstr "Page not found"
 
-#: src/components/widgets/record-list-widget/components/record-tile/main.tsx:27
+#: src/components/widgets/record-list-widget/components/record-item/main.tsx:27
 msgid "Record deleted."
 msgstr "Record deleted."
 
@@ -124,8 +128,12 @@ msgstr "Record deleted."
 msgid "Record not found."
 msgstr "Record not found."
 
+#: src/components/widgets/record-list-widget/main.tsx:35
+msgid "Records"
+msgstr "Records"
+
 #: src/components/metadata/records/records-page-metadata/main.tsx:14
-#: src/app/(protected)/records/[event]/page.tsx:19
+#: src/app/(protected)/(explorer)/records/[event]/page.tsx:19
 msgid "Records • magnolia"
 msgstr "Records • magnolia"
 

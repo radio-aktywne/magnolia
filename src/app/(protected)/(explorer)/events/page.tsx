@@ -2,10 +2,9 @@ import { i18n } from "@lingui/core";
 import { msg } from "@lingui/core/macro";
 import { Metadata } from "next";
 
-import { EventsPageMetadata } from "../../../components/metadata/events/events-page-metadata";
-import { EventsPageView } from "../../../components/views/events/events-page-view";
-import { getLanguage } from "../../../lib/i18n/get-language";
-import { loadLocale } from "../../../lib/i18n/load-locale";
+import { EventsPageMetadata } from "../../../../components/metadata/events/events-page-metadata";
+import { getLanguage } from "../../../../lib/i18n/get-language";
+import { loadLocale } from "../../../../lib/i18n/load-locale";
 import { EventsPageInput } from "./types";
 
 export const dynamic = "force-dynamic";
@@ -21,10 +20,5 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default function EventsPage({}: EventsPageInput) {
-  return (
-    <>
-      <EventsPageMetadata />
-      <EventsPageView />
-    </>
-  );
+  return <EventsPageMetadata />;
 }
