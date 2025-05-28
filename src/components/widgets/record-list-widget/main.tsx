@@ -2,31 +2,23 @@
 
 import { msg } from "@lingui/core/macro";
 import { useLingui } from "@lingui/react";
-import { Center, Pagination, Stack, Title } from "@mantine/core";
-import { useEffect, useState } from "react";
+import { Center, Stack, Title } from "@mantine/core";
+import { List, ListItem } from "@radio-aktywne/ui";
+import { useEffect } from "react";
 
 import { useListRecords } from "../../../hooks/gecko/use-list-records";
 import { useToasts } from "../../../hooks/use-toasts";
-import { RecordTile } from "./components/record-tile";
+import { RecordItem } from "./components/record-item";
 import { RecordListWidgetInput } from "./types";
 
 export function RecordListWidget({
   event: event,
-  perPage = 5,
   records: prefetchedRecords,
 }: RecordListWidgetInput) {
-  const [page, setPage] = useState(1);
-
   const { _ } = useLingui();
   const toasts = useToasts();
 
-  const limit = perPage;
-  const offset = perPage * (page - 1);
-  const { data: currentRecords, error } = useListRecords({
-    event: event,
-    limit: limit,
-    offset: offset,
-  });
+  const { data: currentRecords, error } = useListRecords({ event: event });
   const records = currentRecords ?? prefetchedRecords;
 
   useEffect(() => {
@@ -37,18 +29,18 @@ export function RecordListWidget({
     return <Title>{_(msg({ message: "No records." }))}</Title>;
   }
 
-  const pages = Math.ceil(records.count / perPage);
-
   return (
-    <Stack>
-      <Stack>
-        {records.records.map((record) => (
-          <RecordTile key={record.start} record={record} />
-        ))}
-      </Stack>
+    <Stack mah="100%" w="100%">
       <Center>
-        <Pagination onChange={setPage} total={pages} value={page} withEdges />
+        <Title>{_(msg({ message: "Records" }))}</Title>
       </Center>
+      <List style={{ overflowY: "auto" }}>
+        {records.records.map((record) => (
+          <ListItem key={record.start}>
+            <RecordItem record={record} />
+          </ListItem>
+        ))}
+      </List>
     </Stack>
   );
 }

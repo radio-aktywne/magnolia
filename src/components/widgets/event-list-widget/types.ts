@@ -5,6 +5,5 @@ import {
 
 export type EventListWidgetInput = {
   events: ListEventsOutput["events"];
-  perPage?: number;
   where?: ListEventsInput["where"];
 };

@@ -8,7 +8,7 @@ import { inputSchema } from "./schemas";
 import { ListSchedulesInput, ListSchedulesOutput } from "./types";
 
 export async function listSchedules(
-  input: ListSchedulesInput,
+  input: ListSchedulesInput = {},
 ): Promise<ListSchedulesOutput> {
   const { session } = await getSession();
   if (!session) return { error: errors.unauthorized };

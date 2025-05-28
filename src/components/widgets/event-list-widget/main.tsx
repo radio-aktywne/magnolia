@@ -2,31 +2,24 @@
 
 import { msg } from "@lingui/core/macro";
 import { useLingui } from "@lingui/react";
-import { Center, Pagination, Stack, Title } from "@mantine/core";
-import { useEffect, useState } from "react";
+import { Center, Stack, Title, UnstyledButton } from "@mantine/core";
+import { List, ListItem } from "@radio-aktywne/ui";
+import Link from "next/link";
+import { useEffect } from "react";
 
 import { useListEvents } from "../../../hooks/beaver/use-list-events";
 import { useToasts } from "../../../hooks/use-toasts";
-import { EventTile } from "./components/event-tile";
+import { EventItem } from "./components/event-item";
 import { EventListWidgetInput } from "./types";
 
 export function EventListWidget({
   events: prefetchedEvents,
-  perPage = 5,
   where,
 }: EventListWidgetInput) {
-  const [page, setPage] = useState(1);
-
   const { _ } = useLingui();
   const toasts = useToasts();
 
-  const limit = perPage;
-  const offset = perPage * (page - 1);
-  const { data: currentEvents, error } = useListEvents({
-    limit: limit,
-    offset: offset,
-    where: where,
-  });
+  const { data: currentEvents, error } = useListEvents({ where: where });
   const events = currentEvents ?? prefetchedEvents;
 
   useEffect(() => {
@@ -37,18 +30,26 @@ export function EventListWidget({
     return <Title>{_(msg({ message: "No events." }))}</Title>;
   }
 
-  const pages = Math.ceil(events.count / perPage);
-
   return (
-    <Stack>
-      <Stack>
-        {events.events.map((event) => (
-          <EventTile event={event} key={event.id} />
-        ))}
-      </Stack>
+    <Stack mah="100%" w="100%">
       <Center>
-        <Pagination onChange={setPage} total={pages} value={page} withEdges />
+        <UnstyledButton component={Link} href="/events">
+          <Title>{_(msg({ message: "Events" }))}</Title>
+        </UnstyledButton>
       </Center>
+      <List style={{ overflowY: "auto" }}>
+        {events.events.map((event) => (
+          <UnstyledButton
+            component={Link}
+            href={`/records/${event.id}`}
+            key={event.id}
+          >
+            <ListItem>
+              <EventItem event={event} />
+            </ListItem>
+          </UnstyledButton>
+        ))}
+      </List>
     </Stack>
   );
 }
