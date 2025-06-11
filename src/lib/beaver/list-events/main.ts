@@ -13,6 +13,7 @@ export async function listEvents({
   where,
 }: ListEventsInput = {}): Promise<ListEventsOutput> {
   const { data, error, response } = await beaver.GET("/events", {
+    cache: "no-store",
     params: {
       query: {
         include: include,

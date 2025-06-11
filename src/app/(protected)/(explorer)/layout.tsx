@@ -7,6 +7,8 @@ import { EventListWidget } from "../../../components/widgets/event-list-widget";
 import { listEvents } from "../../../lib/beaver/list-events";
 import { ExplorerLayoutInput } from "./types";
 
+export const dynamic = "force-dynamic";
+
 export default async function ExplorerLayout({
   children,
 }: ExplorerLayoutInput) {

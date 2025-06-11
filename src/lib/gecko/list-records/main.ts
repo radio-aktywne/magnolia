@@ -14,6 +14,7 @@ export async function listRecords({
   order,
 }: ListRecordsInput): Promise<ListRecordsOutput> {
   const { data, error, response } = await gecko.GET("/records/{event}", {
+    cache: "no-store",
     params: {
       path: {
         event: event,

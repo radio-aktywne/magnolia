@@ -2,6 +2,8 @@ import { RecordListEventNotFoundMetadata } from "../../../../../components/metad
 import { RecordListEventNotFoundView } from "../../../../../components/views/records/record-list-event-not-found-view";
 import { RecordListEventNotFoundInput } from "./types";
 
+export const dynamic = "force-dynamic";
+
 export default function RecordListEventNotFound({}: RecordListEventNotFoundInput) {
   return (
     <>

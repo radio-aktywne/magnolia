@@ -10,6 +10,7 @@ export async function getEvent({
   include,
 }: GetEventInput): Promise<GetEventOutput> {
   const { data, error, response } = await beaver.GET("/events/{id}", {
+    cache: "no-store",
     params: {
       path: { id: id },
       query: { include: include },
