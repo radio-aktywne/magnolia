@@ -14,6 +14,7 @@ export async function listSchedules({
   where,
 }: ListSchedulesInput = {}): Promise<ListSchedulesOutput> {
   const { data, error, response } = await beaver.GET("/schedule", {
+    cache: "no-store",
     params: {
       query: {
         end: end,

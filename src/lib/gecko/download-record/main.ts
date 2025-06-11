@@ -12,6 +12,7 @@ export async function downloadRecord({
   const { data, error, response } = await gecko.GET(
     "/records/{event}/{start}",
     {
+      cache: "no-store",
       params: {
         path: {
           event: event,

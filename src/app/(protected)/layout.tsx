@@ -3,6 +3,8 @@ import { getSession } from "../../lib/auth/get-session";
 import { SessionProvider } from "../../providers/session-provider";
 import { ProtectedLayoutInput } from "./types";
 
+export const dynamic = "force-dynamic";
+
 export default async function ProtectedLayout({
   children,
 }: ProtectedLayoutInput) {
