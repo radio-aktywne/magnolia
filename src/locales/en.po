@@ -21,24 +21,16 @@ msgstr "An error occurred while deleteing record."
 msgid "An error occurred while downloading the record."
 msgstr "An error occurred while downloading the record."
 
-#: src/actions/beaver/get-event/constants.ts:4
-msgid "An error occurred while fetching the event."
-msgstr "An error occurred while fetching the event."
+#: src/actions/wrappers/list-events-records/constants.ts:4
+msgid "An error occurred while listing events records."
+msgstr "An error occurred while listing events records."
 
-#: src/actions/beaver/list-events/constants.ts:4
-msgid "An error occurred while listing events."
-msgstr "An error occurred while listing events."
-
-#: src/actions/gecko/list-records/constants.ts:4
-msgid "An error occurred while listing records."
-msgstr "An error occurred while listing records."
-
-#: src/actions/beaver/list-schedules/constants.ts:4
-msgid "An error occurred while listing schedules."
-msgstr "An error occurred while listing schedules."
+#: src/actions/beaver/list-shows/constants.ts:4
+msgid "An error occurred while listing shows."
+msgstr "An error occurred while listing shows."
 
 #: src/components/metadata/auth/auth-error-page-metadata/main.tsx:14
-#: src/app/auth/error/page.tsx:18
+#: src/app/auth/error/page.tsx:20
 msgid "Auth error • magnolia"
 msgstr "Auth error • magnolia"
 
@@ -54,34 +46,13 @@ msgstr "Error • magnolia"
 msgid "Error in auth flow"
 msgstr "Error in auth flow"
 
-#: src/components/metadata/records/record-list-event-not-found-metadata/main.tsx:14
-msgid "Event not found • magnolia"
-msgstr "Event not found • magnolia"
-
-#: src/components/views/records/record-list-event-not-found-view/main.tsx:12
-#: src/actions/gecko/list-records/constants.ts:6
-#: src/actions/beaver/get-event/constants.ts:6
-msgid "Event not found."
-msgstr "Event not found."
-
-#: src/components/widgets/event-list-widget/main.tsx:37
-msgid "Events"
-msgstr "Events"
-
-#: src/components/metadata/events/event-list-page-metadata/main.tsx:14
-#: src/app/(protected)/(explorer)/events/page.tsx:18
-msgid "Events • magnolia"
-msgstr "Events • magnolia"
-
 #: src/hooks/use-toasts/main.tsx:31
 msgid "Info"
 msgstr "Info"
 
-#: src/actions/gecko/list-records/constants.ts:5
+#: src/actions/wrappers/list-events-records/constants.ts:5
 #: src/actions/gecko/delete-record/constants.ts:5
-#: src/actions/beaver/list-schedules/constants.ts:5
-#: src/actions/beaver/list-events/constants.ts:5
-#: src/actions/beaver/get-event/constants.ts:5
+#: src/actions/beaver/list-shows/constants.ts:5
 msgid "Invalid input."
 msgstr "Invalid input."
 
@@ -89,27 +60,26 @@ msgstr "Invalid input."
 msgid "Logout"
 msgstr "Logout"
 
+#: src/components/metadata/shows/show-list-page-metadata/main.tsx:13
 #: src/components/metadata/root/root-not-found-metadata/main.tsx:13
 #: src/components/metadata/root/root-error-metadata/main.tsx:13
 #: src/components/metadata/records/record-list-page-metadata/main.tsx:13
-#: src/components/metadata/records/record-list-event-not-found-metadata/main.tsx:13
-#: src/components/metadata/events/event-list-page-metadata/main.tsx:13
 #: src/components/metadata/auth/auth-error-page-metadata/main.tsx:13
-#: src/app/layout.tsx:19
-#: src/app/layout.tsx:20
-#: src/app/auth/error/page.tsx:17
-#: src/app/(protected)/(explorer)/records/[event]/page.tsx:18
-#: src/app/(protected)/(explorer)/events/page.tsx:17
+#: src/app/layout.tsx:21
+#: src/app/layout.tsx:22
+#: src/app/auth/error/page.tsx:19
+#: src/app/(protected)/shows/page.tsx:17
+#: src/app/(protected)/shows/[id]/records/page.tsx:18
 msgid "magnolia"
 msgstr "magnolia"
-
-#: src/components/widgets/event-list-widget/main.tsx:30
-msgid "No events."
-msgstr "No events."
 
 #: src/components/widgets/record-list-widget/main.tsx:29
 msgid "No records."
 msgstr "No records."
+
+#: src/components/widgets/show-list-widget/main.tsx:30
+msgid "No shows."
+msgstr "No shows."
 
 #: src/components/metadata/root/root-not-found-metadata/main.tsx:14
 msgid "Not Found • magnolia"
@@ -119,7 +89,7 @@ msgstr "Not Found • magnolia"
 msgid "Page not found"
 msgstr "Page not found"
 
-#: src/components/widgets/record-list-widget/components/record-item/main.tsx:27
+#: src/components/widgets/record-list-widget/components/record-item/main.tsx:32
 msgid "Record deleted."
 msgstr "Record deleted."
 
@@ -133,13 +103,22 @@ msgid "Records"
 msgstr "Records"
 
 #: src/components/metadata/records/record-list-page-metadata/main.tsx:14
-#: src/app/(protected)/(explorer)/records/[event]/page.tsx:19
+#: src/app/(protected)/shows/[id]/records/page.tsx:19
 msgid "Records • magnolia"
 msgstr "Records • magnolia"
 
 #: src/components/views/root/root-error-view/main.tsx:22
 msgid "Retry"
 msgstr "Retry"
+
+#: src/components/widgets/show-list-widget/main.tsx:37
+msgid "Shows"
+msgstr "Shows"
+
+#: src/components/metadata/shows/show-list-page-metadata/main.tsx:14
+#: src/app/(protected)/shows/page.tsx:18
+msgid "Shows • magnolia"
+msgstr "Shows • magnolia"
 
 #: src/components/views/root/root-error-view/main.tsx:15
 msgid "Something went wrong"
@@ -161,18 +140,10 @@ msgstr "You are not authorized to delete the record."
 msgid "You are not authorized to download the record."
 msgstr "You are not authorized to download the record."
 
-#: src/actions/beaver/get-event/constants.ts:7
-msgid "You are not authorized to fetch the event."
-msgstr "You are not authorized to fetch the event."
+#: src/actions/wrappers/list-events-records/constants.ts:6
+msgid "You are not authorized to list events records."
+msgstr "You are not authorized to list events records."
 
-#: src/actions/beaver/list-events/constants.ts:6
-msgid "You are not authorized to list events."
-msgstr "You are not authorized to list events."
-
-#: src/actions/gecko/list-records/constants.ts:7
-msgid "You are not authorized to list records."
-msgstr "You are not authorized to list records."
-
-#: src/actions/beaver/list-schedules/constants.ts:6
-msgid "You are not authorized to list schedules."
-msgstr "You are not authorized to list schedules."
+#: src/actions/beaver/list-shows/constants.ts:6
+msgid "You are not authorized to list shows."
+msgstr "You are not authorized to list shows."

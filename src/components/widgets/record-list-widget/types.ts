@@ -1,9 +1,6 @@
-import {
-  ListRecordsInput,
-  ListRecordsOutput,
-} from "../../../lib/gecko/list-records";
+import { UseListEventsRecordsInput } from "../../../hooks/wrappers/use-list-events-records";
+import { ListEventsRecordsOutput } from "../../../lib/wrappers/list-events-records";
 
 export type RecordListWidgetInput = {
-  event: ListRecordsInput["event"];
-  records: ListRecordsOutput["records"];
-};
+  records: ListEventsRecordsOutput["records"];
+} & UseListEventsRecordsInput;

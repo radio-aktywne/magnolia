@@ -1,19 +1,14 @@
-import { notFound } from "next/navigation";
-
-import {
-  EventNotFoundError,
-  listRecords,
-} from "../../../../lib/gecko/list-records";
+import { listEventsRecords } from "../../../../lib/wrappers/list-events-records";
 import { RecordListWidget } from "../../../widgets/record-list-widget";
 import { RecordListPageViewInput } from "./types";
 
-export async function RecordListPageView({ event }: RecordListPageViewInput) {
-  try {
-    const { records } = await listRecords({ event: event });
+export async function RecordListPageView({ show }: RecordListPageViewInput) {
+  const include = JSON.stringify({ show: true });
+  const where = JSON.stringify({ show: { id: show }, type: "live" });
+  const { records } = await listEventsRecords({
+    include: include,
+    where: where,
+  });
 
-    return <RecordListWidget event={event} records={records} />;
-  } catch (error) {
-    if (error instanceof EventNotFoundError) notFound();
-    throw error;
-  }
+  return <RecordListWidget include={include} records={records} where={where} />;
 }

@@ -2,42 +2,57 @@
 
 import { msg } from "@lingui/core/macro";
 import { useLingui } from "@lingui/react";
-import { ActionIcon, Text } from "@mantine/core";
+import { ActionIcon, Divider, Group, Text } from "@mantine/core";
 import { useCallback } from "react";
 import { MdDelete, MdDownload } from "react-icons/md";
 
 import { deleteRecord } from "../../../../../actions/gecko/delete-record";
-import { useListRecords } from "../../../../../hooks/gecko/use-list-records";
+import { useLanguage } from "../../../../../hooks/use-language";
 import { useToasts } from "../../../../../hooks/use-toasts";
 import { RecordItemInput } from "./types";
+import {
+  formatFilename,
+  formatSizeText,
+  formatStartDateText,
+  formatStartTimeText,
+} from "./utils";
 
-export function RecordItem({ record }: RecordItemInput) {
+export function RecordItem({ onDelete, record }: RecordItemInput) {
   const { _ } = useLingui();
   const toasts = useToasts();
-
-  const { refresh } = useListRecords({ event: record.event });
+  const { language } = useLanguage();
 
   const handleDelete = useCallback(async () => {
     const { error } = await deleteRecord({
-      event: record.event,
+      event: record.event.id,
       start: record.start,
     });
 
     if (error) toasts.error(_(error));
     else toasts.success(_(msg({ message: "Record deleted." })));
 
-    void refresh();
-  }, [_, record, refresh, toasts]);
+    onDelete?.();
+  }, [_, onDelete, record, toasts]);
 
   return (
     <>
-      <Text fw="bold" size="xs">
-        {record.start}
-      </Text>
+      <Group gap="xs">
+        <Text fw="bold" size="xs">
+          {formatStartDateText(record)}
+        </Text>
+        <Divider orientation="vertical" size="sm" />
+        <Text fw="bold" size="xs">
+          {formatStartTimeText(record)}
+        </Text>
+        <Divider orientation="vertical" size="sm" />
+        <Text fw="bold" size="xs">
+          {formatSizeText(record, language)}
+        </Text>
+      </Group>
       <ActionIcon
         component="a"
-        download={`${record.event}-${record.start}`}
-        href={`/api/records/${record.event}/${record.start}`}
+        download={formatFilename(record)}
+        href={`/api/records/${record.event.id}/${record.start}`}
         size="auto"
         variant="transparent"
       >
