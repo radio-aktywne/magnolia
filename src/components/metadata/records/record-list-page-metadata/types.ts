@@ -1,3 +1,3 @@
 export type RecordListPageMetadataInput = {
-  event: string;
+  show: string;
 };

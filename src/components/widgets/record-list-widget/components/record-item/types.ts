@@ -1,5 +1,6 @@
-import { ListRecordsOutput } from "../../../../../lib/gecko/list-records";
+import { ListEventsRecordsOutput } from "../../../../../lib/wrappers/list-events-records";
 
 export type RecordItemInput = {
-  record: ListRecordsOutput["records"]["records"][number];
+  onDelete?: () => void;
+  record: ListEventsRecordsOutput["records"][number];
 };

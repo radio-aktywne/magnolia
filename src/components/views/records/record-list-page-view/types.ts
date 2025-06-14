@@ -1,3 +1,3 @@
 export type RecordListPageViewInput = {
-  event: string;
+  show: string;
 };

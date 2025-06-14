@@ -6,26 +6,26 @@ import { Center, Stack, Title } from "@mantine/core";
 import { List, ListItem } from "@radio-aktywne/ui";
 import { useEffect } from "react";
 
-import { useListRecords } from "../../../hooks/gecko/use-list-records";
 import { useToasts } from "../../../hooks/use-toasts";
+import { useListEventsRecords } from "../../../hooks/wrappers/use-list-events-records";
 import { RecordItem } from "./components/record-item";
 import { RecordListWidgetInput } from "./types";
 
 export function RecordListWidget({
-  event: event,
   records: prefetchedRecords,
+  ...props
 }: RecordListWidgetInput) {
   const { _ } = useLingui();
   const toasts = useToasts();
 
-  const { data: currentRecords, error } = useListRecords({ event: event });
+  const { data: currentRecords, error, refresh } = useListEventsRecords(props);
   const records = currentRecords ?? prefetchedRecords;
 
   useEffect(() => {
     if (error) toasts.warning(_(error));
   }, [_, error, toasts]);
 
-  if (records.count === 0) {
+  if (records.length === 0) {
     return <Title>{_(msg({ message: "No records." }))}</Title>;
   }
 
@@ -35,9 +35,9 @@ export function RecordListWidget({
         <Title>{_(msg({ message: "Records" }))}</Title>
       </Center>
       <List style={{ overflowY: "auto" }}>
-        {records.records.map((record) => (
-          <ListItem key={record.start}>
-            <RecordItem record={record} />
+        {records.map((record) => (
+          <ListItem key={`${record.event.id}-${record.start}`}>
+            <RecordItem onDelete={refresh} record={record} />
           </ListItem>
         ))}
       </List>
