@@ -3,7 +3,7 @@
 import { msg } from "@lingui/core/macro";
 import { useLingui } from "@lingui/react";
 
-import { useDocumentMetadata } from "../../../../hooks/use-document-metadata";
+import { useDocumentMetadata } from "../../../../../hooks/use-document-metadata";
 import { RecordListPageMetadataInput } from "./types";
 
 export function RecordListPageMetadata({}: RecordListPageMetadataInput) {

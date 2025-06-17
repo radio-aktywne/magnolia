@@ -63,7 +63,8 @@ msgstr "Logout"
 #: src/components/metadata/shows/show-list-page-metadata/main.tsx:13
 #: src/components/metadata/root/root-not-found-metadata/main.tsx:13
 #: src/components/metadata/root/root-error-metadata/main.tsx:13
-#: src/components/metadata/records/record-list-page-metadata/main.tsx:13
+#: src/components/metadata/details/show-not-found-metadata/main.tsx:13
+#: src/components/metadata/details/records/record-list-page-metadata/main.tsx:13
 #: src/components/metadata/auth/auth-error-page-metadata/main.tsx:13
 #: src/app/layout.tsx:21
 #: src/app/layout.tsx:22
@@ -102,7 +103,7 @@ msgstr "Record not found."
 msgid "Records"
 msgstr "Records"
 
-#: src/components/metadata/records/record-list-page-metadata/main.tsx:14
+#: src/components/metadata/details/records/record-list-page-metadata/main.tsx:14
 #: src/app/(protected)/shows/[id]/records/page.tsx:19
 msgid "Records • magnolia"
 msgstr "Records • magnolia"
@@ -110,6 +111,14 @@ msgstr "Records • magnolia"
 #: src/components/views/root/root-error-view/main.tsx:22
 msgid "Retry"
 msgstr "Retry"
+
+#: src/components/metadata/details/show-not-found-metadata/main.tsx:14
+msgid "Show not found • magnolia"
+msgstr "Show not found • magnolia"
+
+#: src/components/views/details/show-not-found-view/main.tsx:12
+msgid "Show not found."
+msgstr "Show not found."
 
 #: src/components/widgets/show-list-widget/main.tsx:37
 msgid "Shows"
