@@ -2,5 +2,6 @@ import { ListEventsRecordsOutput } from "../../../../../lib/wrappers/list-events
 
 export type RecordItemInput = {
   onDelete?: () => void;
-  record: ListEventsRecordsOutput["records"][number];
+  record: ListEventsRecordsOutput["records"]["records"][number];
+  timezone?: string;
 };

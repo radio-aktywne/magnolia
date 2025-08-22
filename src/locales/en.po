@@ -29,8 +29,8 @@ msgstr "An error occurred while listing events records."
 msgid "An error occurred while listing shows."
 msgstr "An error occurred while listing shows."
 
-#: src/components/metadata/auth/auth-error-page-metadata/main.tsx:14
 #: src/app/auth/error/page.tsx:20
+#: src/components/metadata/auth/auth-error-page-metadata/main.tsx:14
 msgid "Auth error • magnolia"
 msgstr "Auth error • magnolia"
 
@@ -46,13 +46,17 @@ msgstr "Error • magnolia"
 msgid "Error in auth flow"
 msgstr "Error in auth flow"
 
+#: src/components/widgets/record-list-widget/components/date-range-filter/main.tsx:49
+msgid "Filter by date range"
+msgstr "Filter by date range"
+
 #: src/hooks/use-toasts/main.tsx:31
 msgid "Info"
 msgstr "Info"
 
-#: src/actions/wrappers/list-events-records/constants.ts:5
-#: src/actions/gecko/delete-record/constants.ts:5
 #: src/actions/beaver/list-shows/constants.ts:5
+#: src/actions/gecko/delete-record/constants.ts:5
+#: src/actions/wrappers/list-events-records/constants.ts:5
 msgid "Invalid input."
 msgstr "Invalid input."
 
@@ -60,27 +64,31 @@ msgstr "Invalid input."
 msgid "Logout"
 msgstr "Logout"
 
-#: src/components/metadata/shows/show-list-page-metadata/main.tsx:13
-#: src/components/metadata/root/root-not-found-metadata/main.tsx:13
-#: src/components/metadata/root/root-error-metadata/main.tsx:13
-#: src/components/metadata/details/show-not-found-metadata/main.tsx:13
-#: src/components/metadata/details/records/record-list-page-metadata/main.tsx:13
-#: src/components/metadata/auth/auth-error-page-metadata/main.tsx:13
+#: src/app/(protected)/shows/[id]/records/page.tsx:20
+#: src/app/(protected)/shows/page.tsx:17
+#: src/app/auth/error/page.tsx:19
 #: src/app/layout.tsx:21
 #: src/app/layout.tsx:22
-#: src/app/auth/error/page.tsx:19
-#: src/app/(protected)/shows/page.tsx:17
-#: src/app/(protected)/shows/[id]/records/page.tsx:18
+#: src/components/metadata/auth/auth-error-page-metadata/main.tsx:13
+#: src/components/metadata/details/records/record-list-page-metadata/main.tsx:13
+#: src/components/metadata/details/show-not-found-metadata/main.tsx:13
+#: src/components/metadata/root/root-error-metadata/main.tsx:13
+#: src/components/metadata/root/root-not-found-metadata/main.tsx:13
+#: src/components/metadata/shows/show-list-page-metadata/main.tsx:13
 msgid "magnolia"
 msgstr "magnolia"
 
-#: src/components/widgets/record-list-widget/main.tsx:29
-msgid "No records."
-msgstr "No records."
+#: src/components/widgets/record-list-widget/main.tsx:60
+msgid "No events."
+msgstr "No events."
 
-#: src/components/widgets/show-list-widget/main.tsx:30
-msgid "No shows."
-msgstr "No shows."
+#: src/components/widgets/record-list-widget/main.tsx:83
+msgid "No records"
+msgstr "No records"
+
+#: src/components/widgets/show-list-widget/main.tsx:90
+msgid "No shows"
+msgstr "No shows"
 
 #: src/components/metadata/root/root-not-found-metadata/main.tsx:14
 msgid "Not Found • magnolia"
@@ -94,23 +102,27 @@ msgstr "Page not found"
 msgid "Record deleted."
 msgstr "Record deleted."
 
-#: src/app/api/records/[event]/[start]/constants.ts:8
 #: src/actions/gecko/delete-record/constants.ts:6
+#: src/app/api/records/[event]/[start]/constants.ts:8
 msgid "Record not found."
 msgstr "Record not found."
 
-#: src/components/widgets/record-list-widget/main.tsx:35
+#: src/components/widgets/record-list-widget/main.tsx:65
 msgid "Records"
 msgstr "Records"
 
+#: src/app/(protected)/shows/[id]/records/page.tsx:21
 #: src/components/metadata/details/records/record-list-page-metadata/main.tsx:14
-#: src/app/(protected)/shows/[id]/records/page.tsx:19
 msgid "Records • magnolia"
 msgstr "Records • magnolia"
 
 #: src/components/views/root/root-error-view/main.tsx:22
 msgid "Retry"
 msgstr "Retry"
+
+#: src/components/widgets/show-list-widget/components/controls/main.tsx:39
+msgid "Search shows"
+msgstr "Search shows"
 
 #: src/components/metadata/details/show-not-found-metadata/main.tsx:14
 msgid "Show not found • magnolia"
@@ -120,12 +132,12 @@ msgstr "Show not found • magnolia"
 msgid "Show not found."
 msgstr "Show not found."
 
-#: src/components/widgets/show-list-widget/main.tsx:37
+#: src/components/widgets/show-list-widget/main.tsx:74
 msgid "Shows"
 msgstr "Shows"
 
-#: src/components/metadata/shows/show-list-page-metadata/main.tsx:14
 #: src/app/(protected)/shows/page.tsx:18
+#: src/components/metadata/shows/show-list-page-metadata/main.tsx:14
 msgid "Shows • magnolia"
 msgstr "Shows • magnolia"
 

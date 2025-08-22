@@ -1,12 +1,12 @@
 import { components } from "../../../services/gecko";
 
 export type ListRecordsInput = {
-  after?: string;
-  before?: string;
+  after?: null | string;
+  before?: null | string;
   event: string;
-  limit?: number;
-  offset?: number;
-  order?: "asc" | "desc";
+  limit?: null | number;
+  offset?: null | number;
+  order?: "asc" | "desc" | null;
 };
 
 export type ListRecordsOutput = {

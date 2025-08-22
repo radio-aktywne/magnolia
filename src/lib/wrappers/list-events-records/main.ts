@@ -6,6 +6,7 @@ import { listEvents } from "../../beaver/list-events";
 import { GeckoError } from "../../gecko/errors";
 import { headRecord } from "../../gecko/head-record";
 import { listRecords } from "../../gecko/list-records";
+import { datetimeDataFormat } from "./constants";
 import { ListEventsRecordsError } from "./errors";
 import { ListEventsRecordsInput, ListEventsRecordsOutput } from "./types";
 
@@ -13,12 +14,14 @@ export async function listEventsRecords({
   after,
   before,
   include,
+  limit,
   order = "desc",
+  timezone,
   where,
 }: ListEventsRecordsInput): Promise<ListEventsRecordsOutput> {
   const { events } = await (async () => {
     try {
-      return listEvents({ include: include, where: where });
+      return listEvents({ include: include, limit: null, where: where });
     } catch (error) {
       if (error instanceof BeaverError) throw new ListEventsRecordsError();
       throw error;
@@ -29,9 +32,22 @@ export async function listEventsRecords({
     const { records } = await (async () => {
       try {
         return await listRecords({
-          after: after,
-          before: before,
+          after: after
+            ? dayjs
+                .tz(after, timezone)
+                .startOf("day")
+                .tz(event.timezone)
+                .format(datetimeDataFormat)
+            : undefined,
+          before: before
+            ? dayjs
+                .tz(before, timezone)
+                .endOf("day")
+                .tz(event.timezone)
+                .format(datetimeDataFormat)
+            : undefined,
           event: event.id,
+          limit: limit,
           order: order,
         });
       } catch (error) {
@@ -40,7 +56,7 @@ export async function listEventsRecords({
       }
     })();
 
-    const promises = records.records.map(async (record) => {
+    return records.records.map(async (record) => {
       const { etag, length, modified, type } = await (async () => {
         try {
           return await headRecord({ event: event.id, start: record.start });
@@ -59,12 +75,13 @@ export async function listEventsRecords({
         type: type,
       };
     });
-
-    return await Promise.all(promises);
   });
 
-  const records = (await Promise.all(promises))
-    .flat()
+  const records = (
+    await Promise.all(
+      (await Promise.all(promises)).flat().slice(0, limit ?? undefined),
+    )
+  )
     .toSorted((a, b) => a.start.diff(b.start) * (order === "asc" ? 1 : -1))
     .map((record) => ({
       etag: record.etag,
@@ -75,5 +92,5 @@ export async function listEventsRecords({
       type: record.type,
     }));
 
-  return { records: records };
+  return { records: { events: events.events, records: records } };
 }

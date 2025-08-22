@@ -4,14 +4,20 @@ import slugify from "slugify";
 import dayjs from "../../../../../dayjs";
 import { RecordItemInput } from "./types";
 
-export function formatStartDateText(record: RecordItemInput["record"]) {
+export function formatStartDateText(
+  record: RecordItemInput["record"],
+  timezone?: string,
+) {
   const start = dayjs.tz(record.start, record.event.timezone);
-  return start.local().format("LL");
+  return (timezone ? start.tz(timezone) : start.local()).format("LL");
 }
 
-export function formatStartTimeText(record: RecordItemInput["record"]) {
+export function formatStartTimeText(
+  record: RecordItemInput["record"],
+  timezone?: string,
+) {
   const start = dayjs.tz(record.start, record.event.timezone);
-  return start.local().format("LT");
+  return (timezone ? start.tz(timezone) : start.local()).format("LT");
 }
 
 export function formatSizeText(

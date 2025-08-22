@@ -19,6 +19,10 @@ export function useListShows({
 }: UseListShowsInput = {}): UseListShowsOutput {
   const [state, setState] = useState<UseListShowsState>({ loading: true });
 
+  useEffect(() => {
+    setState({ loading: true });
+  }, [include, limit, offset, order, where]);
+
   const refresh = useCallback(async () => {
     const { data, error } = await listShows({
       include: include,

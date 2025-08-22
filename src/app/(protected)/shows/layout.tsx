@@ -12,13 +12,17 @@ export const dynamic = "force-dynamic";
 export default async function ShowListLayout({
   children,
 }: ShowListLayoutInput) {
-  const where = JSON.stringify({ events: { some: { type: "live" } } });
-  const { shows } = await listShows({ where: where });
+  const props = {
+    limit: 10,
+    order: JSON.stringify({ title: "asc" }),
+    where: JSON.stringify({ events: { some: { type: "live" } } }),
+  };
+  const { shows } = await listShows(props);
 
   return (
     <MasterDetailLayout>
       <MasterDetailLayoutMasterPanel>
-        <ShowListWidget shows={shows} where={where} />
+        <ShowListWidget shows={shows} {...props} />
       </MasterDetailLayoutMasterPanel>
       {children}
     </MasterDetailLayout>

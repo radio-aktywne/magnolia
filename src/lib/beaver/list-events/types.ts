@@ -1,12 +1,12 @@
 import { components } from "../../../services/beaver";
 
 export type ListEventsInput = {
-  include?: string;
-  limit?: number;
-  offset?: number;
-  order?: string;
-  query?: string;
-  where?: string;
+  include?: null | string;
+  limit?: null | number;
+  offset?: null | number;
+  order?: null | string;
+  query?: null | string;
+  where?: null | string;
 };
 
 export type ListEventsOutput = {

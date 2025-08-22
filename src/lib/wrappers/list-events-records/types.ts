@@ -2,7 +2,7 @@ import { ListEventsInput, ListEventsOutput } from "../../beaver/list-events";
 import { HeadRecordOutput } from "../../gecko/head-record";
 import { ListRecordsInput, ListRecordsOutput } from "../../gecko/list-records";
 
-export type Record = {
+export type ListEventsRecordsRecord = {
   etag: HeadRecordOutput["etag"];
   event: ListEventsOutput["events"]["events"][number];
   length: HeadRecordOutput["length"];
@@ -11,14 +11,21 @@ export type Record = {
   type: HeadRecordOutput["type"];
 };
 
+export type ListEventsRecordsRecords = {
+  events: ListEventsOutput["events"]["events"];
+  records: ListEventsRecordsRecord[];
+};
+
 export type ListEventsRecordsInput = {
-  after?: ListRecordsInput["after"];
-  before?: ListRecordsInput["before"];
+  after?: string;
+  before?: string;
   include?: ListEventsInput["include"];
-  order?: ListRecordsInput["order"];
+  limit?: ListRecordsInput["limit"];
+  order?: NonNullable<ListRecordsInput["order"]>;
+  timezone?: string;
   where?: ListEventsInput["where"];
 };
 
 export type ListEventsRecordsOutput = {
-  records: Record[];
+  records: ListEventsRecordsRecords;
 };

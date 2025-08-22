@@ -17,7 +17,7 @@ import {
   formatStartTimeText,
 } from "./utils";
 
-export function RecordItem({ onDelete, record }: RecordItemInput) {
+export function RecordItem({ onDelete, record, timezone }: RecordItemInput) {
   const { _ } = useLingui();
   const toasts = useToasts();
   const { language } = useLanguage();
@@ -35,21 +35,21 @@ export function RecordItem({ onDelete, record }: RecordItemInput) {
   }, [_, onDelete, record, toasts]);
 
   return (
-    <>
-      <Group gap="xs">
-        <Text fw="bold" size="xs">
-          {formatStartDateText(record)}
-        </Text>
-        <Divider orientation="vertical" size="sm" />
-        <Text fw="bold" size="xs">
-          {formatStartTimeText(record)}
-        </Text>
-        <Divider orientation="vertical" size="sm" />
-        <Text fw="bold" size="xs">
-          {formatSizeText(record, language)}
-        </Text>
-      </Group>
+    <Group gap="sm" w="100%">
+      <Text flex={1} fw="bold" size="xs">
+        {formatStartDateText(record, timezone)}
+      </Text>
+      <Divider orientation="vertical" size="sm" />
+      <Text flex={1} fw="bold" size="xs" ta="center">
+        {formatStartTimeText(record, timezone)}
+      </Text>
+      <Divider orientation="vertical" size="sm" />
+      <Text flex={1} fw="bold" size="xs" ta="center">
+        {formatSizeText(record, language)}
+      </Text>
+      <Divider orientation="vertical" size="sm" />
       <ActionIcon
+        bd="none"
         component="a"
         download={formatFilename(record)}
         href={`/api/records/${record.event.id}/${record.start}`}
@@ -59,6 +59,7 @@ export function RecordItem({ onDelete, record }: RecordItemInput) {
         <MdDownload size="1em" />
       </ActionIcon>
       <ActionIcon
+        bd="none"
         color="ra-red"
         onClick={handleDelete}
         size="auto"
@@ -66,6 +67,6 @@ export function RecordItem({ onDelete, record }: RecordItemInput) {
       >
         <MdDelete size="1em" />
       </ActionIcon>
-    </>
+    </Group>
   );
 }

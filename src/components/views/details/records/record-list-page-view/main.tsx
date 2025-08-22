@@ -6,7 +6,10 @@ import { RecordListWidget } from "../../../../widgets/record-list-widget";
 import { RecordListPageViewInput } from "./types";
 
 export async function RecordListPageView({
+  after,
+  before,
   show: showId,
+  timezone,
 }: RecordListPageViewInput) {
   const { show } = await (async () => {
     try {
@@ -17,12 +20,18 @@ export async function RecordListPageView({
     }
   })();
 
-  const include = JSON.stringify({ show: true });
-  const where = JSON.stringify({ show: { id: show.id }, type: "live" });
-  const { records } = await listEventsRecords({
-    include: include,
-    where: where,
-  });
+  const props = {
+    after: after && before && timezone ? after : undefined,
+    before: after && before && timezone ? before : undefined,
+    include: JSON.stringify({ show: true }),
+    limit: 100,
+    timezone: after && before && timezone ? timezone : undefined,
+    where: JSON.stringify({
+      show: { is: { id: show.id } },
+      type: "live",
+    }),
+  };
+  const { records } = await listEventsRecords(props);
 
-  return <RecordListWidget include={include} records={records} where={where} />;
+  return <RecordListWidget records={records} show={show} {...props} />;
 }
