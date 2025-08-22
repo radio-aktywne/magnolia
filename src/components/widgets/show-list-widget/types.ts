@@ -4,5 +4,6 @@ import {
 } from "../../../lib/beaver/list-shows";
 
 export type ShowListWidgetInput = {
+  limit: NonNullable<ListShowsInput["limit"]>;
   shows: ListShowsOutput["shows"];
-} & ListShowsInput;
+} & Omit<ListShowsInput, "limit">;

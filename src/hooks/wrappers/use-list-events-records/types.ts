@@ -10,7 +10,9 @@ export type UseListEventsRecordsInput = {
   before?: ListEventsRecordsInput["before"];
   include?: ListEventsRecordsInput["include"];
   interval?: number;
+  limit?: ListEventsRecordsInput["limit"];
   order?: ListEventsRecordsInput["order"];
+  timezone?: ListEventsRecordsInput["timezone"];
   where?: ListEventsRecordsInput["where"];
 };
 

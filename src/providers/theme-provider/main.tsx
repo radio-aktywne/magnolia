@@ -8,6 +8,7 @@ import { colorSchemeManager } from "./scheme";
 import { ThemeProviderInput } from "./types";
 
 import "@mantine/core/styles.layer.css";
+import "@mantine/dates/styles.layer.css";
 import "@mantine/notifications/styles.layer.css";
 import "@radio-aktywne/ui/styles.css";
 
