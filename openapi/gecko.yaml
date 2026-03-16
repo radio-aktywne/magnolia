@@ -1,9 +1,12 @@
+openapi: "3.1.0"
 info:
   title: gecko
-openapi: 3.1.0
+  version: "0.24.0"
 paths:
   /ping:
     get:
+      tags:
+        - Ping
       summary: Ping
       description: Ping.
       operationId: PingPing
@@ -11,19 +14,15 @@ paths:
         "204":
           description: Request fulfilled, nothing follows
           headers:
-            cache-control:
+            Cache-Control:
               schema:
                 type: string
-              required: false
+              required: true
               deprecated: false
-              allowEmptyValue: false
-              allowReserved: false
-          content:
-            application/json:
-              schema:
-                type: "null"
       deprecated: false
     head:
+      tags:
+        - Ping
       summary: Ping headers
       description: Ping headers.
       operationId: PingHeadping
@@ -31,103 +30,53 @@ paths:
         "204":
           description: Request fulfilled, nothing follows
           headers:
-            cache-control:
+            Cache-Control:
               schema:
                 type: string
-              required: false
+              required: true
               deprecated: false
-              allowEmptyValue: false
-              allowReserved: false
-          content:
-            application/json:
-              schema:
-                type: "null"
       deprecated: false
-  /records/{event}/{start}:
+  /recordings/{event}/{start}:
     get:
-      summary: Download record
-      description: Download a record.
-      operationId: RecordsEventStartDownload
+      tags:
+        - Recordings
+      summary: Download recording
+      description: Download a recording.
+      operationId: RecordingsEventStartDownload
       parameters:
         - name: event
           in: path
           schema:
-            type: string
-            format: uuid
-            description: Identifier of the event.
-          description: Identifier of the event.
+            $ref: "#/components/schemas/DownloadRequestEvent"
           required: true
           deprecated: false
-          allowEmptyValue: false
-          allowReserved: false
         - name: start
           in: path
           schema:
-            type: string
-            description: Start time of the event instance in event timezone.
-          description: Start time of the event instance in event timezone.
+            $ref: "#/components/schemas/DownloadRequestStart"
           required: true
           deprecated: false
-          allowEmptyValue: false
-          allowReserved: false
       responses:
         "200":
           description: Stream Response
           headers:
-            content-length:
-              schema:
-                type: string
-              description: File size in bytes
-              required: false
-              deprecated: false
-              allowEmptyValue: false
-              allowReserved: false
-            last-modified:
-              schema:
-                type: string
-                format: date-time
-              description: Last modified data-time in RFC 2822 format
-              required: false
-              deprecated: false
-              allowEmptyValue: false
-              allowReserved: false
-            etag:
-              schema:
-                type: string
-              description: Entity tag
-              required: false
-              deprecated: false
-              allowEmptyValue: false
-              allowReserved: false
             Last-Modified:
-              description: Last modified.
-              required: false
+              required: true
               deprecated: false
-              allowEmptyValue: false
-              allowReserved: false
             Content-Length:
-              description: Content length.
-              required: false
+              required: true
               deprecated: false
-              allowEmptyValue: false
-              allowReserved: false
             ETag:
-              description: Entity tag.
-              required: false
+              required: true
               deprecated: false
-              allowEmptyValue: false
-              allowReserved: false
             Content-Type:
-              description: Content type.
-              required: false
+              required: true
               deprecated: false
-              allowEmptyValue: false
-              allowReserved: false
           content:
-            "":
+            "*/*":
               schema:
                 type: string
-                contentMediaType: application/octet-stream
+                format: binary
         "400":
           description: Bad request syntax or unsupported method
           content:
@@ -152,53 +101,77 @@ paths:
                 examples:
                   - status_code: 400
                     detail: Bad Request
+                    extra: {}
+        "404":
+          description: Nothing matches the given URI
+          content:
+            application/json:
+              schema:
+                properties:
+                  status_code:
+                    type: integer
+                  detail:
+                    type: string
+                  extra:
+                    additionalProperties: {}
+                    type:
+                      - "null"
+                      - object
+                      - array
+                type: object
+                required:
+                  - detail
+                  - status_code
+                description: Not Found Exception
+                examples:
+                  - status_code: 404
+                    detail: Not Found
                     extra: {}
       deprecated: false
     put:
-      summary: Upload record
-      description: Upload a record.
-      operationId: RecordsEventStartUpload
+      tags:
+        - Recordings
+      summary: Upload recording
+      description: Upload a recording.
+      operationId: RecordingsEventStartUpload
       parameters:
         - name: event
           in: path
           schema:
-            type: string
-            format: uuid
-            description: Identifier of the event.
-          description: Identifier of the event.
+            $ref: "#/components/schemas/UploadRequestEvent"
           required: true
           deprecated: false
-          allowEmptyValue: false
-          allowReserved: false
         - name: start
           in: path
           schema:
-            type: string
-            format: date-time
-            description: Start time of the event instance in event timezone.
-          description: Start time of the event instance in event timezone.
+            $ref: "#/components/schemas/UploadRequestStart"
           required: true
           deprecated: false
-          allowEmptyValue: false
-          allowReserved: false
         - name: Content-Type
           in: header
           schema:
-            type: string
-            description: Type of the record data.
-          description: Type of the record data.
+            anyOf:
+              - $ref: "#/components/schemas/UploadRequestType"
+              - type: string
+                contentMediaType: application/json
+                contentSchema:
+                  $ref: "#/components/schemas/UploadRequestType"
+            title: UploadRequestType
+            description: Type of the recording data.
+          description: Type of the recording data.
           required: true
           deprecated: false
-          allowEmptyValue: false
-          allowReserved: false
+      requestBody:
+        content:
+          "*/*":
+            schema:
+              type: string
+              format: binary
+        required: true
       responses:
         "204":
           description: Request fulfilled, nothing follows
           headers: {}
-          content:
-            application/json:
-              schema:
-                type: "null"
         "400":
           description: Bad request syntax or unsupported method
           content:
@@ -223,42 +196,56 @@ paths:
                 examples:
                   - status_code: 400
                     detail: Bad Request
+                    extra: {}
+        "404":
+          description: Nothing matches the given URI
+          content:
+            application/json:
+              schema:
+                properties:
+                  status_code:
+                    type: integer
+                  detail:
+                    type: string
+                  extra:
+                    additionalProperties: {}
+                    type:
+                      - "null"
+                      - object
+                      - array
+                type: object
+                required:
+                  - detail
+                  - status_code
+                description: Not Found Exception
+                examples:
+                  - status_code: 404
+                    detail: Not Found
                     extra: {}
       deprecated: false
     delete:
-      summary: Delete record
-      description: Delete a record.
-      operationId: RecordsEventStartDelete
+      tags:
+        - Recordings
+      summary: Delete recording
+      description: Delete a recording.
+      operationId: RecordingsEventStartDelete
       parameters:
         - name: event
           in: path
           schema:
-            type: string
-            format: uuid
-            description: Identifier of the event.
-          description: Identifier of the event.
+            $ref: "#/components/schemas/DeleteRequestEvent"
           required: true
           deprecated: false
-          allowEmptyValue: false
-          allowReserved: false
         - name: start
           in: path
           schema:
-            type: string
-            description: Start time of the event instance in event timezone.
-          description: Start time of the event instance in event timezone.
+            $ref: "#/components/schemas/DeleteRequestStart"
           required: true
           deprecated: false
-          allowEmptyValue: false
-          allowReserved: false
       responses:
         "204":
           description: Request fulfilled, nothing follows
           headers: {}
-          content:
-            application/json:
-              schema:
-                type: "null"
         "400":
           description: Bad request syntax or unsupported method
           content:
@@ -283,66 +270,68 @@ paths:
                 examples:
                   - status_code: 400
                     detail: Bad Request
+                    extra: {}
+        "404":
+          description: Nothing matches the given URI
+          content:
+            application/json:
+              schema:
+                properties:
+                  status_code:
+                    type: integer
+                  detail:
+                    type: string
+                  extra:
+                    additionalProperties: {}
+                    type:
+                      - "null"
+                      - object
+                      - array
+                type: object
+                required:
+                  - detail
+                  - status_code
+                description: Not Found Exception
+                examples:
+                  - status_code: 404
+                    detail: Not Found
                     extra: {}
       deprecated: false
     head:
-      summary: Download record headers
-      description: Download record headers.
-      operationId: RecordsEventStartHeaddownload
+      tags:
+        - Recordings
+      summary: Download recording headers
+      description: Download recording headers.
+      operationId: RecordingsEventStartHeaddownload
       parameters:
         - name: event
           in: path
           schema:
-            type: string
-            format: uuid
-            description: Identifier of the event.
-          description: Identifier of the event.
+            $ref: "#/components/schemas/HeadDownloadRequestEvent"
           required: true
           deprecated: false
-          allowEmptyValue: false
-          allowReserved: false
         - name: start
           in: path
           schema:
-            type: string
-            description: Start time of the event instance in event timezone.
-          description: Start time of the event instance in event timezone.
+            $ref: "#/components/schemas/HeadDownloadRequestStart"
           required: true
           deprecated: false
-          allowEmptyValue: false
-          allowReserved: false
       responses:
         "200":
-          description: Request fulfilled, document follows
+          description: Request fulfilled, headers follow
           headers:
             Last-Modified:
-              description: Last modified.
-              required: false
+              required: true
               deprecated: false
-              allowEmptyValue: false
-              allowReserved: false
             Content-Length:
-              description: Content length.
-              required: false
+              required: true
               deprecated: false
-              allowEmptyValue: false
-              allowReserved: false
             ETag:
-              description: Entity tag.
-              required: false
+              required: true
               deprecated: false
-              allowEmptyValue: false
-              allowReserved: false
             Content-Type:
-              description: Content type.
-              required: false
+              required: true
               deprecated: false
-              allowEmptyValue: false
-              allowReserved: false
-          content:
-            application/json:
-              schema:
-                type: "null"
         "400":
           description: Bad request syntax or unsupported method
           content:
@@ -368,33 +357,62 @@ paths:
                   - status_code: 400
                     detail: Bad Request
                     extra: {}
+        "404":
+          description: Nothing matches the given URI
+          content:
+            application/json:
+              schema:
+                properties:
+                  status_code:
+                    type: integer
+                  detail:
+                    type: string
+                  extra:
+                    additionalProperties: {}
+                    type:
+                      - "null"
+                      - object
+                      - array
+                type: object
+                required:
+                  - detail
+                  - status_code
+                description: Not Found Exception
+                examples:
+                  - status_code: 404
+                    detail: Not Found
+                    extra: {}
       deprecated: false
-  /records/{event}:
+  /recordings/{event}:
     get:
-      summary: List records
-      description: List records.
-      operationId: RecordsEventList
+      tags:
+        - Recordings
+      summary: List recordings
+      description: List recordings.
+      operationId: RecordingsEventList
       parameters:
         - name: event
           in: path
           schema:
-            type: string
-            format: uuid
-            description: Identifier of the event to list records for.
-          description: Identifier of the event to list records for.
+            $ref: "#/components/schemas/ListRequestEvent"
           required: true
           deprecated: false
-          allowEmptyValue: false
-          allowReserved: false
         - name: after
           in: query
           schema:
             oneOf:
+              - anyOf:
+                  - $ref: "#/components/schemas/ListRequestAfter"
+                  - type: string
+                    contentMediaType: application/json
+                    contentSchema:
+                      $ref: "#/components/schemas/ListRequestAfter"
+                title: ListRequestAfter
               - type: "null"
-              - type: string
-                format: date-time
-            description: Only list records after this time (in event timezone).
-          description: Only list records after this time (in event timezone).
+            description: >-
+              Only list recordings after this datetime (in event timezone).
+          description: >-
+            Only list recordings after this datetime (in event timezone).
           required: false
           deprecated: false
           allowEmptyValue: false
@@ -403,11 +421,18 @@ paths:
           in: query
           schema:
             oneOf:
+              - anyOf:
+                  - $ref: "#/components/schemas/ListRequestBefore"
+                  - type: string
+                    contentMediaType: application/json
+                    contentSchema:
+                      $ref: "#/components/schemas/ListRequestBefore"
+                title: ListRequestBefore
               - type: "null"
-              - type: string
-                format: date-time
-            description: Only list records before this time (in event timezone).
-          description: Only list records before this time (in event timezone).
+            description: >-
+              Only list recordings before this datetime (in event timezone).
+          description: >-
+            Only list recordings before this datetime (in event timezone).
           required: false
           deprecated: false
           allowEmptyValue: false
@@ -416,12 +441,16 @@ paths:
           in: query
           schema:
             oneOf:
+              - anyOf:
+                  - $ref: "#/components/schemas/ListRequestLimit"
+                  - type: string
+                    contentMediaType: application/json
+                    contentSchema:
+                      $ref: "#/components/schemas/ListRequestLimit"
+                title: ListRequestLimit
               - type: "null"
-              - type: integer
-                default: 10
-            description: Maximum number of records to return.
-            default: 10
-          description: Maximum number of records to return.
+            description: Maximum number of recordings to return. Default is 10.
+          description: Maximum number of recordings to return. Default is 10.
           required: false
           deprecated: false
           allowEmptyValue: false
@@ -430,10 +459,16 @@ paths:
           in: query
           schema:
             oneOf:
+              - anyOf:
+                  - $ref: "#/components/schemas/ListRequestOffset"
+                  - type: string
+                    contentMediaType: application/json
+                    contentSchema:
+                      $ref: "#/components/schemas/ListRequestOffset"
+                title: ListRequestOffset
               - type: "null"
-              - type: integer
-            description: Number of records to skip.
-          description: Number of records to skip.
+            description: Number of recordings to skip.
+          description: Number of recordings to skip.
           required: false
           deprecated: false
           allowEmptyValue: false
@@ -441,13 +476,15 @@ paths:
         - name: order
           in: query
           schema:
-            type:
-              - "null"
-              - string
-            enum:
-              - asc
-              - desc
-              - null
+            oneOf:
+              - anyOf:
+                  - $ref: "#/components/schemas/ListRequestOrder"
+                  - type: string
+                    contentMediaType: application/json
+                    contentSchema:
+                      $ref: "#/components/schemas/ListRequestOrder"
+                title: ListRequestOrder
+              - type: "null"
             description: Order to apply to the results.
           description: Order to apply to the results.
           required: false
@@ -461,7 +498,162 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/RecordList"
+                $ref: "#/components/schemas/ListResponseResults"
+        "400":
+          description: Bad request syntax or unsupported method
+          content:
+            application/json:
+              schema:
+                properties:
+                  status_code:
+                    type: integer
+                  detail:
+                    type: string
+                  extra:
+                    additionalProperties: {}
+                    type:
+                      - "null"
+                      - object
+                      - array
+                type: object
+                required:
+                  - detail
+                  - status_code
+                description: Validation Exception
+                examples:
+                  - status_code: 400
+                    detail: Bad Request
+                    extra: {}
+        "404":
+          description: Nothing matches the given URI
+          content:
+            application/json:
+              schema:
+                properties:
+                  status_code:
+                    type: integer
+                  detail:
+                    type: string
+                  extra:
+                    additionalProperties: {}
+                    type:
+                      - "null"
+                      - object
+                      - array
+                type: object
+                required:
+                  - detail
+                  - status_code
+                description: Not Found Exception
+                examples:
+                  - status_code: 404
+                    detail: Not Found
+                    extra: {}
+      deprecated: false
+  /sse:
+    get:
+      tags:
+        - SSE
+      summary: Get SSE stream
+      description: Get a stream of Server-Sent Events.
+      operationId: SseSubscribe
+      parameters:
+        - name: types
+          in: query
+          schema:
+            oneOf:
+              - anyOf:
+                  - $ref: "#/components/schemas/SubscribeRequestTypes"
+                  - type: string
+                    contentMediaType: application/json
+                    contentSchema:
+                      $ref: "#/components/schemas/SubscribeRequestTypes"
+                title: SubscribeRequestTypes
+              - type: "null"
+            description: Types of events to subscribe to.
+          description: Types of events to subscribe to.
+          required: false
+          deprecated: false
+          allowEmptyValue: false
+          allowReserved: false
+      responses:
+        "200":
+          description: Request fulfilled, stream of Server-Sent Events follows
+          headers:
+            Cache-Control:
+              schema:
+                type: string
+              required: true
+              deprecated: false
+            Connection:
+              schema:
+                type: string
+              required: true
+              deprecated: false
+          content:
+            text/event-stream:
+              schema:
+                type: string
+        "400":
+          description: Bad request syntax or unsupported method
+          content:
+            application/json:
+              schema:
+                properties:
+                  status_code:
+                    type: integer
+                  detail:
+                    type: string
+                  extra:
+                    additionalProperties: {}
+                    type:
+                      - "null"
+                      - object
+                      - array
+                type: object
+                required:
+                  - detail
+                  - status_code
+                description: Validation Exception
+                examples:
+                  - status_code: 400
+                    detail: Bad Request
+                    extra: {}
+      deprecated: false
+  /test:
+    get:
+      tags:
+        - Test
+      summary: Test
+      description: Test.
+      operationId: TestTest
+      parameters:
+        - name: parameters
+          in: query
+          schema:
+            oneOf:
+              - anyOf:
+                  - $ref: "#/components/schemas/TestRequestParameters"
+                  - type: string
+                    contentMediaType: application/json
+                    contentSchema:
+                      $ref: "#/components/schemas/TestRequestParameters"
+                title: TestRequestParameters
+              - type: "null"
+            description: Parameters for testing.
+          description: Parameters for testing.
+          required: false
+          deprecated: false
+          allowEmptyValue: false
+          allowReserved: false
+      responses:
+        "200":
+          description: Request fulfilled, document follows
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TestResponseResult"
         "400":
           description: Bad request syntax or unsupported method
           content:
@@ -490,43 +682,165 @@ paths:
       deprecated: false
 components:
   schemas:
-    Record:
+    DeleteRequestEvent:
+      type: string
+      format: uuid
+    DeleteRequestStart:
+      type: string
+      format: date-time
+      examples:
+        - 2000-01-01T00:00:00
+    DownloadRequestEvent:
+      type: string
+      format: uuid
+    DownloadRequestStart:
+      type: string
+      format: date-time
+      examples:
+        - 2000-01-01T00:00:00
+    EventType:
+      type: string
+      enum:
+        - test
+      title: EventType
+      description: Event types.
+    HeadDownloadRequestEvent:
+      type: string
+      format: uuid
+    HeadDownloadRequestStart:
+      type: string
+      format: date-time
+      examples:
+        - 2000-01-01T00:00:00
+    ListOrder:
+      type: string
+      enum:
+        - asc
+        - desc
+      title: ListOrder
+      description: Order to list recordings.
+    ListRequestAfter:
+      anyOf:
+        - $ref: "#/components/schemas/NaiveDatetime"
+        - type: "null"
+    ListRequestBefore:
+      anyOf:
+        - $ref: "#/components/schemas/NaiveDatetime"
+        - type: "null"
+    ListRequestEvent:
+      type: string
+      format: uuid
+    ListRequestLimit:
+      anyOf:
+        - type: integer
+        - type: "null"
+    ListRequestOffset:
+      anyOf:
+        - type: integer
+        - type: "null"
+    ListRequestOrder:
+      anyOf:
+        - $ref: "#/components/schemas/ListOrder"
+        - type: "null"
+    ListResponseResults:
+      properties:
+        count:
+          type: integer
+          title: Count
+          description: Total number of recordings that match the request.
+        limit:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Limit
+          description: Maximum number of returned recordings.
+        offset:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Offset
+          description: Number of skipped recordings.
+        recordings:
+          items:
+            $ref: "#/components/schemas/Recording"
+          type: array
+          title: Recordings
+          description: List of recordings.
+      type: object
+      required:
+        - count
+        - limit
+        - offset
+        - recordings
+      title: RecordingList
+      description: List of recordings.
+    NaiveDatetime:
+      type: string
+      format: date-time
+      examples:
+        - 2000-01-01T00:00:00
+    Parameters:
+      properties:
+        message:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Message
+          description: Optional message to include in the test.
+          default: null
+      type: object
+      title: Parameters
+      description: Parameters for testing.
+    Recording:
       properties:
         event:
           type: string
           format: uuid
+          title: Event
           description: Identifier of the event.
         start:
-          type: string
-          format: date-time
-          description: Start time of the event instance in event timezone.
+          $ref: "#/components/schemas/NaiveDatetime"
       type: object
       required:
         - event
         - start
-      title: Record
-    RecordList:
-      properties:
-        count:
-          type: integer
-          description: Total number of records that match the request.
-        limit:
-          oneOf:
-            - type: "null"
-            - type: integer
-          description: Maximum number of returned records.
-        offset:
-          oneOf:
-            - type: "null"
-            - type: integer
-          description: Number of skipped records.
-        records:
-          items:
-            $ref: "#/components/schemas/Record"
+      title: Recording
+      description: Recording data.
+    SubscribeRequestTypes:
+      anyOf:
+        - type: string
+        - items:
+            $ref: "#/components/schemas/EventType"
           type: array
-          description: List of records.
+          uniqueItems: true
+        - type: "null"
+    TestRequestParameters:
+      anyOf:
+        - $ref: "#/components/schemas/Parameters"
+        - type: "null"
+    TestResponseResult:
+      properties:
+        success:
+          type: boolean
+          title: Success
+          description: Indicates if the test was successful.
+        message:
+          type: string
+          title: Message
+          description: Message returned from the test.
       type: object
       required:
-        - count
-        - records
-      title: RecordList
+        - success
+        - message
+      title: Result
+      description: Result of the test.
+    UploadRequestEvent:
+      type: string
+      format: uuid
+    UploadRequestStart:
+      type: string
+      format: date-time
+      examples:
+        - 2000-01-01T00:00:00
+    UploadRequestType:
+      type: string

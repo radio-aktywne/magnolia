@@ -1,0 +1,138 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: magnolia\n"
+"Language: pl\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"MIME-Version: 1.0\n"
+"X-Generator: @lingui/cli\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Plural-Forms: \n"
+
+#: src/client/core/components/list-recordings-widget/main.tsx:145
+msgid "{remaining, plural, other {...and # more.}}"
+msgstr "{remaining, plural, other {...i # więcej.}}"
+
+#: src/client/core/components/list-recordings-widget/main.tsx:79
+#: src/client/test/components/test-widget/main.tsx:52
+msgid "An unexpected error occurred"
+msgstr "Wystąpił nieoczekiwany błąd"
+
+#: src/client/test/components/test-widget/components/test-form/main.tsx:25
+msgid "Enter some value"
+msgstr "Wprowadź jakąś wartość"
+
+#: src/isomorphic/notifications/hooks/use-notifications/main.ts:46
+msgid "Error"
+msgstr "Błąd"
+
+#: src/app/(root)/(main)/error.tsx:11
+#: src/app/(root)/(recordings)/(master)/(detail)/error.tsx:11
+#: src/app/(root)/(recordings)/error.tsx:11
+msgid "Error • magnolia"
+msgstr "Błąd • magnolia"
+
+#: src/client/core/components/list-recordings-widget/components/controls/main.tsx:59
+msgid "Filter by date range"
+msgstr "Filtruj według zakresu dat"
+
+#: src/isomorphic/notifications/hooks/use-notifications/main.ts:56
+msgid "Info"
+msgstr "Informacja"
+
+#: src/client/test/components/test-widget/main.tsx:41
+#: src/client/test/components/test-widget/main.tsx:62
+msgid "Invalid input"
+msgstr "Nieprawidłowe dane wejściowe"
+
+#: src/app/(root)/layout.tsx:39
+msgid "magnolia"
+msgstr "magnolia"
+
+#: src/app/(root)/layout.tsx:33
+msgid "magnolia is a Next.js app"
+msgstr "magnolia to aplikacja Next.js"
+
+#: src/client/core/components/list-recordings-widget/main.tsx:128
+msgid "No recordings"
+msgstr "Brak zapisów transmisji"
+
+#: src/client/core/components/shows-widget/main.tsx:101
+msgid "No shows"
+msgstr "Brak audycji"
+
+#: src/app/(root)/(main)/not-found.tsx:15
+#: src/app/(root)/(recordings)/(master)/(detail)/not-found.tsx:15
+msgid "Not Found • magnolia"
+msgstr "Nie znaleziono • magnolia"
+
+#: src/app/(root)/(main)/not-found.view.tsx:8
+#: src/app/(root)/(recordings)/(master)/(detail)/not-found.view.tsx:8
+msgid "Page not found"
+msgstr "Nie znaleziono strony"
+
+#: src/client/core/components/list-recordings-widget/main.tsx:73
+msgid "Recording already deleted"
+msgstr "Zapis transmisji jest już usunięty"
+
+#: src/client/core/components/list-recordings-widget/main.tsx:85
+msgid "Recording deleted"
+msgstr "Usunięto zapis transmisji"
+
+#: src/client/core/components/list-recordings-widget/main.tsx:119
+msgid "Recordings"
+msgstr "Zapisy transmisji"
+
+#: src/app/(root)/(recordings)/(master)/(detail)/shows/[id]/recordings/page.tsx:40
+msgid "Recordings • {showTitle} • magnolia"
+msgstr "Zapisy transmisji • {showTitle} • magnolia"
+
+#: src/isomorphic/core/components/generic/error-widget/main.tsx:21
+msgid "Retry"
+msgstr "Spróbuj ponownie"
+
+#: src/client/core/components/shows-widget/components/controls/main.tsx:30
+msgid "Search shows"
+msgstr "Szukaj audycji"
+
+#: src/app/(root)/(recordings)/(master)/(detail)/shows/[id]/not-found.view.tsx:8
+msgid "Show not found"
+msgstr "Nie znaleziono audycji"
+
+#: src/app/(root)/(recordings)/(master)/(detail)/shows/[id]/not-found.tsx:15
+msgid "Show not found • magnolia"
+msgstr "Nie znaleziono audycji • magnolia"
+
+#: src/client/core/components/shows-widget/main.tsx:89
+msgid "Shows"
+msgstr "Audycje"
+
+#: src/app/(root)/(recordings)/(master)/shows/page.tsx:20
+msgid "Shows • magnolia"
+msgstr "Audycje • magnolia"
+
+#: src/app/(root)/(main)/error.view.tsx:10
+#: src/app/(root)/(recordings)/(master)/(detail)/error.view.tsx:10
+#: src/app/(root)/(recordings)/error.view.tsx:12
+msgid "Something went wrong"
+msgstr "Coś poszło nie tak"
+
+#: src/client/test/components/test-widget/components/test-form/main.tsx:30
+msgid "Submit"
+msgstr "Wyślij"
+
+#: src/isomorphic/notifications/hooks/use-notifications/main.ts:66
+msgid "Success"
+msgstr "Sukces"
+
+#: src/isomorphic/notifications/hooks/use-notifications/main.ts:76
+msgid "Warning"
+msgstr "Ostrzeżenie"
+
+#: src/server/orpc/vars/procedures/vars/test/vars/validate/main.ts:27
+msgid "Why did the chicken cross the road? To get to the other side."
+msgstr "Dlaczego kura przeszła przez ulicę? Żeby dostać się na drugą stronę."
