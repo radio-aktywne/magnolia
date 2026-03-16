@@ -1,0 +1,138 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: magnolia\n"
+"Language: en\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"MIME-Version: 1.0\n"
+"X-Generator: @lingui/cli\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Plural-Forms: \n"
+
+#: src/client/core/components/list-recordings-widget/main.tsx:145
+msgid "{remaining, plural, other {...and # more.}}"
+msgstr "{remaining, plural, other {...and # more.}}"
+
+#: src/client/core/components/list-recordings-widget/main.tsx:79
+#: src/client/test/components/test-widget/main.tsx:52
+msgid "An unexpected error occurred"
+msgstr "An unexpected error occurred"
+
+#: src/client/test/components/test-widget/components/test-form/main.tsx:25
+msgid "Enter some value"
+msgstr "Enter some value"
+
+#: src/isomorphic/notifications/hooks/use-notifications/main.ts:46
+msgid "Error"
+msgstr "Error"
+
+#: src/app/(root)/(main)/error.tsx:11
+#: src/app/(root)/(recordings)/(master)/(detail)/error.tsx:11
+#: src/app/(root)/(recordings)/error.tsx:11
+msgid "Error • magnolia"
+msgstr "Error • magnolia"
+
+#: src/client/core/components/list-recordings-widget/components/controls/main.tsx:59
+msgid "Filter by date range"
+msgstr "Filter by date range"
+
+#: src/isomorphic/notifications/hooks/use-notifications/main.ts:56
+msgid "Info"
+msgstr "Info"
+
+#: src/client/test/components/test-widget/main.tsx:41
+#: src/client/test/components/test-widget/main.tsx:62
+msgid "Invalid input"
+msgstr "Invalid input"
+
+#: src/app/(root)/layout.tsx:39
+msgid "magnolia"
+msgstr "magnolia"
+
+#: src/app/(root)/layout.tsx:33
+msgid "magnolia is a Next.js app"
+msgstr "magnolia is a Next.js app"
+
+#: src/client/core/components/list-recordings-widget/main.tsx:128
+msgid "No recordings"
+msgstr "No recordings"
+
+#: src/client/core/components/shows-widget/main.tsx:101
+msgid "No shows"
+msgstr "No shows"
+
+#: src/app/(root)/(main)/not-found.tsx:15
+#: src/app/(root)/(recordings)/(master)/(detail)/not-found.tsx:15
+msgid "Not Found • magnolia"
+msgstr "Not Found • magnolia"
+
+#: src/app/(root)/(main)/not-found.view.tsx:8
+#: src/app/(root)/(recordings)/(master)/(detail)/not-found.view.tsx:8
+msgid "Page not found"
+msgstr "Page not found"
+
+#: src/client/core/components/list-recordings-widget/main.tsx:73
+msgid "Recording already deleted"
+msgstr "Recording already deleted"
+
+#: src/client/core/components/list-recordings-widget/main.tsx:85
+msgid "Recording deleted"
+msgstr "Recording deleted"
+
+#: src/client/core/components/list-recordings-widget/main.tsx:119
+msgid "Recordings"
+msgstr "Recordings"
+
+#: src/app/(root)/(recordings)/(master)/(detail)/shows/[id]/recordings/page.tsx:40
+msgid "Recordings • {showTitle} • magnolia"
+msgstr "Recordings • {showTitle} • magnolia"
+
+#: src/isomorphic/core/components/generic/error-widget/main.tsx:21
+msgid "Retry"
+msgstr "Retry"
+
+#: src/client/core/components/shows-widget/components/controls/main.tsx:30
+msgid "Search shows"
+msgstr "Search shows"
+
+#: src/app/(root)/(recordings)/(master)/(detail)/shows/[id]/not-found.view.tsx:8
+msgid "Show not found"
+msgstr "Show not found"
+
+#: src/app/(root)/(recordings)/(master)/(detail)/shows/[id]/not-found.tsx:15
+msgid "Show not found • magnolia"
+msgstr "Show not found • magnolia"
+
+#: src/client/core/components/shows-widget/main.tsx:89
+msgid "Shows"
+msgstr "Shows"
+
+#: src/app/(root)/(recordings)/(master)/shows/page.tsx:20
+msgid "Shows • magnolia"
+msgstr "Shows • magnolia"
+
+#: src/app/(root)/(main)/error.view.tsx:10
+#: src/app/(root)/(recordings)/(master)/(detail)/error.view.tsx:10
+#: src/app/(root)/(recordings)/error.view.tsx:12
+msgid "Something went wrong"
+msgstr "Something went wrong"
+
+#: src/client/test/components/test-widget/components/test-form/main.tsx:30
+msgid "Submit"
+msgstr "Submit"
+
+#: src/isomorphic/notifications/hooks/use-notifications/main.ts:66
+msgid "Success"
+msgstr "Success"
+
+#: src/isomorphic/notifications/hooks/use-notifications/main.ts:76
+msgid "Warning"
+msgstr "Warning"
+
+#: src/server/orpc/vars/procedures/vars/test/vars/validate/main.ts:27
+msgid "Why did the chicken cross the road? To get to the other side."
+msgstr "Why did the chicken cross the road? To get to the other side."

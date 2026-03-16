@@ -15,7 +15,8 @@ Broadcast recordings app 📼
 
 ## 💡 About
 
-`magnolia` is a web app for managing recordings of live broadcasts.
+`magnolia` is a [`Next.js`](https://nextjs.org) app
+for managing recordings of live broadcasts.
 
 ## 📄 Further Reading
 
