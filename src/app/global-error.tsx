@@ -6,7 +6,7 @@ import { GlobalErrorView } from "./global-error.view";
 import "./styles.css";
 
 function getDescription({}: ErrorMetadataUtilityInput = {}) {
-  return "magnolia is a Next.js app";
+  return "Broadcast recordings app 📼";
 }
 
 function getTitle({}: ErrorMetadataUtilityInput = {}) {
