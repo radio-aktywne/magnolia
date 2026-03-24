@@ -30,7 +30,7 @@ import { RootLayoutView } from "./layout.view";
 async function getDescription({}: LayoutMetadataUtilityInput<
   typeof Schemas.Path
 > = {}) {
-  return msg({ message: "magnolia is a Next.js app" });
+  return msg({ message: "Broadcast recordings app 📼" });
 }
 
 async function getTitle({}: LayoutMetadataUtilityInput<

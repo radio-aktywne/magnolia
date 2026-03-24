@@ -22,6 +22,10 @@ msgstr "{remaining, plural, other {...i # więcej.}}"
 msgid "An unexpected error occurred"
 msgstr "Wystąpił nieoczekiwany błąd"
 
+#: src/app/(root)/layout.tsx:33
+msgid "Broadcast recordings app 📼"
+msgstr "Broadcast recordings app 📼"
+
 #: src/client/test/components/test-widget/components/test-form/main.tsx:25
 msgid "Enter some value"
 msgstr "Wprowadź jakąś wartość"
@@ -52,10 +56,6 @@ msgstr "Nieprawidłowe dane wejściowe"
 #: src/app/(root)/layout.tsx:39
 msgid "magnolia"
 msgstr "magnolia"
-
-#: src/app/(root)/layout.tsx:33
-msgid "magnolia is a Next.js app"
-msgstr "magnolia to aplikacja Next.js"
 
 #: src/client/core/components/list-recordings-widget/main.tsx:128
 msgid "No recordings"
