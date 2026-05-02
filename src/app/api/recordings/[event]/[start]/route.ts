@@ -17,13 +17,22 @@ export async function GET(
 
   const pathParameters = await Schemas.Path.parseAsync(await params);
 
-  const { response: recordingsEventStartDownloadResponse } =
-    await state.current.apis.gecko.recordingsEventStartDownload({
-      path: { event: pathParameters.event, start: pathParameters.start },
-    });
+  const {
+    data: recordingsEventStartDownloadData,
+    response: recordingsEventStartDownloadResponse,
+  } = await state.current.apis.gecko.recordingsEventStartDownload({
+    path: { event: pathParameters.event, start: pathParameters.start },
+  });
 
-  if (recordingsEventStartDownloadResponse.status === 404)
-    return new Response(STATUS_CODES[404], { status: 404 });
+  if (recordingsEventStartDownloadData === undefined) {
+    if (recordingsEventStartDownloadResponse.status === 400)
+      return new Response(STATUS_CODES[400], { status: 400 });
+
+    if (recordingsEventStartDownloadResponse.status === 404)
+      return new Response(STATUS_CODES[404], { status: 404 });
+
+    return new Response(STATUS_CODES[500], { status: 500 });
+  }
 
   return new Response(recordingsEventStartDownloadResponse.body, {
     headers: {
