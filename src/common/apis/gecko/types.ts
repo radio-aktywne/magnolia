@@ -353,19 +353,6 @@ export type RecordingsEventStartUploadErrors = {
         }
       | Array<unknown>;
   };
-  /**
-   * Not Found Exception
-   */
-  404: {
-    status_code: number;
-    detail: string;
-    extra?:
-      | null
-      | {
-          [key: string]: unknown;
-        }
-      | Array<unknown>;
-  };
 };
 
 export type RecordingsEventStartUploadError =
@@ -416,19 +403,6 @@ export type RecordingsEventListErrors = {
    * Validation Exception
    */
   400: {
-    status_code: number;
-    detail: string;
-    extra?:
-      | null
-      | {
-          [key: string]: unknown;
-        }
-      | Array<unknown>;
-  };
-  /**
-   * Not Found Exception
-   */
-  404: {
     status_code: number;
     detail: string;
     extra?:
