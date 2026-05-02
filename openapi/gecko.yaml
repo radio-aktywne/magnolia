@@ -1,7 +1,7 @@
 openapi: "3.1.0"
 info:
   title: gecko
-  version: "0.24.0"
+  version: "0.25.0"
 paths:
   /ping:
     get:
@@ -196,31 +196,6 @@ paths:
                 examples:
                   - status_code: 400
                     detail: Bad Request
-                    extra: {}
-        "404":
-          description: Nothing matches the given URI
-          content:
-            application/json:
-              schema:
-                properties:
-                  status_code:
-                    type: integer
-                  detail:
-                    type: string
-                  extra:
-                    additionalProperties: {}
-                    type:
-                      - "null"
-                      - object
-                      - array
-                type: object
-                required:
-                  - detail
-                  - status_code
-                description: Not Found Exception
-                examples:
-                  - status_code: 404
-                    detail: Not Found
                     extra: {}
       deprecated: false
     delete:
@@ -523,31 +498,6 @@ paths:
                 examples:
                   - status_code: 400
                     detail: Bad Request
-                    extra: {}
-        "404":
-          description: Nothing matches the given URI
-          content:
-            application/json:
-              schema:
-                properties:
-                  status_code:
-                    type: integer
-                  detail:
-                    type: string
-                  extra:
-                    additionalProperties: {}
-                    type:
-                      - "null"
-                      - object
-                      - array
-                type: object
-                required:
-                  - detail
-                  - status_code
-                description: Not Found Exception
-                examples:
-                  - status_code: 404
-                    detail: Not Found
                     extra: {}
       deprecated: false
   /sse:
