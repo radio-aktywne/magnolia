@@ -46,6 +46,18 @@ You can configure the app at runtime using various environment variables:
 - `MAGNOLIA__DEBUG` -
   enable debug mode
   (default: `true`)
+- `MAGNOLIA__IDENTITY__USERS__DEBUG__ID` -
+  identifier of the debug user
+  (default: `debug`)
+- `MAGNOLIA__IDENTITY__USERS__DEBUG__TRAITS__LOCALES__PREFERRED` -
+  preferred locale of the debug user
+  (default: ``)
+- `MAGNOLIA__IDENTITY__USERS__DEBUG__TRAITS__NAMES__DISPLAY` -
+  display name of the debug user
+  (default: `Debug User`)
+- `MAGNOLIA__IDENTITY__USERS__DEBUG__TRAITS__PICTURES__PROFILE__URL` -
+  profile picture URL of the debug user
+  (default: ``)
 - `MAGNOLIA__SERVER__HOST` -
   host to run the server on
   (default: `0.0.0.0`)
