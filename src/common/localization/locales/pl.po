@@ -22,7 +22,7 @@ msgstr "{remaining, plural, other {...i # więcej.}}"
 msgid "An unexpected error occurred"
 msgstr "Wystąpił nieoczekiwany błąd"
 
-#: src/app/(root)/layout.tsx:33
+#: src/app/(root)/layout.tsx:36
 msgid "Broadcast recordings app 📼"
 msgstr "Broadcast recordings app 📼"
 
@@ -30,13 +30,12 @@ msgstr "Broadcast recordings app 📼"
 msgid "Enter some value"
 msgstr "Wprowadź jakąś wartość"
 
-#: src/isomorphic/notifications/hooks/use-notifications/main.ts:46
+#: src/isomorphic/notifications/hooks/use-notifications/main.ts:40
 msgid "Error"
 msgstr "Błąd"
 
-#: src/app/(root)/(main)/error.tsx:11
 #: src/app/(root)/(recordings)/(master)/(detail)/error.tsx:11
-#: src/app/(root)/(recordings)/error.tsx:11
+#: src/app/(root)/error.tsx:11
 msgid "Error • magnolia"
 msgstr "Błąd • magnolia"
 
@@ -44,7 +43,11 @@ msgstr "Błąd • magnolia"
 msgid "Filter by date range"
 msgstr "Filtruj według zakresu dat"
 
-#: src/isomorphic/notifications/hooks/use-notifications/main.ts:56
+#: src/app/(root)/forbidden.tsx:10
+msgid "Forbidden • magnolia"
+msgstr "Brak dostępu • magnolia"
+
+#: src/isomorphic/notifications/hooks/use-notifications/main.ts:51
 msgid "Info"
 msgstr "Informacja"
 
@@ -53,7 +56,11 @@ msgstr "Informacja"
 msgid "Invalid input"
 msgstr "Nieprawidłowe dane wejściowe"
 
-#: src/app/(root)/layout.tsx:39
+#: src/isomorphic/identity/components/identity-widget/main.tsx:21
+msgid "Logout"
+msgstr "Wyloguj się"
+
+#: src/app/(root)/layout.tsx:42
 msgid "magnolia"
 msgstr "magnolia"
 
@@ -65,13 +72,12 @@ msgstr "Brak zapisów transmisji"
 msgid "No shows"
 msgstr "Brak audycji"
 
-#: src/app/(root)/(main)/not-found.tsx:15
 #: src/app/(root)/(recordings)/(master)/(detail)/not-found.tsx:15
+#: src/app/(root)/not-found.tsx:15
 msgid "Not Found • magnolia"
 msgstr "Nie znaleziono • magnolia"
 
-#: src/app/(root)/(main)/not-found.view.tsx:8
-#: src/app/(root)/(recordings)/(master)/(detail)/not-found.view.tsx:8
+#: src/isomorphic/core/components/generic/not-found-widget/main.tsx:15
 msgid "Page not found"
 msgstr "Nie znaleziono strony"
 
@@ -87,11 +93,11 @@ msgstr "Usunięto zapis transmisji"
 msgid "Recordings"
 msgstr "Zapisy transmisji"
 
-#: src/app/(root)/(recordings)/(master)/(detail)/shows/[id]/recordings/page.tsx:40
+#: src/app/(root)/(recordings)/(master)/(detail)/shows/[id]/recordings/page.tsx:42
 msgid "Recordings • {showTitle} • magnolia"
 msgstr "Zapisy transmisji • {showTitle} • magnolia"
 
-#: src/isomorphic/core/components/generic/error-widget/main.tsx:21
+#: src/isomorphic/core/components/generic/error-widget/main.tsx:25
 msgid "Retry"
 msgstr "Spróbuj ponownie"
 
@@ -111,13 +117,11 @@ msgstr "Nie znaleziono audycji • magnolia"
 msgid "Shows"
 msgstr "Audycje"
 
-#: src/app/(root)/(recordings)/(master)/shows/page.tsx:20
+#: src/app/(root)/(recordings)/(master)/shows/page.tsx:21
 msgid "Shows • magnolia"
 msgstr "Audycje • magnolia"
 
-#: src/app/(root)/(main)/error.view.tsx:10
-#: src/app/(root)/(recordings)/(master)/(detail)/error.view.tsx:10
-#: src/app/(root)/(recordings)/error.view.tsx:12
+#: src/isomorphic/core/components/generic/error-widget/main.tsx:16
 msgid "Something went wrong"
 msgstr "Coś poszło nie tak"
 
@@ -125,14 +129,22 @@ msgstr "Coś poszło nie tak"
 msgid "Submit"
 msgstr "Wyślij"
 
-#: src/isomorphic/notifications/hooks/use-notifications/main.ts:66
+#: src/isomorphic/notifications/hooks/use-notifications/main.ts:62
 msgid "Success"
 msgstr "Sukces"
 
-#: src/isomorphic/notifications/hooks/use-notifications/main.ts:76
+#: src/isomorphic/notifications/hooks/use-notifications/main.ts:73
 msgid "Warning"
 msgstr "Ostrzeżenie"
 
-#: src/server/orpc/vars/procedures/vars/test/vars/validate/main.ts:27
+#: src/server/orpc/vars/procedures/vars/test/vars/validate/main.ts:29
 msgid "Why did the chicken cross the road? To get to the other side."
 msgstr "Dlaczego kura przeszła przez ulicę? Żeby dostać się na drugą stronę."
+
+#: src/isomorphic/access/components/forbidden-widget/main.tsx:16
+msgid "You are not allowed to access this page"
+msgstr "Nie masz dostępu do tej strony"
+
+#: src/isomorphic/identity/components/identity-provider/components/user-synchronizer/main.tsx:56
+msgid "You are not authenticated. Reload the page to authenticate again."
+msgstr "Nie jesteś uwierzytelniony. Odśwież stronę, aby ponownie się uwierzytelnić."
