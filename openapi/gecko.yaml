@@ -1,7 +1,7 @@
 openapi: "3.1.0"
 info:
   title: gecko
-  version: "0.25.0"
+  version: "0.26.0"
 paths:
   /ping:
     get:
@@ -54,6 +54,7 @@ paths:
           in: path
           schema:
             $ref: "#/components/schemas/DownloadRequestStart"
+          description: Datetime without timezone.
           required: true
           deprecated: false
       responses:
@@ -145,6 +146,7 @@ paths:
           in: path
           schema:
             $ref: "#/components/schemas/UploadRequestStart"
+          description: Datetime without timezone.
           required: true
           deprecated: false
         - name: Content-Type
@@ -215,6 +217,7 @@ paths:
           in: path
           schema:
             $ref: "#/components/schemas/DeleteRequestStart"
+          description: Datetime without timezone.
           required: true
           deprecated: false
       responses:
@@ -289,6 +292,7 @@ paths:
           in: path
           schema:
             $ref: "#/components/schemas/HeadDownloadRequestStart"
+          description: Datetime without timezone.
           required: true
           deprecated: false
       responses:
@@ -638,6 +642,7 @@ components:
     DeleteRequestStart:
       type: string
       format: date-time
+      description: Datetime without timezone.
       examples:
         - 2000-01-01T00:00:00
     DownloadRequestEvent:
@@ -646,6 +651,7 @@ components:
     DownloadRequestStart:
       type: string
       format: date-time
+      description: Datetime without timezone.
       examples:
         - 2000-01-01T00:00:00
     EventType:
@@ -660,6 +666,7 @@ components:
     HeadDownloadRequestStart:
       type: string
       format: date-time
+      description: Datetime without timezone.
       examples:
         - 2000-01-01T00:00:00
     ListOrder:
@@ -727,6 +734,7 @@ components:
     NaiveDatetime:
       type: string
       format: date-time
+      description: Datetime without timezone.
       examples:
         - 2000-01-01T00:00:00
     Parameters:
@@ -790,6 +798,7 @@ components:
     UploadRequestStart:
       type: string
       format: date-time
+      description: Datetime without timezone.
       examples:
         - 2000-01-01T00:00:00
     UploadRequestType:

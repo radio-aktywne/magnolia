@@ -4,10 +4,14 @@ import * as z from "zod";
 
 export const UploadRequestTypeSchema = z.string();
 
-export const UploadRequestStartSchema = z.iso.datetime({
-  offset: true,
-  local: true,
-});
+/**
+ * Datetime without timezone.
+ */
+export const UploadRequestStartSchema = z.iso
+  .datetime({ offset: true, local: true })
+  .register(z.globalRegistry, {
+    description: "Datetime without timezone.",
+  });
 
 export const UploadRequestEventSchema = z.uuid();
 
@@ -57,10 +61,14 @@ export const SubscribeRequestTypesSchema = z
   .union([z.string(), z.array(EventTypeSchema)])
   .nullable();
 
-export const NaiveDatetimeSchema = z.iso.datetime({
-  offset: true,
-  local: true,
-});
+/**
+ * Datetime without timezone.
+ */
+export const NaiveDatetimeSchema = z.iso
+  .datetime({ offset: true, local: true })
+  .register(z.globalRegistry, {
+    description: "Datetime without timezone.",
+  });
 
 /**
  * Recording
@@ -121,24 +129,36 @@ export const ListRequestBeforeSchema = NaiveDatetimeSchema.nullable();
 
 export const ListRequestAfterSchema = NaiveDatetimeSchema.nullable();
 
-export const HeadDownloadRequestStartSchema = z.iso.datetime({
-  offset: true,
-  local: true,
-});
+/**
+ * Datetime without timezone.
+ */
+export const HeadDownloadRequestStartSchema = z.iso
+  .datetime({ offset: true, local: true })
+  .register(z.globalRegistry, {
+    description: "Datetime without timezone.",
+  });
 
 export const HeadDownloadRequestEventSchema = z.uuid();
 
-export const DownloadRequestStartSchema = z.iso.datetime({
-  offset: true,
-  local: true,
-});
+/**
+ * Datetime without timezone.
+ */
+export const DownloadRequestStartSchema = z.iso
+  .datetime({ offset: true, local: true })
+  .register(z.globalRegistry, {
+    description: "Datetime without timezone.",
+  });
 
 export const DownloadRequestEventSchema = z.uuid();
 
-export const DeleteRequestStartSchema = z.iso.datetime({
-  offset: true,
-  local: true,
-});
+/**
+ * Datetime without timezone.
+ */
+export const DeleteRequestStartSchema = z.iso
+  .datetime({ offset: true, local: true })
+  .register(z.globalRegistry, {
+    description: "Datetime without timezone.",
+  });
 
 export const DeleteRequestEventSchema = z.uuid();
 

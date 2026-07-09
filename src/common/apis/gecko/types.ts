@@ -6,6 +6,9 @@ export type ClientOptions = {
 
 export type UploadRequestType = string;
 
+/**
+ * Datetime without timezone.
+ */
 export type UploadRequestStart = string;
 
 export type UploadRequestEvent = string;
@@ -70,6 +73,9 @@ export type Recording = {
   start: NaiveDatetime;
 };
 
+/**
+ * Datetime without timezone.
+ */
 export type NaiveDatetime = string;
 
 /**
@@ -123,14 +129,23 @@ export type ListRequestBefore = NaiveDatetime | null;
 
 export type ListRequestAfter = NaiveDatetime | null;
 
+/**
+ * Datetime without timezone.
+ */
 export type HeadDownloadRequestStart = string;
 
 export type HeadDownloadRequestEvent = string;
 
+/**
+ * Datetime without timezone.
+ */
 export type DownloadRequestStart = string;
 
 export type DownloadRequestEvent = string;
 
+/**
+ * Datetime without timezone.
+ */
 export type DeleteRequestStart = string;
 
 export type DeleteRequestEvent = string;
@@ -172,6 +187,9 @@ export type RecordingsEventStartDeleteRequest = {
   body?: never;
   path: {
     event: DeleteRequestEvent;
+    /**
+     * Datetime without timezone.
+     */
     start: DeleteRequestStart;
   };
   query?: never;
@@ -224,6 +242,9 @@ export type RecordingsEventStartDownloadRequest = {
   body?: never;
   path: {
     event: DownloadRequestEvent;
+    /**
+     * Datetime without timezone.
+     */
     start: DownloadRequestStart;
   };
   query?: never;
@@ -276,6 +297,9 @@ export type RecordingsEventStartHeaddownloadRequest = {
   body?: never;
   path: {
     event: HeadDownloadRequestEvent;
+    /**
+     * Datetime without timezone.
+     */
     start: HeadDownloadRequestStart;
   };
   query?: never;
@@ -333,6 +357,9 @@ export type RecordingsEventStartUploadRequest = {
   };
   path: {
     event: UploadRequestEvent;
+    /**
+     * Datetime without timezone.
+     */
     start: UploadRequestStart;
   };
   query?: never;
