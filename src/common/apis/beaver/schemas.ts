@@ -215,16 +215,8 @@ export const ShowsModelsCountTerminationSchema = z
   });
 
 export const ShowsModelsTerminationSchema = z.union([
-  z
-    .object({
-      type: z.literal("shows_models_CountTermination"),
-    })
-    .and(ShowsModelsCountTerminationSchema),
-  z
-    .object({
-      type: z.literal("shows_models_UntilTermination"),
-    })
-    .and(ShowsModelsUntilTerminationSchema),
+  ShowsModelsCountTerminationSchema,
+  ShowsModelsUntilTerminationSchema,
 ]);
 
 /**
@@ -574,16 +566,8 @@ export const InstancesModelsCountTerminationSchema = z
   });
 
 export const InstancesModelsTerminationSchema = z.union([
-  z
-    .object({
-      type: z.literal("instances_models_CountTermination"),
-    })
-    .and(InstancesModelsCountTerminationSchema),
-  z
-    .object({
-      type: z.literal("instances_models_UntilTermination"),
-    })
-    .and(InstancesModelsUntilTerminationSchema),
+  InstancesModelsCountTerminationSchema,
+  InstancesModelsUntilTerminationSchema,
 ]);
 
 /**
@@ -952,16 +936,8 @@ export const EventsModelsCountTerminationSchema = z
   });
 
 export const EventsModelsTerminationSchema = z.union([
-  z
-    .object({
-      type: z.literal("events_models_CountTermination"),
-    })
-    .and(EventsModelsCountTerminationSchema),
-  z
-    .object({
-      type: z.literal("events_models_UntilTermination"),
-    })
-    .and(EventsModelsUntilTerminationSchema),
+  EventsModelsCountTerminationSchema,
+  EventsModelsUntilTerminationSchema,
 ]);
 
 /**
@@ -1080,52 +1056,10 @@ export const EventsModelsRecurrenceSchema = z
     description: "Recurrence rule data.",
   });
 
-/**
- * EventOrderByTimezoneInput
- *
- * Order by timezone.
- */
-export const EventOrderByTimezoneInputSchema = z
-  .object({
-    timezone: z.enum(["asc", "desc"]),
-  })
-  .register(z.globalRegistry, {
-    description: "Order by timezone.",
-  });
-
-/**
- * EventOrderByEndInput
- *
- * Order by end time.
- */
-export const EventOrderByEndInputSchema = z
-  .object({
-    end: z.enum(["asc", "desc"]),
-  })
-  .register(z.globalRegistry, {
-    description: "Order by end time.",
-  });
-
-/**
- * EventOrderByStartInput
- *
- * Order by start time.
- */
-export const EventOrderByStartInputSchema = z
-  .object({
-    start: z.enum(["asc", "desc"]),
-  })
-  .register(z.globalRegistry, {
-    description: "Order by start time.",
-  });
-
 export const EventOrderByInputSchema = z.union([
   EventsModelsEventIdOrderByInputSchema,
   EventsModelsEventTypeOrderByInputSchema,
   EventsModelsEventShowIdOrderByInputSchema,
-  EventOrderByStartInputSchema,
-  EventOrderByEndInputSchema,
-  EventOrderByTimezoneInputSchema,
 ]);
 
 export const EventsModelsListRequestOrderSchema = z
