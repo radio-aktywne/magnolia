@@ -387,12 +387,8 @@ export type ShowsModelsTimezone = string;
 export type ShowsModelsTimedelta = string;
 
 export type ShowsModelsTermination =
-  | ({
-      type: "shows_models_CountTermination";
-    } & ShowsModelsCountTermination)
-  | ({
-      type: "shows_models_UntilTermination";
-    } & ShowsModelsUntilTermination);
+  | ShowsModelsCountTermination
+  | ShowsModelsUntilTermination;
 
 /**
  * CountTermination
@@ -1108,12 +1104,8 @@ export type InstancesModelsTimezone = string;
 export type InstancesModelsTimedelta = string;
 
 export type InstancesModelsTermination =
-  | ({
-      type: "instances_models_CountTermination";
-    } & InstancesModelsCountTermination)
-  | ({
-      type: "instances_models_UntilTermination";
-    } & InstancesModelsUntilTermination);
+  | InstancesModelsCountTermination
+  | InstancesModelsUntilTermination;
 
 /**
  * CountTermination
@@ -1871,12 +1863,8 @@ export type EventsModelsCountTermination = {
 };
 
 export type EventsModelsTermination =
-  | ({
-      type: "events_models_CountTermination";
-    } & EventsModelsCountTermination)
-  | ({
-      type: "events_models_UntilTermination";
-    } & EventsModelsUntilTermination);
+  | EventsModelsCountTermination
+  | EventsModelsUntilTermination;
 
 /**
  * Frequency
@@ -2176,49 +2164,10 @@ export type EventsModelsListRequestOrder =
   | Array<EventOrderByInput>
   | null;
 
-/**
- * EventOrderByTimezoneInput
- *
- * Order by timezone.
- */
-export type EventOrderByTimezoneInput = {
-  /**
-   * Timezone
-   */
-  timezone: "asc" | "desc";
-};
-
-/**
- * EventOrderByEndInput
- *
- * Order by end time.
- */
-export type EventOrderByEndInput = {
-  /**
-   * End
-   */
-  end: "asc" | "desc";
-};
-
-/**
- * EventOrderByStartInput
- *
- * Order by start time.
- */
-export type EventOrderByStartInput = {
-  /**
-   * Start
-   */
-  start: "asc" | "desc";
-};
-
 export type EventOrderByInput =
   | EventsModelsEventIdOrderByInput
   | EventsModelsEventTypeOrderByInput
-  | EventsModelsEventShowIdOrderByInput
-  | EventOrderByStartInput
-  | EventOrderByEndInput
-  | EventOrderByTimezoneInput;
+  | EventsModelsEventShowIdOrderByInput;
 
 export type EventsModelsListRequestOffset = number | null;
 
