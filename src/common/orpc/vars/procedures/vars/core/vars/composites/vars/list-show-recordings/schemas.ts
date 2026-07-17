@@ -13,9 +13,9 @@ export const Schemas = {
   Input: z.object({
     after: z.iso.datetime({ local: true }).optional(),
     before: z.iso.datetime({ local: true }).optional(),
-    id: ShowsIdGetRequestSchema.shape.path.shape.id,
     limit: z.number().int().nonnegative().nullable().default(10),
     order: ListOrderSchema.default("desc"),
+    show: ShowsIdGetRequestSchema.shape.path.shape.id.nullish(),
   }),
   Output: z.object({
     count: z.number().int().nonnegative(),
@@ -25,7 +25,8 @@ export const Schemas = {
           ...ShowsModelsEventSchema.omit({ show: true }).shape,
           show: ShowsModelsEventSchema.shape.show
             .unwrap()
-            .omit({ events: true }),
+            .omit({ events: true })
+            .nullable(),
         }),
         recording: z.object({
           etag: z.string(),

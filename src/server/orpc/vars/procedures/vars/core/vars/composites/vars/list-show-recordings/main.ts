@@ -5,20 +5,20 @@ import { dayjs } from "../../../../../../../../../../common/dates/vars/dayjs";
 import { state } from "../../../../../../../../../state/vars/state";
 import { orpcServerRootBase } from "../../../../../../../bases/root";
 import { authenticatedMiddleware } from "../../../../../../../middleware/authenticated";
+import { events as eventsProcedures } from "../../../events";
 import { recordings } from "../../../recordings";
-import { shows } from "../../../shows";
 
 export const listShowRecordings =
   orpcServerRootBase.core.composites.listShowRecordings
     .use(authenticatedMiddleware)
     .handler(async ({ input }) => {
-      const showsGetData = await call(shows.get, {
-        id: input.id,
-        include: { events: { where: { type: "live" } } },
+      const eventsList = await call(eventsProcedures.list, {
+        include: { show: true },
+        where: { showId: input.show ?? null, type: "live" as const },
       });
 
       const perEventData = await Promise.all(
-        showsGetData.events!.map(async (event) => {
+        eventsList.events.map(async (event) => {
           const data = await call(recordings.list, {
             after:
               input.after &&
@@ -68,7 +68,9 @@ export const listShowRecordings =
             return {
               event: {
                 ...data.event,
-                show: omit(showsGetData, ["events"]),
+                show: data.event.show
+                  ? omit(data.event.show, ["events"])
+                  : null,
               },
               recording: {
                 etag: headers.get("ETag")!,
