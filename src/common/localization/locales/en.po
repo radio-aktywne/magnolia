@@ -13,11 +13,11 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: src/client/core/components/list-recordings-widget/main.tsx:145
+#: src/client/core/components/list-recordings-widget/main.tsx:159
 msgid "{remaining, plural, other {...and # more.}}"
 msgstr "{remaining, plural, other {...and # more.}}"
 
-#: src/client/core/components/list-recordings-widget/main.tsx:79
+#: src/client/core/components/list-recordings-widget/main.tsx:94
 #: src/client/test/components/test-widget/main.tsx:52
 msgid "An unexpected error occurred"
 msgstr "An unexpected error occurred"
@@ -34,12 +34,11 @@ msgstr "Enter some value"
 msgid "Error"
 msgstr "Error"
 
-#: src/app/(root)/(recordings)/(master)/(detail)/error.tsx:11
 #: src/app/(root)/error.tsx:11
 msgid "Error • magnolia"
 msgstr "Error • magnolia"
 
-#: src/client/core/components/list-recordings-widget/components/controls/main.tsx:59
+#: src/client/core/components/list-recordings-widget/components/range-filter/main.tsx:60
 msgid "Filter by date range"
 msgstr "Filter by date range"
 
@@ -64,15 +63,14 @@ msgstr "Logout"
 msgid "magnolia"
 msgstr "magnolia"
 
-#: src/client/core/components/list-recordings-widget/main.tsx:128
+#: src/client/core/components/list-recordings-widget/main.tsx:142
 msgid "No recordings"
 msgstr "No recordings"
 
-#: src/client/core/components/shows-widget/main.tsx:101
+#: src/client/core/components/list-recordings-widget/components/show-filter/main.tsx:45
 msgid "No shows"
 msgstr "No shows"
 
-#: src/app/(root)/(recordings)/(master)/(detail)/not-found.tsx:15
 #: src/app/(root)/not-found.tsx:15
 msgid "Not Found • magnolia"
 msgstr "Not Found • magnolia"
@@ -81,45 +79,33 @@ msgstr "Not Found • magnolia"
 msgid "Page not found"
 msgstr "Page not found"
 
-#: src/client/core/components/list-recordings-widget/main.tsx:73
+#: src/client/core/components/list-recordings-widget/main.tsx:88
 msgid "Recording already deleted"
 msgstr "Recording already deleted"
 
-#: src/client/core/components/list-recordings-widget/main.tsx:85
+#: src/client/core/components/list-recordings-widget/main.tsx:100
 msgid "Recording deleted"
 msgstr "Recording deleted"
 
-#: src/client/core/components/list-recordings-widget/main.tsx:119
+#: src/client/core/components/list-recordings-widget/main.tsx:130
 msgid "Recordings"
 msgstr "Recordings"
 
-#: src/app/(root)/(recordings)/(master)/(detail)/shows/[id]/recordings/page.tsx:42
+#: src/app/(root)/(main)/recordings/page.tsx:45
 msgid "Recordings • {showTitle} • magnolia"
 msgstr "Recordings • {showTitle} • magnolia"
+
+#: src/app/(root)/(main)/recordings/page.tsx:24
+msgid "Recordings • magnolia"
+msgstr "Recordings • magnolia"
 
 #: src/isomorphic/core/components/generic/error-widget/main.tsx:25
 msgid "Retry"
 msgstr "Retry"
 
-#: src/client/core/components/shows-widget/components/controls/main.tsx:30
-msgid "Search shows"
-msgstr "Search shows"
-
-#: src/app/(root)/(recordings)/(master)/(detail)/shows/[id]/not-found.view.tsx:8
-msgid "Show not found"
-msgstr "Show not found"
-
-#: src/app/(root)/(recordings)/(master)/(detail)/shows/[id]/not-found.tsx:15
-msgid "Show not found • magnolia"
-msgstr "Show not found • magnolia"
-
-#: src/client/core/components/shows-widget/main.tsx:89
-msgid "Shows"
-msgstr "Shows"
-
-#: src/app/(root)/(recordings)/(master)/shows/page.tsx:21
-msgid "Shows • magnolia"
-msgstr "Shows • magnolia"
+#: src/client/core/components/list-recordings-widget/components/show-filter/main.tsx:47
+msgid "Select show"
+msgstr "Select show"
 
 #: src/isomorphic/core/components/generic/error-widget/main.tsx:16
 msgid "Something went wrong"

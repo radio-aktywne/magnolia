@@ -30,6 +30,7 @@
     "client-only": "~0.0",
     "dayjs": "~1.11",
     "es-toolkit": "~1.43",
+    "fuse.js": "~7.5",
     "next": "16.1.5",
     "pretty-bytes": "~7.1",
     "react": "~19.2",

@@ -1,3 +1,3 @@
 export type ListRecordingsWidgetInput = {
-  id: string;
+  show?: null | string;
 };

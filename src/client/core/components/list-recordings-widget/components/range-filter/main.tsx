@@ -3,12 +3,12 @@ import { DatePickerInput } from "@mantine/dates";
 import { useCallback, useMemo } from "react";
 import { MdCalendarToday } from "react-icons/md";
 
-import type { ControlsInput } from "./types";
+import type { RangeFilterInput } from "./types";
 
 import { dayjs } from "../../../../../../common/dates/vars/dayjs";
 import { useLocalization } from "../../../../../../isomorphic/localization/hooks/use-localization";
 
-export function Controls({ defaultRange, onRangeChange }: ControlsInput) {
+export function RangeFilter({ defaultRange, onRangeChange }: RangeFilterInput) {
   const { localization } = useLocalization();
 
   const defaultValue = useMemo(
@@ -51,6 +51,7 @@ export function Controls({ defaultRange, onRangeChange }: ControlsInput) {
       clearable={true}
       defaultValue={defaultValue}
       dropdownType="modal"
+      flex={1}
       highlightToday={true}
       leftSection={<MdCalendarToday />}
       leftSectionPointerEvents="none"
@@ -60,7 +61,6 @@ export function Controls({ defaultRange, onRangeChange }: ControlsInput) {
       )}
       type="range"
       valueFormat="LL"
-      w="100%"
     />
   );
 }

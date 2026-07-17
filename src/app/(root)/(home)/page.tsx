@@ -7,5 +7,5 @@ import type { Keys } from "./types";
 export default async function HomePage({}: PageInput<Keys.Path, Keys.Query>) {
   await connection();
 
-  redirect("/shows");
+  redirect("/recordings");
 }
