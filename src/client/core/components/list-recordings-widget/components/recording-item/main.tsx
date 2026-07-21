@@ -55,6 +55,7 @@ export function RecordingItem({
       <Divider orientation="vertical" size="sm" />
       <ActionIcon
         bd="none"
+        color="ra-blue"
         component="a"
         download={`${slugify(event.show ? event.show.title : event.id)}_${dayjs.tz(recording.start, event.timezone).utc().format("YYYYMMDDTHHmmss[Z]")}`}
         href={`/api/recordings/${event.id}/${recording.start}`}
