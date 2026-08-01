@@ -18,15 +18,15 @@ msgid "{remaining, plural, other {...and # more.}}"
 msgstr "{remaining, plural, other {...and # more.}}"
 
 #: src/client/core/components/list-recordings-widget/main.tsx:94
-#: src/client/test/components/test-widget/main.tsx:52
+#: src/client/test/components/test-widget/main.tsx:50
 msgid "An unexpected error occurred"
 msgstr "An unexpected error occurred"
 
-#: src/app/(root)/layout.tsx:36
+#: src/app/(root)/layout.tsx:37
 msgid "Broadcast recordings app 📼"
 msgstr "Broadcast recordings app 📼"
 
-#: src/client/test/components/test-widget/components/test-form/main.tsx:25
+#: src/client/test/components/test-widget/components/test-form/main.tsx:30
 msgid "Enter some value"
 msgstr "Enter some value"
 
@@ -50,8 +50,8 @@ msgstr "Forbidden • magnolia"
 msgid "Info"
 msgstr "Info"
 
-#: src/client/test/components/test-widget/main.tsx:41
-#: src/client/test/components/test-widget/main.tsx:62
+#: src/client/test/components/test-widget/main.tsx:39
+#: src/client/test/components/test-widget/main.tsx:60
 msgid "Invalid input"
 msgstr "Invalid input"
 
@@ -59,7 +59,7 @@ msgstr "Invalid input"
 msgid "Logout"
 msgstr "Logout"
 
-#: src/app/(root)/layout.tsx:42
+#: src/app/(root)/layout.tsx:43
 msgid "magnolia"
 msgstr "magnolia"
 
@@ -111,7 +111,7 @@ msgstr "Select show"
 msgid "Something went wrong"
 msgstr "Something went wrong"
 
-#: src/client/test/components/test-widget/components/test-form/main.tsx:30
+#: src/client/test/components/test-widget/components/test-form/main.tsx:36
 msgid "Submit"
 msgstr "Submit"
 
