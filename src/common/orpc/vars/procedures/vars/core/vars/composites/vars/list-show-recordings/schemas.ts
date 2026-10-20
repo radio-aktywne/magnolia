@@ -3,6 +3,7 @@ import * as z from "zod";
 import {
   ShowsIdGetRequestSchema,
   ShowsModelsEventSchema,
+  ShowsModelsShowSchema,
 } from "../../../../../../../../../apis/beaver/schemas";
 import {
   ListOrderSchema,
@@ -23,10 +24,7 @@ export const Schemas = {
       z.object({
         event: z.object({
           ...ShowsModelsEventSchema.omit({ show: true }).shape,
-          show: ShowsModelsEventSchema.shape.show
-            .unwrap()
-            .omit({ events: true })
-            .nullable(),
+          show: ShowsModelsShowSchema.omit({ events: true }).nullable(),
         }),
         recording: z.object({
           etag: z.string(),

@@ -21,7 +21,7 @@ export const get = orpcServerRootBase.core.instances.get
     });
 
     if (instancesEventidStartGetData === undefined) {
-      if (instancesEventidStartGetResponse.status === 404)
+      if (instancesEventidStartGetResponse?.status === 404)
         throw errors.NOT_FOUND();
       throw errors.INTERNAL_SERVER_ERROR();
     }

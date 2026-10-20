@@ -19,7 +19,7 @@ export const get = orpcServerRootBase.core.events.get
       });
 
     if (eventsIdGetData === undefined) {
-      if (eventsIdGetResponse.status === 404) throw errors.NOT_FOUND();
+      if (eventsIdGetResponse?.status === 404) throw errors.NOT_FOUND();
       throw errors.INTERNAL_SERVER_ERROR();
     }
 

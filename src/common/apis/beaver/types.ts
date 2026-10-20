@@ -5,409 +5,67 @@ export type ClientOptions = {
 };
 
 /**
- * EventType
+ * Event
  *
- * Event types.
+ * Event data.
  */
-export type SseModelsEventType = "test";
-
-/**
- * _Event_type_OrderByInput
- */
-export type ShowsModelsEventTypeOrderByInput = {
-  /**
-   * Type
-   */
-  type: "asc" | "desc";
-};
-
-/**
- * _Event_showId_OrderByInput
- */
-export type ShowsModelsEventShowIdOrderByInput = {
-  /**
-   * Showid
-   */
-  showId: "asc" | "desc";
-};
-
-/**
- * _Event_id_OrderByInput
- */
-export type ShowsModelsEventIdOrderByInput = {
+export type CreateResponseEvent = {
   /**
    * Id
-   */
-  id: "asc" | "desc";
-};
-
-/**
- * _Event_RelevanceOrderByInput
- */
-export type ShowsModelsEventRelevanceOrderByInput = {
-  _relevance: ShowsModelsEventRelevanceInner;
-};
-
-/**
- * _Event_RelevanceInner
- */
-export type ShowsModelsEventRelevanceInner = {
-  /**
-   * Fields
-   */
-  fields: Array<"id" | "type" | "showId">;
-  /**
-   * Search
-   */
-  search: string;
-  /**
-   * Sort
-   */
-  sort: "asc" | "desc";
-};
-
-/**
- * _EventWhereUnique_id_Input
- */
-export type ShowsModelsEventWhereUniqueIdInput = {
-  /**
-   * Id
+   *
+   * Identifier of the event.
    */
   id: string;
-};
-
-export type ShowsModelsYearday = number | number;
-
-/**
- * WeekdayRule
- *
- * Day rule data.
- */
-export type ShowsModelsWeekdayRule = {
-  day: ShowsModelsWeekday;
-  /**
-   * Occurrence of the day in the year.
-   */
-  occurrence?: ShowsModelsWeek | null;
-};
-
-export type ShowsModelsWeek = number | number;
-
-/**
- * Weekday
- *
- * Weekday options.
- */
-export type ShowsModelsWeekday =
-  | "monday"
-  | "tuesday"
-  | "wednesday"
-  | "thursday"
-  | "friday"
-  | "saturday"
-  | "sunday";
-
-export type ShowsModelsUpdateRequestInclude = ShowInclude | null;
-
-/**
- * ShowIncludeFromShow
- *
- * Relational arguments for Show
- */
-export type ShowsModelsShowIncludeFromShow = {
-  /**
-   * Events
-   */
-  events?: boolean | ShowsModelsFindManyEventArgsFromShow;
-};
-
-/**
- * FindManyEventArgsFromShow
- *
- * Arguments for Show
- */
-export type ShowsModelsFindManyEventArgsFromShow = {
-  /**
-   * Take
-   */
-  take?: number;
-  /**
-   * Skip
-   */
-  skip?: number;
-  /**
-   * Orderby
-   */
-  orderBy?:
-    | ShowsModelsEventIdOrderByInput
-    | ShowsModelsEventTypeOrderByInput
-    | ShowsModelsEventShowIdOrderByInput
-    | ShowsModelsEventRelevanceOrderByInput
-    | Array<
-        | ShowsModelsEventIdOrderByInput
-        | ShowsModelsEventTypeOrderByInput
-        | ShowsModelsEventShowIdOrderByInput
-        | ShowsModelsEventRelevanceOrderByInput
-      >;
-  where?: ShowsModelsEventWhereInput;
-  cursor?: ShowsModelsEventWhereUniqueIdInput;
-  /**
-   * Distinct
-   */
-  distinct?: Array<"id" | "type" | "showId">;
-  include?: ShowsModelsEventIncludeFromEvent;
-};
-
-/**
- * ShowArgsFromEvent
- *
- * Arguments for Event
- */
-export type ShowsModelsShowArgsFromEvent = {
-  include?: ShowsModelsShowIncludeFromShow;
-};
-
-/**
- * EventIncludeFromEvent
- *
- * Relational arguments for Event
- */
-export type ShowsModelsEventIncludeFromEvent = {
-  /**
-   * Show
-   */
-  show?: boolean | ShowsModelsShowArgsFromEvent;
-};
-
-/**
- * ShowWhereInput
- *
- * Show arguments for searching
- */
-export type ShowsModelsShowWhereInput = {
-  /**
-   * Id
-   */
-  id?: string | ShowsModelsStringFilter;
-  /**
-   * Title
-   */
-  title?: string | ShowsModelsStringFilter;
-  /**
-   * Description
-   */
-  description?: string | ShowsModelsStringFilter | null;
-  events?: ShowsModelsEventListRelationFilter;
-  /**
-   * And
-   */
-  and?: Array<ShowsModelsShowWhereInput>;
-  /**
-   * Or
-   */
-  or?: Array<ShowsModelsShowWhereInput>;
-  /**
-   * Not
-   */
-  not?: Array<ShowsModelsShowWhereInput>;
-};
-
-/**
- * ShowRelationFilter
- */
-export type ShowsModelsShowRelationFilter = {
-  is?: ShowsModelsShowWhereInput;
-  isNot?: ShowsModelsShowWhereInput;
-};
-
-/**
- * EventType
- */
-export type ShowsModelsEventType = "live" | "replay" | "prerecorded";
-
-/**
- * EventWhereInput
- *
- * Event arguments for searching
- */
-export type ShowsModelsEventWhereInput = {
-  /**
-   * Id
-   */
-  id?: string | ShowsModelsStringFilter;
-  type?: ShowsModelsEventType;
+  type: EventsModelsEventType;
   /**
    * Showid
-   */
-  showId?: string | ShowsModelsStringFilter | null;
-  show?: ShowsModelsShowRelationFilter;
-  /**
-   * And
-   */
-  and?: Array<ShowsModelsEventWhereInput>;
-  /**
-   * Or
-   */
-  or?: Array<ShowsModelsEventWhereInput>;
-  /**
-   * Not
-   */
-  not?: Array<ShowsModelsEventWhereInput>;
-};
-
-/**
- * StringFilter
- */
-export type ShowsModelsStringFilter = {
-  /**
-   * Equals
-   */
-  equals?: string;
-  /**
-   * Notin
-   */
-  notIn?: Array<string>;
-  /**
-   * Lt
-   */
-  lt?: string;
-  /**
-   * Lte
-   */
-  lte?: string;
-  /**
-   * Gt
-   */
-  gt?: string;
-  /**
-   * Gte
-   */
-  gte?: string;
-  /**
-   * Contains
-   */
-  contains?: string;
-  /**
-   * Startswith
-   */
-  startswith?: string;
-  /**
-   * Endswith
-   */
-  endswith?: string;
-  /**
-   * In
-   */
-  in?: Array<string>;
-  /**
-   * Not
-   */
-  not?: string | ShowsModelsStringFilter;
-  /**
-   * Mode
-   */
-  mode?: "default" | "insensitive";
-  /**
-   * Search
-   */
-  search?: string;
-};
-
-/**
- * EventListRelationFilter
- */
-export type ShowsModelsEventListRelationFilter = {
-  some?: ShowsModelsEventWhereInput;
-  none?: ShowsModelsEventWhereInput;
-  every?: ShowsModelsEventWhereInput;
-};
-
-/**
- * ShowInclude
- *
- * Show relational arguments
- */
-export type ShowInclude = {
-  /**
-   * Events
-   */
-  events?: boolean | ShowsModelsFindManyEventArgsFromShow;
-};
-
-export type ShowsModelsUpdateRequestId = string;
-
-/**
- * ShowUpdateManyMutationInput
- *
- * Arguments for updating many records
- */
-export type ShowsModelsUpdateRequestData = {
-  /**
-   * Id
-   */
-  id?: string;
-  /**
-   * Title
-   */
-  title?: string;
-  /**
-   * Description
-   */
-  description?: string | null;
-};
-
-/**
- * UntilTermination
- *
- * Until termination data.
- */
-export type ShowsModelsUntilTermination = {
-  /**
-   * Type
    *
-   * Type of the termination.
+   * Identifier of the show the event belongs to.
    */
-  type?: "until";
-  until: ShowsModelsNaiveDatetime;
+  showId: string | null;
+  /**
+   * Show the event belongs to.
+   */
+  show: EventsModelsShow | null;
+  start: EventsModelsNaiveDatetime;
+  duration: EventsModelsTimedelta;
+  timezone: EventsModelsTimezone;
+  /**
+   * Recurrence rule of the event.
+   */
+  recurrence?: EventsModelsRecurrence | null;
+  /**
+   * Include
+   *
+   * Included instances of the event.
+   */
+  include?: Array<EventsModelsInclusion> | null;
+  /**
+   * Exclude
+   *
+   * Excluded instances of the event.
+   */
+  exclude?: Array<EventsModelsExclusion> | null;
 };
 
 /**
- * Datetime without timezone.
- */
-export type ShowsModelsNaiveDatetime = string;
-
-/**
- * Timezone name.
- */
-export type ShowsModelsTimezone = string;
-
-/**
- * Duration of time.
- */
-export type ShowsModelsTimedelta = string;
-
-export type ShowsModelsTermination =
-  | ShowsModelsCountTermination
-  | ShowsModelsUntilTermination;
-
-/**
- * CountTermination
+ * Instance
  *
- * Count termination data.
+ * Instance data.
  */
-export type ShowsModelsCountTermination = {
+export type CreateResponseInstance = {
+  start: InstancesModelsNaiveDatetime;
+  duration: InstancesModelsTimedelta;
   /**
-   * Type
+   * Eventid
    *
-   * Type of the termination.
+   * Identifier of the event the instance belongs to.
    */
-  type?: "count";
+  eventId: string;
   /**
-   * Count
-   *
-   * Number of instances of recurring event.
+   * Event the instance belongs to.
    */
-  count: number;
+  event: InstancesModelsEvent | null;
 };
 
 /**
@@ -415,7 +73,7 @@ export type ShowsModelsCountTermination = {
  *
  * Show data.
  */
-export type ShowsModelsShow = {
+export type CreateResponseShow = {
   /**
    * Id
    *
@@ -442,599 +100,12 @@ export type ShowsModelsShow = {
   events: Array<ShowsModelsEvent> | null;
 };
 
-/**
- * Exclusion
- *
- * Exclusion data.
- */
-export type ShowsModelsExclusion = {
-  start: ShowsModelsNaiveDatetime;
-};
+export type DeleteRequestEventId = string;
 
 /**
- * Inclusion
- *
- * Inclusion data.
+ * Datetime without timezone.
  */
-export type ShowsModelsInclusion = {
-  start: ShowsModelsNaiveDatetime;
-};
-
-export type ShowsModelsMonth = number;
-
-export type ShowsModelsMonthday = number | number;
-
-export type ShowsModelsHour = number;
-
-export type ShowsModelsMinute = number;
-
-export type ShowsModelsSecond = number;
-
-/**
- * Frequency
- *
- * Frequency options.
- */
-export type ShowsModelsFrequency =
-  | "secondly"
-  | "minutely"
-  | "hourly"
-  | "daily"
-  | "weekly"
-  | "monthly"
-  | "yearly";
-
-/**
- * Recurrence
- *
- * Recurrence rule data.
- */
-export type ShowsModelsRecurrence = {
-  frequency: ShowsModelsFrequency;
-  /**
-   * Termination of the recurrence.
-   */
-  termination?: ShowsModelsTermination | null;
-  /**
-   * Interval
-   *
-   * Interval of the recurrence.
-   */
-  interval?: number | null;
-  /**
-   * Byseconds
-   *
-   * Seconds of the recurrence.
-   */
-  bySeconds?: Array<ShowsModelsSecond> | null;
-  /**
-   * Byminutes
-   *
-   * Minutes of the recurrence.
-   */
-  byMinutes?: Array<ShowsModelsMinute> | null;
-  /**
-   * Byhours
-   *
-   * Hours of the recurrence.
-   */
-  byHours?: Array<ShowsModelsHour> | null;
-  /**
-   * Byweekdays
-   *
-   * Weekdays of the recurrence.
-   */
-  byWeekdays?: Array<ShowsModelsWeekdayRule> | null;
-  /**
-   * Bymonthdays
-   *
-   * Monthdays of the recurrence.
-   */
-  byMonthdays?: Array<ShowsModelsMonthday> | null;
-  /**
-   * Byyeardays
-   *
-   * Yeardays of the recurrence.
-   */
-  byYeardays?: Array<ShowsModelsYearday> | null;
-  /**
-   * Byweeks
-   *
-   * Weeks of the recurrence.
-   */
-  byWeeks?: Array<ShowsModelsWeek> | null;
-  /**
-   * Bymonths
-   *
-   * Months of the recurrence.
-   */
-  byMonths?: Array<ShowsModelsMonth> | null;
-  /**
-   * Bysetpositions
-   *
-   * Set positions of the recurrence.
-   */
-  bySetPositions?: Array<ShowsModelsYearday> | null;
-  /**
-   * Start day of the week.
-   */
-  weekStart?: ShowsModelsWeekday | null;
-};
-
-/**
- * Event
- *
- * Event data.
- */
-export type ShowsModelsEvent = {
-  /**
-   * Id
-   *
-   * Identifier of the event.
-   */
-  id: string;
-  type: ShowsModelsEventType;
-  /**
-   * Showid
-   *
-   * Identifier of the show the event belongs to.
-   */
-  showId: string | null;
-  /**
-   * Show the event belongs to.
-   */
-  show: ShowsModelsShow | null;
-  start: ShowsModelsNaiveDatetime;
-  duration: ShowsModelsTimedelta;
-  timezone: ShowsModelsTimezone;
-  /**
-   * Recurrence rule of the event.
-   */
-  recurrence?: ShowsModelsRecurrence | null;
-  /**
-   * Include
-   *
-   * Included instances of the event.
-   */
-  include?: Array<ShowsModelsInclusion> | null;
-  /**
-   * Exclude
-   *
-   * Excluded instances of the event.
-   */
-  exclude?: Array<ShowsModelsExclusion> | null;
-};
-
-/**
- * ShowList
- *
- * List of shows.
- */
-export type ShowsModelsListResponseResults = {
-  /**
-   * Count
-   *
-   * Total number of shows that matched the query.
-   */
-  count: number;
-  /**
-   * Limit
-   *
-   * Maximum number of returned shows.
-   */
-  limit: number | null;
-  /**
-   * Offset
-   *
-   * Number of shows skipped.
-   */
-  offset: number | null;
-  /**
-   * Shows
-   *
-   * Shows that matched the request.
-   */
-  shows: Array<ShowsModelsShow>;
-};
-
-export type ShowsModelsListRequestWhere = ShowsModelsShowWhereInput | null;
-
-export type ShowsModelsListRequestOrder =
-  | ShowOrderByInput
-  | Array<ShowOrderByInput>
-  | null;
-
-/**
- * _Show_description_OrderByInput
- */
-export type ShowDescriptionOrderByInput = {
-  /**
-   * Description
-   */
-  description: "asc" | "desc";
-};
-
-/**
- * _Show_title_OrderByInput
- */
-export type ShowTitleOrderByInput = {
-  /**
-   * Title
-   */
-  title: "asc" | "desc";
-};
-
-/**
- * _Show_id_OrderByInput
- */
-export type ShowIdOrderByInput = {
-  /**
-   * Id
-   */
-  id: "asc" | "desc";
-};
-
-export type ShowOrderByInput =
-  | ShowIdOrderByInput
-  | ShowTitleOrderByInput
-  | ShowDescriptionOrderByInput;
-
-export type ShowsModelsListRequestOffset = number | null;
-
-export type ShowsModelsListRequestLimit = number | null;
-
-export type ShowsModelsListRequestInclude = ShowInclude | null;
-
-export type ShowsModelsGetRequestInclude = ShowInclude | null;
-
-export type ShowsModelsGetRequestId = string;
-
-export type ShowsModelsDeleteRequestId = string;
-
-export type ShowsModelsCreateRequestInclude = ShowInclude | null;
-
-/**
- * ShowCreateWithoutRelationsInput
- *
- * Required arguments to the Show create method, without relations
- */
-export type ShowsModelsCreateRequestData = {
-  /**
-   * Id
-   */
-  id?: string;
-  /**
-   * Description
-   */
-  description?: string | null;
-  /**
-   * Title
-   */
-  title: string;
-};
-
-/**
- * _Event_type_OrderByInput
- */
-export type InstancesModelsEventTypeOrderByInput = {
-  /**
-   * Type
-   */
-  type: "asc" | "desc";
-};
-
-/**
- * _Event_showId_OrderByInput
- */
-export type InstancesModelsEventShowIdOrderByInput = {
-  /**
-   * Showid
-   */
-  showId: "asc" | "desc";
-};
-
-/**
- * _Event_id_OrderByInput
- */
-export type InstancesModelsEventIdOrderByInput = {
-  /**
-   * Id
-   */
-  id: "asc" | "desc";
-};
-
-/**
- * _Event_RelevanceOrderByInput
- */
-export type InstancesModelsEventRelevanceOrderByInput = {
-  _relevance: InstancesModelsEventRelevanceInner;
-};
-
-/**
- * _Event_RelevanceInner
- */
-export type InstancesModelsEventRelevanceInner = {
-  /**
-   * Fields
-   */
-  fields: Array<"id" | "type" | "showId">;
-  /**
-   * Search
-   */
-  search: string;
-  /**
-   * Sort
-   */
-  sort: "asc" | "desc";
-};
-
-/**
- * _EventWhereUnique_id_Input
- */
-export type InstancesModelsEventWhereUniqueIdInput = {
-  /**
-   * Id
-   */
-  id: string;
-};
-
-export type InstancesModelsYearday = number | number;
-
-/**
- * WeekdayRule
- *
- * Day rule data.
- */
-export type InstancesModelsWeekdayRule = {
-  day: InstancesModelsWeekday;
-  /**
-   * Occurrence of the day in the year.
-   */
-  occurrence?: InstancesModelsWeek | null;
-};
-
-export type InstancesModelsWeek = number | number;
-
-/**
- * Weekday
- *
- * Weekday options.
- */
-export type InstancesModelsWeekday =
-  | "monday"
-  | "tuesday"
-  | "wednesday"
-  | "thursday"
-  | "friday"
-  | "saturday"
-  | "sunday";
-
-export type InstancesModelsUpdateRequestInclude = InstanceInclude | null;
-
-/**
- * EventIncludeFromEvent
- *
- * Relational arguments for Event
- */
-export type InstancesModelsEventIncludeFromEvent = {
-  /**
-   * Show
-   */
-  show?: boolean | InstancesModelsShowArgsFromEvent;
-};
-
-/**
- * ShowArgsFromEvent
- *
- * Arguments for Event
- */
-export type InstancesModelsShowArgsFromEvent = {
-  include?: InstancesModelsShowIncludeFromShow;
-};
-
-/**
- * EventListRelationFilter
- */
-export type InstancesModelsEventListRelationFilter = {
-  some?: InstancesModelsEventWhereInput;
-  none?: InstancesModelsEventWhereInput;
-  every?: InstancesModelsEventWhereInput;
-};
-
-/**
- * EventWhereInput
- *
- * Event arguments for searching
- */
-export type InstancesModelsEventWhereInput = {
-  /**
-   * Id
-   */
-  id?: string | InstancesModelsStringFilter;
-  type?: InstancesModelsEventType;
-  /**
-   * Showid
-   */
-  showId?: string | InstancesModelsStringFilter | null;
-  show?: InstancesModelsShowRelationFilter;
-  /**
-   * And
-   */
-  and?: Array<InstancesModelsEventWhereInput>;
-  /**
-   * Or
-   */
-  or?: Array<InstancesModelsEventWhereInput>;
-  /**
-   * Not
-   */
-  not?: Array<InstancesModelsEventWhereInput>;
-};
-
-/**
- * ShowWhereInput
- *
- * Show arguments for searching
- */
-export type InstancesModelsShowWhereInput = {
-  /**
-   * Id
-   */
-  id?: string | InstancesModelsStringFilter;
-  /**
-   * Title
-   */
-  title?: string | InstancesModelsStringFilter;
-  /**
-   * Description
-   */
-  description?: string | InstancesModelsStringFilter | null;
-  events?: InstancesModelsEventListRelationFilter;
-  /**
-   * And
-   */
-  and?: Array<InstancesModelsShowWhereInput>;
-  /**
-   * Or
-   */
-  or?: Array<InstancesModelsShowWhereInput>;
-  /**
-   * Not
-   */
-  not?: Array<InstancesModelsShowWhereInput>;
-};
-
-/**
- * StringFilter
- */
-export type InstancesModelsStringFilter = {
-  /**
-   * Equals
-   */
-  equals?: string;
-  /**
-   * Notin
-   */
-  notIn?: Array<string>;
-  /**
-   * Lt
-   */
-  lt?: string;
-  /**
-   * Lte
-   */
-  lte?: string;
-  /**
-   * Gt
-   */
-  gt?: string;
-  /**
-   * Gte
-   */
-  gte?: string;
-  /**
-   * Contains
-   */
-  contains?: string;
-  /**
-   * Startswith
-   */
-  startswith?: string;
-  /**
-   * Endswith
-   */
-  endswith?: string;
-  /**
-   * In
-   */
-  in?: Array<string>;
-  /**
-   * Not
-   */
-  not?: string | InstancesModelsStringFilter;
-  /**
-   * Mode
-   */
-  mode?: "default" | "insensitive";
-  /**
-   * Search
-   */
-  search?: string;
-};
-
-/**
- * ShowRelationFilter
- */
-export type InstancesModelsShowRelationFilter = {
-  is?: InstancesModelsShowWhereInput;
-  isNot?: InstancesModelsShowWhereInput;
-};
-
-/**
- * EventType
- */
-export type InstancesModelsEventType = "live" | "replay" | "prerecorded";
-
-/**
- * FindManyEventArgsFromShow
- *
- * Arguments for Show
- */
-export type InstancesModelsFindManyEventArgsFromShow = {
-  /**
-   * Take
-   */
-  take?: number;
-  /**
-   * Skip
-   */
-  skip?: number;
-  /**
-   * Orderby
-   */
-  orderBy?:
-    | InstancesModelsEventIdOrderByInput
-    | InstancesModelsEventTypeOrderByInput
-    | InstancesModelsEventShowIdOrderByInput
-    | InstancesModelsEventRelevanceOrderByInput
-    | Array<
-        | InstancesModelsEventIdOrderByInput
-        | InstancesModelsEventTypeOrderByInput
-        | InstancesModelsEventShowIdOrderByInput
-        | InstancesModelsEventRelevanceOrderByInput
-      >;
-  where?: InstancesModelsEventWhereInput;
-  cursor?: InstancesModelsEventWhereUniqueIdInput;
-  /**
-   * Distinct
-   */
-  distinct?: Array<"id" | "type" | "showId">;
-  include?: InstancesModelsEventIncludeFromEvent;
-};
-
-/**
- * ShowIncludeFromShow
- *
- * Relational arguments for Show
- */
-export type InstancesModelsShowIncludeFromShow = {
-  /**
-   * Events
-   */
-  events?: boolean | InstancesModelsFindManyEventArgsFromShow;
-};
-
-/**
- * EventInclude
- *
- * Event relational arguments
- */
-export type InstancesModelsEventInclude = {
-  /**
-   * Show
-   */
-  show?: boolean | InstancesModelsShowArgsFromEvent;
-};
+export type DeleteRequestStart = string;
 
 /**
  * EventArgsFromInstance
@@ -1045,297 +116,76 @@ export type EventArgsFromInstance = {
   include?: InstancesModelsEventInclude;
 };
 
+export type EventOrderByInput =
+  | EventsModelsEventIdOrderByInput
+  | EventsModelsEventTypeOrderByInput
+  | EventsModelsEventShowIdOrderByInput;
+
 /**
- * InstanceInclude
- *
- * Relations to include when querying instances.
+ * EventRelationFilter
  */
-export type InstanceInclude = {
-  /**
-   * Event
-   *
-   * Event relation to include.
-   */
-  event?: boolean | EventArgsFromInstance;
+export type EventRelationFilter = {
+  is?: InstancesModelsEventWhereInput;
+  isNot?: InstancesModelsEventWhereInput;
 };
 
 /**
- * InstanceUpdateInput
+ * EventUpdateInput
  *
- * Data to update an instance.
+ * Data to update an event.
  */
-export type InstancesModelsUpdateRequestData = {
-  start?: InstancesModelsNaiveDatetime;
-};
-
-/**
- * Datetime without timezone.
- */
-export type InstancesModelsNaiveDatetime = string;
-
-/**
- * UntilTermination
- *
- * Until termination data.
- */
-export type InstancesModelsUntilTermination = {
-  /**
-   * Type
-   *
-   * Type of the termination.
-   */
-  type?: "until";
-  until: InstancesModelsNaiveDatetime;
-};
-
-/**
- * Datetime in UTC.
- */
-export type InstancesModelsUtcDatetime = string;
-
-/**
- * Timezone name.
- */
-export type InstancesModelsTimezone = string;
-
-/**
- * Duration of time.
- */
-export type InstancesModelsTimedelta = string;
-
-export type InstancesModelsTermination =
-  | InstancesModelsCountTermination
-  | InstancesModelsUntilTermination;
-
-/**
- * CountTermination
- *
- * Count termination data.
- */
-export type InstancesModelsCountTermination = {
-  /**
-   * Type
-   *
-   * Type of the termination.
-   */
-  type?: "count";
-  /**
-   * Count
-   *
-   * Number of instances of recurring event.
-   */
-  count: number;
-};
-
-/**
- * Show
- *
- * Show data.
- */
-export type InstancesModelsShow = {
+export type EventUpdateInput = {
   /**
    * Id
-   *
-   * Identifier of the show.
    */
-  id: string;
-  /**
-   * Title
-   *
-   * Title of the show.
-   */
-  title: string;
-  /**
-   * Description
-   *
-   * Description of the show.
-   */
-  description: string | null;
-  /**
-   * Events
-   *
-   * Events the show belongs to.
-   */
-  events: Array<InstancesModelsEvent> | null;
-};
-
-/**
- * Event
- *
- * Event data.
- */
-export type InstancesModelsEvent = {
-  /**
-   * Id
-   *
-   * Identifier of the event.
-   */
-  id: string;
-  type: InstancesModelsEventType;
-  /**
-   * Showid
-   *
-   * Identifier of the show the event belongs to.
-   */
-  showId: string | null;
-  /**
-   * Show the event belongs to.
-   */
-  show: InstancesModelsShow | null;
-  start: InstancesModelsNaiveDatetime;
-  duration: InstancesModelsTimedelta;
-  timezone: InstancesModelsTimezone;
+  id?: string;
+  type?: EventsModelsEventType;
+  start?: EventsModelsNaiveDatetime;
+  duration?: EventsModelsTimedelta;
+  timezone?: EventsModelsTimezone;
   /**
    * Recurrence rule of the event.
    */
-  recurrence?: InstancesModelsRecurrence | null;
+  recurrence?: RecurrenceUpdateInput | null;
   /**
    * Include
    *
    * Included instances of the event.
    */
-  include?: Array<InstancesModelsInclusion> | null;
+  include?: Array<EventsModelsInclusion> | null;
   /**
    * Exclude
    *
    * Excluded instances of the event.
    */
-  exclude?: Array<InstancesModelsExclusion> | null;
+  exclude?: Array<EventsModelsExclusion> | null;
 };
 
+export type GetRequestEventId = string;
+
 /**
- * Exclusion
- *
- * Exclusion data.
+ * Datetime without timezone.
  */
-export type InstancesModelsExclusion = {
+export type GetRequestStart = string;
+
+/**
+ * Instance
+ *
+ * Instance data.
+ */
+export type GetResponseInstance = {
   start: InstancesModelsNaiveDatetime;
-};
-
-/**
- * Inclusion
- *
- * Inclusion data.
- */
-export type InstancesModelsInclusion = {
-  start: InstancesModelsNaiveDatetime;
-};
-
-export type InstancesModelsMonth = number;
-
-export type InstancesModelsMonthday = number | number;
-
-export type InstancesModelsHour = number;
-
-export type InstancesModelsMinute = number;
-
-export type InstancesModelsSecond = number;
-
-/**
- * Frequency
- *
- * Frequency options.
- */
-export type InstancesModelsFrequency =
-  | "secondly"
-  | "minutely"
-  | "hourly"
-  | "daily"
-  | "weekly"
-  | "monthly"
-  | "yearly";
-
-/**
- * Recurrence
- *
- * Recurrence rule data.
- */
-export type InstancesModelsRecurrence = {
-  frequency: InstancesModelsFrequency;
+  duration: InstancesModelsTimedelta;
   /**
-   * Termination of the recurrence.
-   */
-  termination?: InstancesModelsTermination | null;
-  /**
-   * Interval
+   * Eventid
    *
-   * Interval of the recurrence.
+   * Identifier of the event the instance belongs to.
    */
-  interval?: number | null;
+  eventId: string;
   /**
-   * Byseconds
-   *
-   * Seconds of the recurrence.
+   * Event the instance belongs to.
    */
-  bySeconds?: Array<InstancesModelsSecond> | null;
-  /**
-   * Byminutes
-   *
-   * Minutes of the recurrence.
-   */
-  byMinutes?: Array<InstancesModelsMinute> | null;
-  /**
-   * Byhours
-   *
-   * Hours of the recurrence.
-   */
-  byHours?: Array<InstancesModelsHour> | null;
-  /**
-   * Byweekdays
-   *
-   * Weekdays of the recurrence.
-   */
-  byWeekdays?: Array<InstancesModelsWeekdayRule> | null;
-  /**
-   * Bymonthdays
-   *
-   * Monthdays of the recurrence.
-   */
-  byMonthdays?: Array<InstancesModelsMonthday> | null;
-  /**
-   * Byyeardays
-   *
-   * Yeardays of the recurrence.
-   */
-  byYeardays?: Array<InstancesModelsYearday> | null;
-  /**
-   * Byweeks
-   *
-   * Weeks of the recurrence.
-   */
-  byWeeks?: Array<InstancesModelsWeek> | null;
-  /**
-   * Bymonths
-   *
-   * Months of the recurrence.
-   */
-  byMonths?: Array<InstancesModelsMonth> | null;
-  /**
-   * Bysetpositions
-   *
-   * Set positions of the recurrence.
-   */
-  bySetPositions?: Array<InstancesModelsYearday> | null;
-  /**
-   * Start day of the week.
-   */
-  weekStart?: InstancesModelsWeekday | null;
-};
-
-/**
- * InstanceList
- *
- * List of instances.
- */
-export type InstancesModelsListResponseResults = {
-  start: InstancesModelsUtcDatetime;
-  end: InstancesModelsUtcDatetime;
-  /**
-   * Instances
-   *
-   * Instances that matched the request.
-   */
-  instances: Array<Instance>;
+  event: InstancesModelsEvent | null;
 };
 
 /**
@@ -1358,40 +208,19 @@ export type Instance = {
   event: InstancesModelsEvent | null;
 };
 
-export type InstancesModelsListRequestWhere = InstanceWhereInput | null;
-
 /**
- * EventRelationFilter
- */
-export type EventRelationFilter = {
-  is?: InstancesModelsEventWhereInput;
-  isNot?: InstancesModelsEventWhereInput;
-};
-
-/**
- * InstanceWhereInput
+ * InstanceInclude
  *
- * Instance arguments for searching.
+ * Relations to include when querying instances.
  */
-export type InstanceWhereInput = {
-  event?: EventRelationFilter;
+export type InstanceInclude = {
+  /**
+   * Event
+   *
+   * Event relation to include.
+   */
+  event?: boolean | EventArgsFromInstance;
 };
-
-export type InstancesModelsListRequestOrder =
-  | InstanceOrderByInput
-  | Array<InstanceOrderByInput>
-  | null;
-
-/**
- * InstanceOrderByEventIdInput
- *
- * Order by event ID of the instance.
- */
-export type InstanceOrderByEventIdInput = {
-  eventId: SortOrder;
-};
-
-export type SortOrder = "asc" | "desc";
 
 /**
  * InstanceOrderByDurationInput
@@ -1403,6 +232,20 @@ export type InstanceOrderByDurationInput = {
 };
 
 /**
+ * InstanceOrderByEventIdInput
+ *
+ * Order by event ID of the instance.
+ */
+export type InstanceOrderByEventIdInput = {
+  eventId: SortOrder;
+};
+
+export type InstanceOrderByInput =
+  | InstanceOrderByStartInput
+  | InstanceOrderByDurationInput
+  | InstanceOrderByEventIdInput;
+
+/**
  * InstanceOrderByStartInput
  *
  * Order by start datetime of the instance.
@@ -1411,56 +254,271 @@ export type InstanceOrderByStartInput = {
   start: SortOrder;
 };
 
-export type InstanceOrderByInput =
-  | InstanceOrderByStartInput
-  | InstanceOrderByDurationInput
-  | InstanceOrderByEventIdInput;
-
-export type InstancesModelsListRequestInclude = InstanceInclude | null;
-
-export type InstancesModelsGetRequestInclude = InstanceInclude | null;
-
-export type InstancesModelsCreateRequestInclude = InstanceInclude | null;
+/**
+ * InstanceWhereInput
+ *
+ * Instance arguments for searching.
+ */
+export type InstanceWhereInput = {
+  event?: EventRelationFilter;
+};
 
 /**
- * InstanceCreateInput
- *
- * Data to create an instance.
+ * Datetime in UTC.
  */
-export type InstancesModelsCreateRequestData = {
+export type ListRequestEnd = string;
+
+export type ListRequestQuery = Query | null;
+
+/**
+ * Datetime in UTC.
+ */
+export type ListRequestStart = string;
+
+/**
+ * Parameters
+ *
+ * Parameters for testing.
+ */
+export type Parameters = {
+  /**
+   * Message
+   *
+   * Optional message to include in the test.
+   */
+  message?: string | null;
+};
+
+export type Query = TimeRangeQuery | RecurringQuery;
+
+/**
+ * RecurrenceUpdateInput
+ *
+ * Data to update a recurrence rule.
+ */
+export type RecurrenceUpdateInput = {
+  frequency?: EventsModelsFrequency;
+  /**
+   * Termination of the recurrence.
+   */
+  termination?: EventsModelsTermination | null;
+  /**
+   * Interval
+   *
+   * Interval of the recurrence.
+   */
+  interval?: number | null;
+  /**
+   * Byseconds
+   *
+   * Seconds of the recurrence.
+   */
+  bySeconds?: Array<EventsModelsSecond> | null;
+  /**
+   * Byminutes
+   *
+   * Minutes of the recurrence.
+   */
+  byMinutes?: Array<EventsModelsMinute> | null;
+  /**
+   * Byhours
+   *
+   * Hours of the recurrence.
+   */
+  byHours?: Array<EventsModelsHour> | null;
+  /**
+   * Byweekdays
+   *
+   * Weekdays of the recurrence.
+   */
+  byWeekdays?: Array<EventsModelsWeekdayRule> | null;
+  /**
+   * Bymonthdays
+   *
+   * Monthdays of the recurrence.
+   */
+  byMonthdays?: Array<EventsModelsMonthday> | null;
+  /**
+   * Byyeardays
+   *
+   * Yeardays of the recurrence.
+   */
+  byYeardays?: Array<EventsModelsYearday> | null;
+  /**
+   * Byweeks
+   *
+   * Weeks of the recurrence.
+   */
+  byWeeks?: Array<EventsModelsWeek> | null;
+  /**
+   * Bymonths
+   *
+   * Months of the recurrence.
+   */
+  byMonths?: Array<EventsModelsMonth> | null;
+  /**
+   * Bysetpositions
+   *
+   * Set positions of the recurrence.
+   */
+  bySetPositions?: Array<EventsModelsYearday> | null;
+  /**
+   * Start day of the week.
+   */
+  weekStart?: EventsModelsWeekday | null;
+};
+
+/**
+ * RecurringQuery
+ *
+ * Query for recurring events.
+ */
+export type RecurringQuery = {
+  /**
+   * Type
+   *
+   * Type of the query.
+   */
+  type?: "recurring";
+  /**
+   * Recurring
+   *
+   * Whether to search for recurring or non-recurring events.
+   */
+  recurring: boolean;
+};
+
+/**
+ * ShowInclude
+ *
+ * Show relational arguments
+ */
+export type ShowInclude = {
+  /**
+   * Events
+   */
+  events?: boolean | ShowsModelsFindManyEventArgsFromShow;
+};
+
+export type ShowOrderByInput =
+  ShowIdOrderByInput | ShowTitleOrderByInput | ShowDescriptionOrderByInput;
+
+export type SortOrder = "asc" | "desc";
+
+/**
+ * EventSplitInput
+ *
+ * Data to split an event.
+ */
+export type SplitRequestData = {
+  at: EventsModelsNaiveDatetime;
+  /**
+   * Data to update the event after the split.
+   */
+  update?: EventUpdateInput | null;
+};
+
+export type SplitRequestId = string;
+
+export type SplitRequestInclude = EventsModelsEventInclude | null;
+
+/**
+ * SplitResult
+ *
+ * Result of splitting an event.
+ */
+export type SplitResponseResult = {
+  before: CreateResponseEvent;
+  after: EventsModelsEvent;
+};
+
+export type SubscribeRequestTypes = string | Array<SseModelsEventType> | null;
+
+export type TestRequestParameters = Parameters | null;
+
+/**
+ * Result
+ *
+ * Result of the test.
+ */
+export type TestResponseResult = {
+  /**
+   * Success
+   *
+   * Indicates if the test was successful.
+   */
+  success: boolean;
+  /**
+   * Message
+   *
+   * Message returned from the test.
+   */
+  message: string;
+};
+
+/**
+ * TimeRangeQuery
+ *
+ * Query for events in a time range.
+ */
+export type TimeRangeQuery = {
+  /**
+   * Type
+   *
+   * Type of the query.
+   */
+  type?: "time-range";
+  /**
+   * Beginning of the time range in UTC.
+   */
+  start?: EventsModelsUtcDatetime | null;
+  /**
+   * End of the time range in UTC.
+   */
+  end?: EventsModelsUtcDatetime | null;
+};
+
+export type UpdateRequestEventId = string;
+
+/**
+ * Datetime without timezone.
+ */
+export type UpdateRequestStart = string;
+
+/**
+ * Instance
+ *
+ * Instance data.
+ */
+export type UpdateResponseInstance = {
   start: InstancesModelsNaiveDatetime;
+  duration: InstancesModelsTimedelta;
   /**
    * Eventid
    *
    * Identifier of the event the instance belongs to.
    */
   eventId: string;
-};
-
-/**
- * _Event_type_OrderByInput
- */
-export type EventsModelsEventTypeOrderByInput = {
   /**
-   * Type
+   * Event the instance belongs to.
    */
-  type: "asc" | "desc";
+  event: InstancesModelsEvent | null;
 };
 
 /**
- * _Event_showId_OrderByInput
+ * _Show_description_OrderByInput
  */
-export type EventsModelsEventShowIdOrderByInput = {
+export type ShowDescriptionOrderByInput = {
   /**
-   * Showid
+   * Description
    */
-  showId: "asc" | "desc";
+  description: "asc" | "desc";
 };
 
 /**
- * _Event_id_OrderByInput
+ * _Show_id_OrderByInput
  */
-export type EventsModelsEventIdOrderByInput = {
+export type ShowIdOrderByInput = {
   /**
    * Id
    */
@@ -1468,72 +526,130 @@ export type EventsModelsEventIdOrderByInput = {
 };
 
 /**
- * _Event_RelevanceOrderByInput
+ * _Show_title_OrderByInput
  */
-export type EventsModelsEventRelevanceOrderByInput = {
-  _relevance: EventsModelsEventRelevanceInner;
+export type ShowTitleOrderByInput = {
+  /**
+   * Title
+   */
+  title: "asc" | "desc";
 };
 
 /**
- * _Event_RelevanceInner
+ * CountTermination
+ *
+ * Count termination data.
  */
-export type EventsModelsEventRelevanceInner = {
+export type EventsModelsCountTermination = {
   /**
-   * Fields
+   * Type
+   *
+   * Type of the termination.
    */
-  fields: Array<"id" | "type" | "showId">;
+  type?: "count";
   /**
-   * Search
+   * Count
+   *
+   * Number of instances of recurring event.
    */
-  search: string;
-  /**
-   * Sort
-   */
-  sort: "asc" | "desc";
+  count: number;
 };
 
 /**
- * _EventWhereUnique_id_Input
+ * EventCreateInput
+ *
+ * Data to create an event.
  */
-export type EventsModelsEventWhereUniqueIdInput = {
+export type EventsModelsCreateRequestData = {
   /**
    * Id
    */
-  id: string;
-};
-
-export type EventsModelsYearday = number | number;
-
-/**
- * WeekdayRule
- *
- * Day rule data.
- */
-export type EventsModelsWeekdayRule = {
-  day: EventsModelsWeekday;
+  id?: string;
   /**
-   * Occurrence of the day in the year.
+   * Showid
    */
-  occurrence?: EventsModelsWeek | null;
+  showId?: string | null;
+  type: EventsModelsEventType;
+  start: EventsModelsNaiveDatetime;
+  duration: EventsModelsTimedelta;
+  timezone: EventsModelsTimezone;
+  /**
+   * Recurrence rule of the event.
+   */
+  recurrence?: EventsModelsRecurrence | null;
+  /**
+   * Include
+   *
+   * Included instances of the event.
+   */
+  include?: Array<EventsModelsInclusion> | null;
+  /**
+   * Exclude
+   *
+   * Excluded instances of the event.
+   */
+  exclude?: Array<EventsModelsExclusion> | null;
 };
 
-export type EventsModelsWeek = number | number;
+export type EventsModelsCreateRequestInclude = EventsModelsEventInclude | null;
+
+export type EventsModelsDeleteRequestId = string;
 
 /**
- * Weekday
+ * Event
  *
- * Weekday options.
+ * Event data.
  */
-export type EventsModelsWeekday =
-  | "monday"
-  | "tuesday"
-  | "wednesday"
-  | "thursday"
-  | "friday"
-  | "saturday"
-  | "sunday";
+export type EventsModelsEvent = {
+  /**
+   * Id
+   *
+   * Identifier of the event.
+   */
+  id: string;
+  type: EventsModelsEventType;
+  /**
+   * Showid
+   *
+   * Identifier of the show the event belongs to.
+   */
+  showId: string | null;
+  /**
+   * Show the event belongs to.
+   */
+  show: EventsModelsShow | null;
+  start: EventsModelsNaiveDatetime;
+  duration: EventsModelsTimedelta;
+  timezone: EventsModelsTimezone;
+  /**
+   * Recurrence rule of the event.
+   */
+  recurrence?: EventsModelsRecurrence | null;
+  /**
+   * Include
+   *
+   * Included instances of the event.
+   */
+  include?: Array<EventsModelsInclusion> | null;
+  /**
+   * Exclude
+   *
+   * Excluded instances of the event.
+   */
+  exclude?: Array<EventsModelsExclusion> | null;
+};
 
-export type EventsModelsUpdateRequestInclude = EventsModelsEventInclude | null;
+/**
+ * EventInclude
+ *
+ * Event relational arguments
+ */
+export type EventsModelsEventInclude = {
+  /**
+   * Show
+   */
+  show?: boolean | EventsModelsShowArgsFromEvent;
+};
 
 /**
  * EventIncludeFromEvent
@@ -1548,15 +664,6 @@ export type EventsModelsEventIncludeFromEvent = {
 };
 
 /**
- * ShowArgsFromEvent
- *
- * Arguments for Event
- */
-export type EventsModelsShowArgsFromEvent = {
-  include?: EventsModelsShowIncludeFromShow;
-};
-
-/**
  * EventListRelationFilter
  */
 export type EventsModelsEventListRelationFilter = {
@@ -1564,6 +671,11 @@ export type EventsModelsEventListRelationFilter = {
   none?: EventsModelsEventWhereInput;
   every?: EventsModelsEventWhereInput;
 };
+
+/**
+ * EventType
+ */
+export type EventsModelsEventType = "live" | "replay" | "prerecorded";
 
 /**
  * EventWhereInput
@@ -1593,6 +705,275 @@ export type EventsModelsEventWhereInput = {
    * Not
    */
   not?: Array<EventsModelsEventWhereInput>;
+};
+
+/**
+ * Exclusion
+ *
+ * Exclusion data.
+ */
+export type EventsModelsExclusion = {
+  start: EventsModelsNaiveDatetime;
+};
+
+/**
+ * FindManyEventArgsFromShow
+ *
+ * Arguments for Show
+ */
+export type EventsModelsFindManyEventArgsFromShow = {
+  /**
+   * Take
+   */
+  take?: number;
+  /**
+   * Skip
+   */
+  skip?: number;
+  /**
+   * Orderby
+   */
+  orderBy?:
+    | EventsModelsEventIdOrderByInput
+    | EventsModelsEventTypeOrderByInput
+    | EventsModelsEventShowIdOrderByInput
+    | EventsModelsEventRelevanceOrderByInput
+    | Array<
+        | EventsModelsEventIdOrderByInput
+        | EventsModelsEventTypeOrderByInput
+        | EventsModelsEventShowIdOrderByInput
+        | EventsModelsEventRelevanceOrderByInput
+      >;
+  where?: EventsModelsEventWhereInput;
+  cursor?: EventsModelsEventWhereUniqueIdInput;
+  /**
+   * Distinct
+   */
+  distinct?: Array<"id" | "type" | "showId">;
+  include?: EventsModelsEventIncludeFromEvent;
+};
+
+/**
+ * Frequency
+ *
+ * Frequency options.
+ */
+export type EventsModelsFrequency =
+  | "secondly"
+  | "minutely"
+  | "hourly"
+  | "daily"
+  | "weekly"
+  | "monthly"
+  | "yearly";
+
+export type EventsModelsGetRequestId = string;
+
+export type EventsModelsGetRequestInclude = EventsModelsEventInclude | null;
+
+export type EventsModelsHour = number;
+
+/**
+ * Inclusion
+ *
+ * Inclusion data.
+ */
+export type EventsModelsInclusion = {
+  start: EventsModelsNaiveDatetime;
+};
+
+export type EventsModelsListRequestInclude = EventsModelsEventInclude | null;
+
+export type EventsModelsListRequestLimit = number | null;
+
+export type EventsModelsListRequestOffset = number | null;
+
+export type EventsModelsListRequestOrder =
+  EventOrderByInput | Array<EventOrderByInput> | null;
+
+export type EventsModelsListRequestWhere = EventsModelsEventWhereInput | null;
+
+/**
+ * EventList
+ *
+ * List of events.
+ */
+export type EventsModelsListResponseResults = {
+  /**
+   * Count
+   *
+   * Total number of events that matched the query.
+   */
+  count: number;
+  /**
+   * Limit
+   *
+   * Maximum number of returned events.
+   */
+  limit: number | null;
+  /**
+   * Offset
+   *
+   * Number of events skipped.
+   */
+  offset: number | null;
+  /**
+   * Events
+   *
+   * Events that matched the request.
+   */
+  events: Array<EventsModelsEvent>;
+};
+
+export type EventsModelsMinute = number;
+
+export type EventsModelsMonth = number;
+
+export type EventsModelsMonthday = number | number;
+
+/**
+ * Datetime without timezone.
+ */
+export type EventsModelsNaiveDatetime = string;
+
+/**
+ * Recurrence
+ *
+ * Recurrence rule data.
+ */
+export type EventsModelsRecurrence = {
+  frequency: EventsModelsFrequency;
+  /**
+   * Termination of the recurrence.
+   */
+  termination?: EventsModelsTermination | null;
+  /**
+   * Interval
+   *
+   * Interval of the recurrence.
+   */
+  interval?: number | null;
+  /**
+   * Byseconds
+   *
+   * Seconds of the recurrence.
+   */
+  bySeconds?: Array<EventsModelsSecond> | null;
+  /**
+   * Byminutes
+   *
+   * Minutes of the recurrence.
+   */
+  byMinutes?: Array<EventsModelsMinute> | null;
+  /**
+   * Byhours
+   *
+   * Hours of the recurrence.
+   */
+  byHours?: Array<EventsModelsHour> | null;
+  /**
+   * Byweekdays
+   *
+   * Weekdays of the recurrence.
+   */
+  byWeekdays?: Array<EventsModelsWeekdayRule> | null;
+  /**
+   * Bymonthdays
+   *
+   * Monthdays of the recurrence.
+   */
+  byMonthdays?: Array<EventsModelsMonthday> | null;
+  /**
+   * Byyeardays
+   *
+   * Yeardays of the recurrence.
+   */
+  byYeardays?: Array<EventsModelsYearday> | null;
+  /**
+   * Byweeks
+   *
+   * Weeks of the recurrence.
+   */
+  byWeeks?: Array<EventsModelsWeek> | null;
+  /**
+   * Bymonths
+   *
+   * Months of the recurrence.
+   */
+  byMonths?: Array<EventsModelsMonth> | null;
+  /**
+   * Bysetpositions
+   *
+   * Set positions of the recurrence.
+   */
+  bySetPositions?: Array<EventsModelsYearday> | null;
+  /**
+   * Start day of the week.
+   */
+  weekStart?: EventsModelsWeekday | null;
+};
+
+export type EventsModelsSecond = number;
+
+/**
+ * Show
+ *
+ * Show data.
+ */
+export type EventsModelsShow = {
+  /**
+   * Id
+   *
+   * Identifier of the show.
+   */
+  id: string;
+  /**
+   * Title
+   *
+   * Title of the show.
+   */
+  title: string;
+  /**
+   * Description
+   *
+   * Description of the show.
+   */
+  description: string | null;
+  /**
+   * Events
+   *
+   * Events the show belongs to.
+   */
+  events: Array<EventsModelsEvent> | null;
+};
+
+/**
+ * ShowArgsFromEvent
+ *
+ * Arguments for Event
+ */
+export type EventsModelsShowArgsFromEvent = {
+  include?: EventsModelsShowIncludeFromShow;
+};
+
+/**
+ * ShowIncludeFromShow
+ *
+ * Relational arguments for Show
+ */
+export type EventsModelsShowIncludeFromShow = {
+  /**
+   * Events
+   */
+  events?: boolean | EventsModelsFindManyEventArgsFromShow;
+};
+
+/**
+ * ShowRelationFilter
+ */
+export type EventsModelsShowRelationFilter = {
+  is?: EventsModelsShowWhereInput;
+  isNot?: EventsModelsShowWhereInput;
 };
 
 /**
@@ -1686,81 +1067,38 @@ export type EventsModelsStringFilter = {
   search?: string;
 };
 
-/**
- * ShowRelationFilter
- */
-export type EventsModelsShowRelationFilter = {
-  is?: EventsModelsShowWhereInput;
-  isNot?: EventsModelsShowWhereInput;
-};
+export type EventsModelsTermination =
+  EventsModelsCountTermination | EventsModelsUntilTermination;
 
 /**
- * EventType
+ * Duration of time.
  */
-export type EventsModelsEventType = "live" | "replay" | "prerecorded";
+export type EventsModelsTimedelta = string;
 
 /**
- * FindManyEventArgsFromShow
+ * Timezone name.
+ */
+export type EventsModelsTimezone = string;
+
+/**
+ * Datetime in UTC.
+ */
+export type EventsModelsUtcDatetime = string;
+
+/**
+ * UntilTermination
  *
- * Arguments for Show
+ * Until termination data.
  */
-export type EventsModelsFindManyEventArgsFromShow = {
+export type EventsModelsUntilTermination = {
   /**
-   * Take
+   * Type
+   *
+   * Type of the termination.
    */
-  take?: number;
-  /**
-   * Skip
-   */
-  skip?: number;
-  /**
-   * Orderby
-   */
-  orderBy?:
-    | EventsModelsEventIdOrderByInput
-    | EventsModelsEventTypeOrderByInput
-    | EventsModelsEventShowIdOrderByInput
-    | EventsModelsEventRelevanceOrderByInput
-    | Array<
-        | EventsModelsEventIdOrderByInput
-        | EventsModelsEventTypeOrderByInput
-        | EventsModelsEventShowIdOrderByInput
-        | EventsModelsEventRelevanceOrderByInput
-      >;
-  where?: EventsModelsEventWhereInput;
-  cursor?: EventsModelsEventWhereUniqueIdInput;
-  /**
-   * Distinct
-   */
-  distinct?: Array<"id" | "type" | "showId">;
-  include?: EventsModelsEventIncludeFromEvent;
+  type?: "until";
+  until: EventsModelsNaiveDatetime;
 };
-
-/**
- * ShowIncludeFromShow
- *
- * Relational arguments for Show
- */
-export type EventsModelsShowIncludeFromShow = {
-  /**
-   * Events
-   */
-  events?: boolean | EventsModelsFindManyEventArgsFromShow;
-};
-
-/**
- * EventInclude
- *
- * Event relational arguments
- */
-export type EventsModelsEventInclude = {
-  /**
-   * Show
-   */
-  show?: boolean | EventsModelsShowArgsFromEvent;
-};
-
-export type EventsModelsUpdateRequestId = string;
 
 /**
  * EventUpdateInput
@@ -1794,52 +1132,104 @@ export type EventsModelsUpdateRequestData = {
   exclude?: Array<EventsModelsExclusion> | null;
 };
 
+export type EventsModelsUpdateRequestId = string;
+
+export type EventsModelsUpdateRequestInclude = EventsModelsEventInclude | null;
+
+export type EventsModelsWeek = number | number;
+
 /**
- * Exclusion
+ * Weekday
  *
- * Exclusion data.
+ * Weekday options.
  */
-export type EventsModelsExclusion = {
-  start: EventsModelsNaiveDatetime;
+export type EventsModelsWeekday =
+  | "monday"
+  | "tuesday"
+  | "wednesday"
+  | "thursday"
+  | "friday"
+  | "saturday"
+  | "sunday";
+
+/**
+ * WeekdayRule
+ *
+ * Day rule data.
+ */
+export type EventsModelsWeekdayRule = {
+  day: EventsModelsWeekday;
+  /**
+   * Occurrence of the day in the year.
+   */
+  occurrence?: EventsModelsWeek | null;
+};
+
+export type EventsModelsYearday = number | number;
+
+/**
+ * _EventWhereUnique_id_Input
+ */
+export type EventsModelsEventWhereUniqueIdInput = {
+  /**
+   * Id
+   */
+  id: string;
 };
 
 /**
- * Datetime without timezone.
+ * _Event_RelevanceInner
  */
-export type EventsModelsNaiveDatetime = string;
-
-/**
- * Inclusion
- *
- * Inclusion data.
- */
-export type EventsModelsInclusion = {
-  start: EventsModelsNaiveDatetime;
+export type EventsModelsEventRelevanceInner = {
+  /**
+   * Fields
+   */
+  fields: Array<"id" | "type" | "showId">;
+  /**
+   * Search
+   */
+  search: string;
+  /**
+   * Sort
+   */
+  sort: "asc" | "desc";
 };
 
-export type EventsModelsMonth = number;
-
-export type EventsModelsMonthday = number | number;
-
-export type EventsModelsHour = number;
-
-export type EventsModelsMinute = number;
-
-export type EventsModelsSecond = number;
+/**
+ * _Event_RelevanceOrderByInput
+ */
+export type EventsModelsEventRelevanceOrderByInput = {
+  _relevance: EventsModelsEventRelevanceInner;
+};
 
 /**
- * UntilTermination
- *
- * Until termination data.
+ * _Event_id_OrderByInput
  */
-export type EventsModelsUntilTermination = {
+export type EventsModelsEventIdOrderByInput = {
+  /**
+   * Id
+   */
+  id: "asc" | "desc";
+};
+
+/**
+ * _Event_showId_OrderByInput
+ */
+export type EventsModelsEventShowIdOrderByInput = {
+  /**
+   * Showid
+   */
+  showId: "asc" | "desc";
+};
+
+/**
+ * _Event_type_OrderByInput
+ */
+export type EventsModelsEventTypeOrderByInput = {
   /**
    * Type
-   *
-   * Type of the termination.
    */
-  type?: "until";
-  until: EventsModelsNaiveDatetime;
+  type: "asc" | "desc";
 };
 
 /**
@@ -1847,7 +1237,7 @@ export type EventsModelsUntilTermination = {
  *
  * Count termination data.
  */
-export type EventsModelsCountTermination = {
+export type InstancesModelsCountTermination = {
   /**
    * Type
    *
@@ -1862,16 +1252,187 @@ export type EventsModelsCountTermination = {
   count: number;
 };
 
-export type EventsModelsTermination =
-  | EventsModelsCountTermination
-  | EventsModelsUntilTermination;
+/**
+ * InstanceCreateInput
+ *
+ * Data to create an instance.
+ */
+export type InstancesModelsCreateRequestData = {
+  start: InstancesModelsNaiveDatetime;
+  /**
+   * Eventid
+   *
+   * Identifier of the event the instance belongs to.
+   */
+  eventId: string;
+};
+
+export type InstancesModelsCreateRequestInclude = InstanceInclude | null;
+
+/**
+ * Event
+ *
+ * Event data.
+ */
+export type InstancesModelsEvent = {
+  /**
+   * Id
+   *
+   * Identifier of the event.
+   */
+  id: string;
+  type: InstancesModelsEventType;
+  /**
+   * Showid
+   *
+   * Identifier of the show the event belongs to.
+   */
+  showId: string | null;
+  /**
+   * Show the event belongs to.
+   */
+  show: InstancesModelsShow | null;
+  start: InstancesModelsNaiveDatetime;
+  duration: InstancesModelsTimedelta;
+  timezone: InstancesModelsTimezone;
+  /**
+   * Recurrence rule of the event.
+   */
+  recurrence?: InstancesModelsRecurrence | null;
+  /**
+   * Include
+   *
+   * Included instances of the event.
+   */
+  include?: Array<InstancesModelsInclusion> | null;
+  /**
+   * Exclude
+   *
+   * Excluded instances of the event.
+   */
+  exclude?: Array<InstancesModelsExclusion> | null;
+};
+
+/**
+ * EventInclude
+ *
+ * Event relational arguments
+ */
+export type InstancesModelsEventInclude = {
+  /**
+   * Show
+   */
+  show?: boolean | InstancesModelsShowArgsFromEvent;
+};
+
+/**
+ * EventIncludeFromEvent
+ *
+ * Relational arguments for Event
+ */
+export type InstancesModelsEventIncludeFromEvent = {
+  /**
+   * Show
+   */
+  show?: boolean | InstancesModelsShowArgsFromEvent;
+};
+
+/**
+ * EventListRelationFilter
+ */
+export type InstancesModelsEventListRelationFilter = {
+  some?: InstancesModelsEventWhereInput;
+  none?: InstancesModelsEventWhereInput;
+  every?: InstancesModelsEventWhereInput;
+};
+
+/**
+ * EventType
+ */
+export type InstancesModelsEventType = "live" | "replay" | "prerecorded";
+
+/**
+ * EventWhereInput
+ *
+ * Event arguments for searching
+ */
+export type InstancesModelsEventWhereInput = {
+  /**
+   * Id
+   */
+  id?: string | InstancesModelsStringFilter;
+  type?: InstancesModelsEventType;
+  /**
+   * Showid
+   */
+  showId?: string | InstancesModelsStringFilter | null;
+  show?: InstancesModelsShowRelationFilter;
+  /**
+   * And
+   */
+  and?: Array<InstancesModelsEventWhereInput>;
+  /**
+   * Or
+   */
+  or?: Array<InstancesModelsEventWhereInput>;
+  /**
+   * Not
+   */
+  not?: Array<InstancesModelsEventWhereInput>;
+};
+
+/**
+ * Exclusion
+ *
+ * Exclusion data.
+ */
+export type InstancesModelsExclusion = {
+  start: InstancesModelsNaiveDatetime;
+};
+
+/**
+ * FindManyEventArgsFromShow
+ *
+ * Arguments for Show
+ */
+export type InstancesModelsFindManyEventArgsFromShow = {
+  /**
+   * Take
+   */
+  take?: number;
+  /**
+   * Skip
+   */
+  skip?: number;
+  /**
+   * Orderby
+   */
+  orderBy?:
+    | InstancesModelsEventIdOrderByInput
+    | InstancesModelsEventTypeOrderByInput
+    | InstancesModelsEventShowIdOrderByInput
+    | InstancesModelsEventRelevanceOrderByInput
+    | Array<
+        | InstancesModelsEventIdOrderByInput
+        | InstancesModelsEventTypeOrderByInput
+        | InstancesModelsEventShowIdOrderByInput
+        | InstancesModelsEventRelevanceOrderByInput
+      >;
+  where?: InstancesModelsEventWhereInput;
+  cursor?: InstancesModelsEventWhereUniqueIdInput;
+  /**
+   * Distinct
+   */
+  distinct?: Array<"id" | "type" | "showId">;
+  include?: InstancesModelsEventIncludeFromEvent;
+};
 
 /**
  * Frequency
  *
  * Frequency options.
  */
-export type EventsModelsFrequency =
+export type InstancesModelsFrequency =
   | "secondly"
   | "minutely"
   | "hourly"
@@ -1880,17 +1441,64 @@ export type EventsModelsFrequency =
   | "monthly"
   | "yearly";
 
+export type InstancesModelsGetRequestInclude = InstanceInclude | null;
+
+export type InstancesModelsHour = number;
+
 /**
- * RecurrenceUpdateInput
+ * Inclusion
  *
- * Data to update a recurrence rule.
+ * Inclusion data.
  */
-export type RecurrenceUpdateInput = {
-  frequency?: EventsModelsFrequency;
+export type InstancesModelsInclusion = {
+  start: InstancesModelsNaiveDatetime;
+};
+
+export type InstancesModelsListRequestInclude = InstanceInclude | null;
+
+export type InstancesModelsListRequestOrder =
+  InstanceOrderByInput | Array<InstanceOrderByInput> | null;
+
+export type InstancesModelsListRequestWhere = InstanceWhereInput | null;
+
+/**
+ * InstanceList
+ *
+ * List of instances.
+ */
+export type InstancesModelsListResponseResults = {
+  start: InstancesModelsUtcDatetime;
+  end: InstancesModelsUtcDatetime;
+  /**
+   * Instances
+   *
+   * Instances that matched the request.
+   */
+  instances: Array<Instance>;
+};
+
+export type InstancesModelsMinute = number;
+
+export type InstancesModelsMonth = number;
+
+export type InstancesModelsMonthday = number | number;
+
+/**
+ * Datetime without timezone.
+ */
+export type InstancesModelsNaiveDatetime = string;
+
+/**
+ * Recurrence
+ *
+ * Recurrence rule data.
+ */
+export type InstancesModelsRecurrence = {
+  frequency: InstancesModelsFrequency;
   /**
    * Termination of the recurrence.
    */
-  termination?: EventsModelsTermination | null;
+  termination?: InstancesModelsTermination | null;
   /**
    * Interval
    *
@@ -1902,82 +1510,69 @@ export type RecurrenceUpdateInput = {
    *
    * Seconds of the recurrence.
    */
-  bySeconds?: Array<EventsModelsSecond> | null;
+  bySeconds?: Array<InstancesModelsSecond> | null;
   /**
    * Byminutes
    *
    * Minutes of the recurrence.
    */
-  byMinutes?: Array<EventsModelsMinute> | null;
+  byMinutes?: Array<InstancesModelsMinute> | null;
   /**
    * Byhours
    *
    * Hours of the recurrence.
    */
-  byHours?: Array<EventsModelsHour> | null;
+  byHours?: Array<InstancesModelsHour> | null;
   /**
    * Byweekdays
    *
    * Weekdays of the recurrence.
    */
-  byWeekdays?: Array<EventsModelsWeekdayRule> | null;
+  byWeekdays?: Array<InstancesModelsWeekdayRule> | null;
   /**
    * Bymonthdays
    *
    * Monthdays of the recurrence.
    */
-  byMonthdays?: Array<EventsModelsMonthday> | null;
+  byMonthdays?: Array<InstancesModelsMonthday> | null;
   /**
    * Byyeardays
    *
    * Yeardays of the recurrence.
    */
-  byYeardays?: Array<EventsModelsYearday> | null;
+  byYeardays?: Array<InstancesModelsYearday> | null;
   /**
    * Byweeks
    *
    * Weeks of the recurrence.
    */
-  byWeeks?: Array<EventsModelsWeek> | null;
+  byWeeks?: Array<InstancesModelsWeek> | null;
   /**
    * Bymonths
    *
    * Months of the recurrence.
    */
-  byMonths?: Array<EventsModelsMonth> | null;
+  byMonths?: Array<InstancesModelsMonth> | null;
   /**
    * Bysetpositions
    *
    * Set positions of the recurrence.
    */
-  bySetPositions?: Array<EventsModelsYearday> | null;
+  bySetPositions?: Array<InstancesModelsYearday> | null;
   /**
    * Start day of the week.
    */
-  weekStart?: EventsModelsWeekday | null;
+  weekStart?: InstancesModelsWeekday | null;
 };
 
-/**
- * Timezone name.
- */
-export type EventsModelsTimezone = string;
-
-/**
- * Duration of time.
- */
-export type EventsModelsTimedelta = string;
-
-/**
- * Datetime in UTC.
- */
-export type EventsModelsUtcDatetime = string;
+export type InstancesModelsSecond = number;
 
 /**
  * Show
  *
  * Show data.
  */
-export type EventsModelsShow = {
+export type InstancesModelsShow = {
   /**
    * Id
    *
@@ -2001,22 +1596,326 @@ export type EventsModelsShow = {
    *
    * Events the show belongs to.
    */
-  events: Array<EventsModelsEvent> | null;
+  events: Array<InstancesModelsEvent> | null;
 };
+
+/**
+ * ShowArgsFromEvent
+ *
+ * Arguments for Event
+ */
+export type InstancesModelsShowArgsFromEvent = {
+  include?: InstancesModelsShowIncludeFromShow;
+};
+
+/**
+ * ShowIncludeFromShow
+ *
+ * Relational arguments for Show
+ */
+export type InstancesModelsShowIncludeFromShow = {
+  /**
+   * Events
+   */
+  events?: boolean | InstancesModelsFindManyEventArgsFromShow;
+};
+
+/**
+ * ShowRelationFilter
+ */
+export type InstancesModelsShowRelationFilter = {
+  is?: InstancesModelsShowWhereInput;
+  isNot?: InstancesModelsShowWhereInput;
+};
+
+/**
+ * ShowWhereInput
+ *
+ * Show arguments for searching
+ */
+export type InstancesModelsShowWhereInput = {
+  /**
+   * Id
+   */
+  id?: string | InstancesModelsStringFilter;
+  /**
+   * Title
+   */
+  title?: string | InstancesModelsStringFilter;
+  /**
+   * Description
+   */
+  description?: string | InstancesModelsStringFilter | null;
+  events?: InstancesModelsEventListRelationFilter;
+  /**
+   * And
+   */
+  and?: Array<InstancesModelsShowWhereInput>;
+  /**
+   * Or
+   */
+  or?: Array<InstancesModelsShowWhereInput>;
+  /**
+   * Not
+   */
+  not?: Array<InstancesModelsShowWhereInput>;
+};
+
+/**
+ * StringFilter
+ */
+export type InstancesModelsStringFilter = {
+  /**
+   * Equals
+   */
+  equals?: string;
+  /**
+   * Notin
+   */
+  notIn?: Array<string>;
+  /**
+   * Lt
+   */
+  lt?: string;
+  /**
+   * Lte
+   */
+  lte?: string;
+  /**
+   * Gt
+   */
+  gt?: string;
+  /**
+   * Gte
+   */
+  gte?: string;
+  /**
+   * Contains
+   */
+  contains?: string;
+  /**
+   * Startswith
+   */
+  startswith?: string;
+  /**
+   * Endswith
+   */
+  endswith?: string;
+  /**
+   * In
+   */
+  in?: Array<string>;
+  /**
+   * Not
+   */
+  not?: string | InstancesModelsStringFilter;
+  /**
+   * Mode
+   */
+  mode?: "default" | "insensitive";
+  /**
+   * Search
+   */
+  search?: string;
+};
+
+export type InstancesModelsTermination =
+  InstancesModelsCountTermination | InstancesModelsUntilTermination;
+
+/**
+ * Duration of time.
+ */
+export type InstancesModelsTimedelta = string;
+
+/**
+ * Timezone name.
+ */
+export type InstancesModelsTimezone = string;
+
+/**
+ * Datetime in UTC.
+ */
+export type InstancesModelsUtcDatetime = string;
+
+/**
+ * UntilTermination
+ *
+ * Until termination data.
+ */
+export type InstancesModelsUntilTermination = {
+  /**
+   * Type
+   *
+   * Type of the termination.
+   */
+  type?: "until";
+  until: InstancesModelsNaiveDatetime;
+};
+
+/**
+ * InstanceUpdateInput
+ *
+ * Data to update an instance.
+ */
+export type InstancesModelsUpdateRequestData = {
+  start?: InstancesModelsNaiveDatetime;
+};
+
+export type InstancesModelsUpdateRequestInclude = InstanceInclude | null;
+
+export type InstancesModelsWeek = number | number;
+
+/**
+ * Weekday
+ *
+ * Weekday options.
+ */
+export type InstancesModelsWeekday =
+  | "monday"
+  | "tuesday"
+  | "wednesday"
+  | "thursday"
+  | "friday"
+  | "saturday"
+  | "sunday";
+
+/**
+ * WeekdayRule
+ *
+ * Day rule data.
+ */
+export type InstancesModelsWeekdayRule = {
+  day: InstancesModelsWeekday;
+  /**
+   * Occurrence of the day in the year.
+   */
+  occurrence?: InstancesModelsWeek | null;
+};
+
+export type InstancesModelsYearday = number | number;
+
+/**
+ * _EventWhereUnique_id_Input
+ */
+export type InstancesModelsEventWhereUniqueIdInput = {
+  /**
+   * Id
+   */
+  id: string;
+};
+
+/**
+ * _Event_RelevanceInner
+ */
+export type InstancesModelsEventRelevanceInner = {
+  /**
+   * Fields
+   */
+  fields: Array<"id" | "type" | "showId">;
+  /**
+   * Search
+   */
+  search: string;
+  /**
+   * Sort
+   */
+  sort: "asc" | "desc";
+};
+
+/**
+ * _Event_RelevanceOrderByInput
+ */
+export type InstancesModelsEventRelevanceOrderByInput = {
+  _relevance: InstancesModelsEventRelevanceInner;
+};
+
+/**
+ * _Event_id_OrderByInput
+ */
+export type InstancesModelsEventIdOrderByInput = {
+  /**
+   * Id
+   */
+  id: "asc" | "desc";
+};
+
+/**
+ * _Event_showId_OrderByInput
+ */
+export type InstancesModelsEventShowIdOrderByInput = {
+  /**
+   * Showid
+   */
+  showId: "asc" | "desc";
+};
+
+/**
+ * _Event_type_OrderByInput
+ */
+export type InstancesModelsEventTypeOrderByInput = {
+  /**
+   * Type
+   */
+  type: "asc" | "desc";
+};
+
+/**
+ * CountTermination
+ *
+ * Count termination data.
+ */
+export type ShowsModelsCountTermination = {
+  /**
+   * Type
+   *
+   * Type of the termination.
+   */
+  type?: "count";
+  /**
+   * Count
+   *
+   * Number of instances of recurring event.
+   */
+  count: number;
+};
+
+/**
+ * ShowCreateWithoutRelationsInput
+ *
+ * Required arguments to the Show create method, without relations
+ */
+export type ShowsModelsCreateRequestData = {
+  /**
+   * Id
+   */
+  id?: string;
+  /**
+   * Description
+   */
+  description?: string | null;
+  /**
+   * Title
+   */
+  title: string;
+};
+
+export type ShowsModelsCreateRequestInclude = ShowInclude | null;
+
+export type ShowsModelsDeleteRequestId = string;
 
 /**
  * Event
  *
  * Event data.
  */
-export type EventsModelsEvent = {
+export type ShowsModelsEvent = {
   /**
    * Id
    *
    * Identifier of the event.
    */
   id: string;
-  type: EventsModelsEventType;
+  type: ShowsModelsEventType;
   /**
    * Showid
    *
@@ -2026,39 +1925,224 @@ export type EventsModelsEvent = {
   /**
    * Show the event belongs to.
    */
-  show: EventsModelsShow | null;
-  start: EventsModelsNaiveDatetime;
-  duration: EventsModelsTimedelta;
-  timezone: EventsModelsTimezone;
+  show: ShowsModelsShow | null;
+  start: ShowsModelsNaiveDatetime;
+  duration: ShowsModelsTimedelta;
+  timezone: ShowsModelsTimezone;
   /**
    * Recurrence rule of the event.
    */
-  recurrence?: EventsModelsRecurrence | null;
+  recurrence?: ShowsModelsRecurrence | null;
   /**
    * Include
    *
    * Included instances of the event.
    */
-  include?: Array<EventsModelsInclusion> | null;
+  include?: Array<ShowsModelsInclusion> | null;
   /**
    * Exclude
    *
    * Excluded instances of the event.
    */
-  exclude?: Array<EventsModelsExclusion> | null;
+  exclude?: Array<ShowsModelsExclusion> | null;
 };
+
+/**
+ * EventIncludeFromEvent
+ *
+ * Relational arguments for Event
+ */
+export type ShowsModelsEventIncludeFromEvent = {
+  /**
+   * Show
+   */
+  show?: boolean | ShowsModelsShowArgsFromEvent;
+};
+
+/**
+ * EventListRelationFilter
+ */
+export type ShowsModelsEventListRelationFilter = {
+  some?: ShowsModelsEventWhereInput;
+  none?: ShowsModelsEventWhereInput;
+  every?: ShowsModelsEventWhereInput;
+};
+
+/**
+ * EventType
+ */
+export type ShowsModelsEventType = "live" | "replay" | "prerecorded";
+
+/**
+ * EventWhereInput
+ *
+ * Event arguments for searching
+ */
+export type ShowsModelsEventWhereInput = {
+  /**
+   * Id
+   */
+  id?: string | ShowsModelsStringFilter;
+  type?: ShowsModelsEventType;
+  /**
+   * Showid
+   */
+  showId?: string | ShowsModelsStringFilter | null;
+  show?: ShowsModelsShowRelationFilter;
+  /**
+   * And
+   */
+  and?: Array<ShowsModelsEventWhereInput>;
+  /**
+   * Or
+   */
+  or?: Array<ShowsModelsEventWhereInput>;
+  /**
+   * Not
+   */
+  not?: Array<ShowsModelsEventWhereInput>;
+};
+
+/**
+ * Exclusion
+ *
+ * Exclusion data.
+ */
+export type ShowsModelsExclusion = {
+  start: ShowsModelsNaiveDatetime;
+};
+
+/**
+ * FindManyEventArgsFromShow
+ *
+ * Arguments for Show
+ */
+export type ShowsModelsFindManyEventArgsFromShow = {
+  /**
+   * Take
+   */
+  take?: number;
+  /**
+   * Skip
+   */
+  skip?: number;
+  /**
+   * Orderby
+   */
+  orderBy?:
+    | ShowsModelsEventIdOrderByInput
+    | ShowsModelsEventTypeOrderByInput
+    | ShowsModelsEventShowIdOrderByInput
+    | ShowsModelsEventRelevanceOrderByInput
+    | Array<
+        | ShowsModelsEventIdOrderByInput
+        | ShowsModelsEventTypeOrderByInput
+        | ShowsModelsEventShowIdOrderByInput
+        | ShowsModelsEventRelevanceOrderByInput
+      >;
+  where?: ShowsModelsEventWhereInput;
+  cursor?: ShowsModelsEventWhereUniqueIdInput;
+  /**
+   * Distinct
+   */
+  distinct?: Array<"id" | "type" | "showId">;
+  include?: ShowsModelsEventIncludeFromEvent;
+};
+
+/**
+ * Frequency
+ *
+ * Frequency options.
+ */
+export type ShowsModelsFrequency =
+  | "secondly"
+  | "minutely"
+  | "hourly"
+  | "daily"
+  | "weekly"
+  | "monthly"
+  | "yearly";
+
+export type ShowsModelsGetRequestId = string;
+
+export type ShowsModelsGetRequestInclude = ShowInclude | null;
+
+export type ShowsModelsHour = number;
+
+/**
+ * Inclusion
+ *
+ * Inclusion data.
+ */
+export type ShowsModelsInclusion = {
+  start: ShowsModelsNaiveDatetime;
+};
+
+export type ShowsModelsListRequestInclude = ShowInclude | null;
+
+export type ShowsModelsListRequestLimit = number | null;
+
+export type ShowsModelsListRequestOffset = number | null;
+
+export type ShowsModelsListRequestOrder =
+  ShowOrderByInput | Array<ShowOrderByInput> | null;
+
+export type ShowsModelsListRequestWhere = ShowsModelsShowWhereInput | null;
+
+/**
+ * ShowList
+ *
+ * List of shows.
+ */
+export type ShowsModelsListResponseResults = {
+  /**
+   * Count
+   *
+   * Total number of shows that matched the query.
+   */
+  count: number;
+  /**
+   * Limit
+   *
+   * Maximum number of returned shows.
+   */
+  limit: number | null;
+  /**
+   * Offset
+   *
+   * Number of shows skipped.
+   */
+  offset: number | null;
+  /**
+   * Shows
+   *
+   * Shows that matched the request.
+   */
+  shows: Array<ShowsModelsShow>;
+};
+
+export type ShowsModelsMinute = number;
+
+export type ShowsModelsMonth = number;
+
+export type ShowsModelsMonthday = number | number;
+
+/**
+ * Datetime without timezone.
+ */
+export type ShowsModelsNaiveDatetime = string;
 
 /**
  * Recurrence
  *
  * Recurrence rule data.
  */
-export type EventsModelsRecurrence = {
-  frequency: EventsModelsFrequency;
+export type ShowsModelsRecurrence = {
+  frequency: ShowsModelsFrequency;
   /**
    * Termination of the recurrence.
    */
-  termination?: EventsModelsTermination | null;
+  termination?: ShowsModelsTermination | null;
   /**
    * Interval
    *
@@ -2070,391 +2154,69 @@ export type EventsModelsRecurrence = {
    *
    * Seconds of the recurrence.
    */
-  bySeconds?: Array<EventsModelsSecond> | null;
+  bySeconds?: Array<ShowsModelsSecond> | null;
   /**
    * Byminutes
    *
    * Minutes of the recurrence.
    */
-  byMinutes?: Array<EventsModelsMinute> | null;
+  byMinutes?: Array<ShowsModelsMinute> | null;
   /**
    * Byhours
    *
    * Hours of the recurrence.
    */
-  byHours?: Array<EventsModelsHour> | null;
+  byHours?: Array<ShowsModelsHour> | null;
   /**
    * Byweekdays
    *
    * Weekdays of the recurrence.
    */
-  byWeekdays?: Array<EventsModelsWeekdayRule> | null;
+  byWeekdays?: Array<ShowsModelsWeekdayRule> | null;
   /**
    * Bymonthdays
    *
    * Monthdays of the recurrence.
    */
-  byMonthdays?: Array<EventsModelsMonthday> | null;
+  byMonthdays?: Array<ShowsModelsMonthday> | null;
   /**
    * Byyeardays
    *
    * Yeardays of the recurrence.
    */
-  byYeardays?: Array<EventsModelsYearday> | null;
+  byYeardays?: Array<ShowsModelsYearday> | null;
   /**
    * Byweeks
    *
    * Weeks of the recurrence.
    */
-  byWeeks?: Array<EventsModelsWeek> | null;
+  byWeeks?: Array<ShowsModelsWeek> | null;
   /**
    * Bymonths
    *
    * Months of the recurrence.
    */
-  byMonths?: Array<EventsModelsMonth> | null;
+  byMonths?: Array<ShowsModelsMonth> | null;
   /**
    * Bysetpositions
    *
    * Set positions of the recurrence.
    */
-  bySetPositions?: Array<EventsModelsYearday> | null;
+  bySetPositions?: Array<ShowsModelsYearday> | null;
   /**
    * Start day of the week.
    */
-  weekStart?: EventsModelsWeekday | null;
+  weekStart?: ShowsModelsWeekday | null;
 };
 
-/**
- * EventList
- *
- * List of events.
- */
-export type EventsModelsListResponseResults = {
-  /**
-   * Count
-   *
-   * Total number of events that matched the query.
-   */
-  count: number;
-  /**
-   * Limit
-   *
-   * Maximum number of returned events.
-   */
-  limit: number | null;
-  /**
-   * Offset
-   *
-   * Number of events skipped.
-   */
-  offset: number | null;
-  /**
-   * Events
-   *
-   * Events that matched the request.
-   */
-  events: Array<EventsModelsEvent>;
-};
-
-export type EventsModelsListRequestWhere = EventsModelsEventWhereInput | null;
-
-export type EventsModelsListRequestOrder =
-  | EventOrderByInput
-  | Array<EventOrderByInput>
-  | null;
-
-export type EventOrderByInput =
-  | EventsModelsEventIdOrderByInput
-  | EventsModelsEventTypeOrderByInput
-  | EventsModelsEventShowIdOrderByInput;
-
-export type EventsModelsListRequestOffset = number | null;
-
-export type EventsModelsListRequestLimit = number | null;
-
-export type EventsModelsListRequestInclude = EventsModelsEventInclude | null;
-
-export type EventsModelsGetRequestInclude = EventsModelsEventInclude | null;
-
-export type EventsModelsGetRequestId = string;
-
-export type EventsModelsDeleteRequestId = string;
-
-export type EventsModelsCreateRequestInclude = EventsModelsEventInclude | null;
-
-/**
- * EventCreateInput
- *
- * Data to create an event.
- */
-export type EventsModelsCreateRequestData = {
-  /**
-   * Id
-   */
-  id?: string;
-  /**
-   * Showid
-   */
-  showId?: string | null;
-  type: EventsModelsEventType;
-  start: EventsModelsNaiveDatetime;
-  duration: EventsModelsTimedelta;
-  timezone: EventsModelsTimezone;
-  /**
-   * Recurrence rule of the event.
-   */
-  recurrence?: EventsModelsRecurrence | null;
-  /**
-   * Include
-   *
-   * Included instances of the event.
-   */
-  include?: Array<EventsModelsInclusion> | null;
-  /**
-   * Exclude
-   *
-   * Excluded instances of the event.
-   */
-  exclude?: Array<EventsModelsExclusion> | null;
-};
-
-/**
- * Instance
- *
- * Instance data.
- */
-export type UpdateResponseInstance = {
-  start: InstancesModelsNaiveDatetime;
-  duration: InstancesModelsTimedelta;
-  /**
-   * Eventid
-   *
-   * Identifier of the event the instance belongs to.
-   */
-  eventId: string;
-  /**
-   * Event the instance belongs to.
-   */
-  event: InstancesModelsEvent | null;
-};
-
-/**
- * Datetime without timezone.
- */
-export type UpdateRequestStart = string;
-
-export type UpdateRequestEventId = string;
-
-/**
- * TimeRangeQuery
- *
- * Query for events in a time range.
- */
-export type TimeRangeQuery = {
-  /**
-   * Type
-   *
-   * Type of the query.
-   */
-  type?: "time-range";
-  /**
-   * Beginning of the time range in UTC.
-   */
-  start?: EventsModelsUtcDatetime | null;
-  /**
-   * End of the time range in UTC.
-   */
-  end?: EventsModelsUtcDatetime | null;
-};
-
-/**
- * Result
- *
- * Result of the test.
- */
-export type TestResponseResult = {
-  /**
-   * Success
-   *
-   * Indicates if the test was successful.
-   */
-  success: boolean;
-  /**
-   * Message
-   *
-   * Message returned from the test.
-   */
-  message: string;
-};
-
-export type TestRequestParameters = Parameters | null;
-
-/**
- * Parameters
- *
- * Parameters for testing.
- */
-export type Parameters = {
-  /**
-   * Message
-   *
-   * Optional message to include in the test.
-   */
-  message?: string | null;
-};
-
-export type SubscribeRequestTypes = string | Array<SseModelsEventType> | null;
-
-/**
- * SplitResult
- *
- * Result of splitting an event.
- */
-export type SplitResponseResult = {
-  before: GetResponseEvent;
-  after: EventsModelsEvent;
-};
-
-/**
- * Event
- *
- * Event data.
- */
-export type GetResponseEvent = {
-  /**
-   * Id
-   *
-   * Identifier of the event.
-   */
-  id: string;
-  type: EventsModelsEventType;
-  /**
-   * Showid
-   *
-   * Identifier of the show the event belongs to.
-   */
-  showId: string | null;
-  /**
-   * Show the event belongs to.
-   */
-  show: EventsModelsShow | null;
-  start: EventsModelsNaiveDatetime;
-  duration: EventsModelsTimedelta;
-  timezone: EventsModelsTimezone;
-  /**
-   * Recurrence rule of the event.
-   */
-  recurrence?: EventsModelsRecurrence | null;
-  /**
-   * Include
-   *
-   * Included instances of the event.
-   */
-  include?: Array<EventsModelsInclusion> | null;
-  /**
-   * Exclude
-   *
-   * Excluded instances of the event.
-   */
-  exclude?: Array<EventsModelsExclusion> | null;
-};
-
-export type SplitRequestInclude = EventsModelsEventInclude | null;
-
-export type SplitRequestId = string;
-
-/**
- * EventSplitInput
- *
- * Data to split an event.
- */
-export type SplitRequestData = {
-  at: EventsModelsNaiveDatetime;
-  /**
-   * Data to update the event after the split.
-   */
-  update?: EventUpdateInput | null;
-};
-
-/**
- * EventUpdateInput
- *
- * Data to update an event.
- */
-export type EventUpdateInput = {
-  /**
-   * Id
-   */
-  id?: string;
-  type?: EventsModelsEventType;
-  start?: EventsModelsNaiveDatetime;
-  duration?: EventsModelsTimedelta;
-  timezone?: EventsModelsTimezone;
-  /**
-   * Recurrence rule of the event.
-   */
-  recurrence?: RecurrenceUpdateInput | null;
-  /**
-   * Include
-   *
-   * Included instances of the event.
-   */
-  include?: Array<EventsModelsInclusion> | null;
-  /**
-   * Exclude
-   *
-   * Excluded instances of the event.
-   */
-  exclude?: Array<EventsModelsExclusion> | null;
-};
-
-/**
- * RecurringQuery
- *
- * Query for recurring events.
- */
-export type RecurringQuery = {
-  /**
-   * Type
-   *
-   * Type of the query.
-   */
-  type?: "recurring";
-  /**
-   * Recurring
-   *
-   * Whether to search for recurring or non-recurring events.
-   */
-  recurring: boolean;
-};
-
-export type Query =
-  | ({
-      type: "TimeRangeQuery";
-    } & TimeRangeQuery)
-  | ({
-      type: "RecurringQuery";
-    } & RecurringQuery);
-
-/**
- * Datetime in UTC.
- */
-export type ListRequestStart = string;
-
-export type ListRequestQuery = Query | null;
-
-/**
- * Datetime in UTC.
- */
-export type ListRequestEnd = string;
+export type ShowsModelsSecond = number;
 
 /**
  * Show
  *
  * Show data.
  */
-export type GetResponseShow = {
+export type ShowsModelsShow = {
   /**
    * Id
    *
@@ -2482,58 +2244,279 @@ export type GetResponseShow = {
 };
 
 /**
- * Instance
+ * ShowArgsFromEvent
  *
- * Instance data.
+ * Arguments for Event
  */
-export type GetResponseInstance = {
-  start: InstancesModelsNaiveDatetime;
-  duration: InstancesModelsTimedelta;
-  /**
-   * Eventid
-   *
-   * Identifier of the event the instance belongs to.
-   */
-  eventId: string;
-  /**
-   * Event the instance belongs to.
-   */
-  event: InstancesModelsEvent | null;
+export type ShowsModelsShowArgsFromEvent = {
+  include?: ShowsModelsShowIncludeFromShow;
 };
 
 /**
- * Datetime without timezone.
- */
-export type GetRequestStart = string;
-
-export type GetRequestEventId = string;
-
-/**
- * Datetime without timezone.
- */
-export type DeleteRequestStart = string;
-
-export type DeleteRequestEventId = string;
-
-/**
- * Instance
+ * ShowIncludeFromShow
  *
- * Instance data.
+ * Relational arguments for Show
  */
-export type CreateResponseInstance = {
-  start: InstancesModelsNaiveDatetime;
-  duration: InstancesModelsTimedelta;
+export type ShowsModelsShowIncludeFromShow = {
   /**
-   * Eventid
-   *
-   * Identifier of the event the instance belongs to.
+   * Events
    */
-  eventId: string;
-  /**
-   * Event the instance belongs to.
-   */
-  event: InstancesModelsEvent | null;
+  events?: boolean | ShowsModelsFindManyEventArgsFromShow;
 };
+
+/**
+ * ShowRelationFilter
+ */
+export type ShowsModelsShowRelationFilter = {
+  is?: ShowsModelsShowWhereInput;
+  isNot?: ShowsModelsShowWhereInput;
+};
+
+/**
+ * ShowWhereInput
+ *
+ * Show arguments for searching
+ */
+export type ShowsModelsShowWhereInput = {
+  /**
+   * Id
+   */
+  id?: string | ShowsModelsStringFilter;
+  /**
+   * Title
+   */
+  title?: string | ShowsModelsStringFilter;
+  /**
+   * Description
+   */
+  description?: string | ShowsModelsStringFilter | null;
+  events?: ShowsModelsEventListRelationFilter;
+  /**
+   * And
+   */
+  and?: Array<ShowsModelsShowWhereInput>;
+  /**
+   * Or
+   */
+  or?: Array<ShowsModelsShowWhereInput>;
+  /**
+   * Not
+   */
+  not?: Array<ShowsModelsShowWhereInput>;
+};
+
+/**
+ * StringFilter
+ */
+export type ShowsModelsStringFilter = {
+  /**
+   * Equals
+   */
+  equals?: string;
+  /**
+   * Notin
+   */
+  notIn?: Array<string>;
+  /**
+   * Lt
+   */
+  lt?: string;
+  /**
+   * Lte
+   */
+  lte?: string;
+  /**
+   * Gt
+   */
+  gt?: string;
+  /**
+   * Gte
+   */
+  gte?: string;
+  /**
+   * Contains
+   */
+  contains?: string;
+  /**
+   * Startswith
+   */
+  startswith?: string;
+  /**
+   * Endswith
+   */
+  endswith?: string;
+  /**
+   * In
+   */
+  in?: Array<string>;
+  /**
+   * Not
+   */
+  not?: string | ShowsModelsStringFilter;
+  /**
+   * Mode
+   */
+  mode?: "default" | "insensitive";
+  /**
+   * Search
+   */
+  search?: string;
+};
+
+export type ShowsModelsTermination =
+  ShowsModelsCountTermination | ShowsModelsUntilTermination;
+
+/**
+ * Duration of time.
+ */
+export type ShowsModelsTimedelta = string;
+
+/**
+ * Timezone name.
+ */
+export type ShowsModelsTimezone = string;
+
+/**
+ * UntilTermination
+ *
+ * Until termination data.
+ */
+export type ShowsModelsUntilTermination = {
+  /**
+   * Type
+   *
+   * Type of the termination.
+   */
+  type?: "until";
+  until: ShowsModelsNaiveDatetime;
+};
+
+/**
+ * ShowUpdateManyMutationInput
+ *
+ * Arguments for updating many records
+ */
+export type ShowsModelsUpdateRequestData = {
+  /**
+   * Id
+   */
+  id?: string;
+  /**
+   * Title
+   */
+  title?: string;
+  /**
+   * Description
+   */
+  description?: string | null;
+};
+
+export type ShowsModelsUpdateRequestId = string;
+
+export type ShowsModelsUpdateRequestInclude = ShowInclude | null;
+
+export type ShowsModelsWeek = number | number;
+
+/**
+ * Weekday
+ *
+ * Weekday options.
+ */
+export type ShowsModelsWeekday =
+  | "monday"
+  | "tuesday"
+  | "wednesday"
+  | "thursday"
+  | "friday"
+  | "saturday"
+  | "sunday";
+
+/**
+ * WeekdayRule
+ *
+ * Day rule data.
+ */
+export type ShowsModelsWeekdayRule = {
+  day: ShowsModelsWeekday;
+  /**
+   * Occurrence of the day in the year.
+   */
+  occurrence?: ShowsModelsWeek | null;
+};
+
+export type ShowsModelsYearday = number | number;
+
+/**
+ * _EventWhereUnique_id_Input
+ */
+export type ShowsModelsEventWhereUniqueIdInput = {
+  /**
+   * Id
+   */
+  id: string;
+};
+
+/**
+ * _Event_RelevanceInner
+ */
+export type ShowsModelsEventRelevanceInner = {
+  /**
+   * Fields
+   */
+  fields: Array<"id" | "type" | "showId">;
+  /**
+   * Search
+   */
+  search: string;
+  /**
+   * Sort
+   */
+  sort: "asc" | "desc";
+};
+
+/**
+ * _Event_RelevanceOrderByInput
+ */
+export type ShowsModelsEventRelevanceOrderByInput = {
+  _relevance: ShowsModelsEventRelevanceInner;
+};
+
+/**
+ * _Event_id_OrderByInput
+ */
+export type ShowsModelsEventIdOrderByInput = {
+  /**
+   * Id
+   */
+  id: "asc" | "desc";
+};
+
+/**
+ * _Event_showId_OrderByInput
+ */
+export type ShowsModelsEventShowIdOrderByInput = {
+  /**
+   * Showid
+   */
+  showId: "asc" | "desc";
+};
+
+/**
+ * _Event_type_OrderByInput
+ */
+export type ShowsModelsEventTypeOrderByInput = {
+  /**
+   * Type
+   */
+  type: "asc" | "desc";
+};
+
+/**
+ * EventType
+ *
+ * Event types.
+ */
+export type SseModelsEventType = "test";
 
 export type EventsListRequest = {
   body?: never;
@@ -2641,7 +2624,7 @@ export type EventsCreateResponses = {
   /**
    * Document created, URL follows
    */
-  201: EventsModelsEvent;
+  201: CreateResponseEvent;
 };
 
 export type EventsCreateResponse =
@@ -2747,7 +2730,7 @@ export type EventsIdGetResponses = {
   /**
    * Request fulfilled, document follows
    */
-  200: GetResponseEvent;
+  200: EventsModelsEvent;
 };
 
 export type EventsIdGetResponse =
@@ -3324,7 +3307,7 @@ export type ShowsCreateResponses = {
   /**
    * Document created, URL follows
    */
-  201: ShowsModelsShow;
+  201: CreateResponseShow;
 };
 
 export type ShowsCreateResponse =
@@ -3429,7 +3412,7 @@ export type ShowsIdGetResponses = {
   /**
    * Request fulfilled, document follows
    */
-  200: GetResponseShow;
+  200: ShowsModelsShow;
 };
 
 export type ShowsIdGetResponse = ShowsIdGetResponses[keyof ShowsIdGetResponses];

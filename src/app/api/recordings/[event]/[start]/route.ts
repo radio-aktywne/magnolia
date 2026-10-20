@@ -31,24 +31,24 @@ export async function GET(
   });
 
   if (recordingsEventStartDownloadData === undefined) {
-    if (recordingsEventStartDownloadResponse.status === 400)
+    if (recordingsEventStartDownloadResponse?.status === 400)
       return new Response(STATUS_CODES[400], { status: 400 });
 
-    if (recordingsEventStartDownloadResponse.status === 404)
+    if (recordingsEventStartDownloadResponse?.status === 404)
       return new Response(STATUS_CODES[404], { status: 404 });
 
     return new Response(STATUS_CODES[500], { status: 500 });
   }
 
-  return new Response(recordingsEventStartDownloadResponse.body, {
+  return new Response(recordingsEventStartDownloadResponse?.body, {
     headers: {
       "Content-Length":
-        recordingsEventStartDownloadResponse.headers.get("Content-Length")!,
+        recordingsEventStartDownloadResponse!.headers.get("Content-Length")!,
       "Content-Type":
-        recordingsEventStartDownloadResponse.headers.get("Content-Type")!,
-      ETag: recordingsEventStartDownloadResponse.headers.get("ETag")!,
+        recordingsEventStartDownloadResponse!.headers.get("Content-Type")!,
+      ETag: recordingsEventStartDownloadResponse!.headers.get("ETag")!,
       "Last-Modified":
-        recordingsEventStartDownloadResponse.headers.get("Last-Modified")!,
+        recordingsEventStartDownloadResponse!.headers.get("Last-Modified")!,
     },
     status: 200,
   });
