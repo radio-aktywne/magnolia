@@ -63,7 +63,7 @@ export const listShowRecordings =
                 path: { event: data.event.id, start: start },
               });
 
-            const headers = recordingsEventStartHeaddownloadResponse.headers;
+            const headers = recordingsEventStartHeaddownloadResponse?.headers;
 
             return {
               event: {
@@ -73,11 +73,11 @@ export const listShowRecordings =
                   : null,
               },
               recording: {
-                etag: headers.get("ETag")!,
-                length: headers.get("Content-Length")!,
-                modified: headers.get("Last-Modified")!,
+                etag: headers!.get("ETag")!,
+                length: headers!.get("Content-Length")!,
+                modified: headers!.get("Last-Modified")!,
                 start: start,
-                type: headers.get("Content-Type")!,
+                type: headers!.get("Content-Type")!,
               },
             };
           }),

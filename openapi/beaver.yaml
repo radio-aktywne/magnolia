@@ -1,7 +1,7 @@
 openapi: "3.1.0"
 info:
   title: beaver
-  version: "0.19.0"
+  version: "0.20.0"
 paths:
   /events:
     get:
@@ -1839,7 +1839,69 @@ paths:
 components:
   schemas:
     CreateResponseEvent:
-      $ref: "#/components/schemas/events_models_Event"
+      properties:
+        id:
+          type: string
+          format: uuid
+          title: Id
+          description: Identifier of the event.
+        type:
+          $ref: "#/components/schemas/events_models_EventType"
+        showId:
+          anyOf:
+            - type: string
+              format: uuid
+            - type: "null"
+          title: Showid
+          description: Identifier of the show the event belongs to.
+        show:
+          anyOf:
+            - $ref: "#/components/schemas/events_models_Show"
+            - type: "null"
+          description: Show the event belongs to.
+        start:
+          $ref: "#/components/schemas/events_models_NaiveDatetime"
+        duration:
+          $ref: "#/components/schemas/events_models_Timedelta"
+        timezone:
+          $ref: "#/components/schemas/events_models_Timezone"
+        recurrence:
+          anyOf:
+            - $ref: "#/components/schemas/events_models_Recurrence"
+            - type: "null"
+          description: Recurrence rule of the event.
+          default: null
+        include:
+          anyOf:
+            - items:
+                $ref: "#/components/schemas/events_models_Inclusion"
+              type: array
+              uniqueItems: true
+            - type: "null"
+          title: Include
+          description: Included instances of the event.
+          default: null
+        exclude:
+          anyOf:
+            - items:
+                $ref: "#/components/schemas/events_models_Exclusion"
+              type: array
+              uniqueItems: true
+            - type: "null"
+          title: Exclude
+          description: Excluded instances of the event.
+          default: null
+      type: object
+      required:
+        - id
+        - type
+        - showId
+        - show
+        - start
+        - duration
+        - timezone
+      title: Event
+      description: Event data.
     CreateResponseInstance:
       properties:
         start:
@@ -1865,7 +1927,38 @@ components:
       title: Instance
       description: Instance data.
     CreateResponseShow:
-      $ref: "#/components/schemas/shows_models_Show"
+      properties:
+        id:
+          type: string
+          format: uuid
+          title: Id
+          description: Identifier of the show.
+        title:
+          type: string
+          title: Title
+          description: Title of the show.
+        description:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Description
+          description: Description of the show.
+        events:
+          anyOf:
+            - items:
+                $ref: "#/components/schemas/shows_models_Event"
+              type: array
+            - type: "null"
+          title: Events
+          description: Events the show belongs to.
+      type: object
+      required:
+        - id
+        - title
+        - description
+        - events
+      title: Show
+      description: Show data.
     DeleteRequestEventId:
       type: string
       format: uuid
@@ -1944,69 +2037,7 @@ components:
       examples:
         - 2000-01-01T00:00:00
     GetResponseEvent:
-      properties:
-        id:
-          type: string
-          format: uuid
-          title: Id
-          description: Identifier of the event.
-        type:
-          $ref: "#/components/schemas/events_models_EventType"
-        showId:
-          anyOf:
-            - type: string
-              format: uuid
-            - type: "null"
-          title: Showid
-          description: Identifier of the show the event belongs to.
-        show:
-          anyOf:
-            - $ref: "#/components/schemas/events_models_Show"
-            - type: "null"
-          description: Show the event belongs to.
-        start:
-          $ref: "#/components/schemas/events_models_NaiveDatetime"
-        duration:
-          $ref: "#/components/schemas/events_models_Timedelta"
-        timezone:
-          $ref: "#/components/schemas/events_models_Timezone"
-        recurrence:
-          anyOf:
-            - $ref: "#/components/schemas/events_models_Recurrence"
-            - type: "null"
-          description: Recurrence rule of the event.
-          default: null
-        include:
-          anyOf:
-            - items:
-                $ref: "#/components/schemas/events_models_Inclusion"
-              type: array
-              uniqueItems: true
-            - type: "null"
-          title: Include
-          description: Included instances of the event.
-          default: null
-        exclude:
-          anyOf:
-            - items:
-                $ref: "#/components/schemas/events_models_Exclusion"
-              type: array
-              uniqueItems: true
-            - type: "null"
-          title: Exclude
-          description: Excluded instances of the event.
-          default: null
-      type: object
-      required:
-        - id
-        - type
-        - showId
-        - show
-        - start
-        - duration
-        - timezone
-      title: Event
-      description: Event data.
+      $ref: "#/components/schemas/events_models_Event"
     GetResponseInstance:
       properties:
         start:
@@ -2032,38 +2063,7 @@ components:
       title: Instance
       description: Instance data.
     GetResponseShow:
-      properties:
-        id:
-          type: string
-          format: uuid
-          title: Id
-          description: Identifier of the show.
-        title:
-          type: string
-          title: Title
-          description: Title of the show.
-        description:
-          anyOf:
-            - type: string
-            - type: "null"
-          title: Description
-          description: Description of the show.
-        events:
-          anyOf:
-            - items:
-                $ref: "#/components/schemas/shows_models_Event"
-              type: array
-            - type: "null"
-          title: Events
-          description: Events the show belongs to.
-      type: object
-      required:
-        - id
-        - title
-        - description
-        - events
-      title: Show
-      description: Show data.
+      $ref: "#/components/schemas/shows_models_Show"
     Instance:
       properties:
         start:
@@ -2341,7 +2341,7 @@ components:
     SplitResponseResult:
       properties:
         before:
-          $ref: "#/components/schemas/GetResponseEvent"
+          $ref: "#/components/schemas/CreateResponseEvent"
         after:
           $ref: "#/components/schemas/events_models_Event"
       type: object

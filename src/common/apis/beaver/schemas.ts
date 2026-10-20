@@ -2,677 +2,82 @@
 
 import * as z from "zod";
 
-/**
- * EventType
- *
- * Event types.
- */
-export const SseModelsEventTypeSchema = z
-  .enum(["test"])
-  .register(z.globalRegistry, {
-    description: "Event types.",
-  });
-
-/**
- * _Event_type_OrderByInput
- */
-export const ShowsModelsEventTypeOrderByInputSchema = z.object({
-  type: z.enum(["asc", "desc"]),
-});
-
-/**
- * _Event_showId_OrderByInput
- */
-export const ShowsModelsEventShowIdOrderByInputSchema = z.object({
-  showId: z.enum(["asc", "desc"]),
-});
-
-/**
- * _Event_id_OrderByInput
- */
-export const ShowsModelsEventIdOrderByInputSchema = z.object({
-  id: z.enum(["asc", "desc"]),
-});
-
-/**
- * _Event_RelevanceInner
- */
-export const ShowsModelsEventRelevanceInnerSchema = z.object({
-  fields: z.array(z.enum(["id", "type", "showId"])),
-  search: z.string(),
-  sort: z.enum(["asc", "desc"]),
-});
-
-/**
- * _Event_RelevanceOrderByInput
- */
-export const ShowsModelsEventRelevanceOrderByInputSchema = z.object({
-  _relevance: ShowsModelsEventRelevanceInnerSchema,
-});
-
-/**
- * _EventWhereUnique_id_Input
- */
-export const ShowsModelsEventWhereUniqueIdInputSchema = z.object({
-  id: z.string(),
-});
-
-export const ShowsModelsYeardaySchema = z.union([
-  z.int().gte(-366).lte(-1),
-  z.int().gte(1).lte(366),
-]);
-
-export const ShowsModelsWeekSchema = z.union([
-  z.int().gte(-53).lte(-1),
-  z.int().gte(1).lte(53),
-]);
-
-/**
- * Weekday
- *
- * Weekday options.
- */
-export const ShowsModelsWeekdaySchema = z
-  .enum([
-    "monday",
-    "tuesday",
-    "wednesday",
-    "thursday",
-    "friday",
-    "saturday",
-    "sunday",
-  ])
-  .register(z.globalRegistry, {
-    description: "Weekday options.",
-  });
-
-/**
- * WeekdayRule
- *
- * Day rule data.
- */
-export const ShowsModelsWeekdayRuleSchema = z
-  .object({
-    day: ShowsModelsWeekdaySchema,
-    occurrence: ShowsModelsWeekSchema.nullish().default(null),
-  })
-  .register(z.globalRegistry, {
-    description: "Day rule data.",
-  });
-
-/**
- * EventType
- */
-export const ShowsModelsEventTypeSchema = z.enum([
-  "live",
-  "replay",
-  "prerecorded",
-]);
-
-/**
- * StringFilter
- */
-export const ShowsModelsStringFilterSchema = z.object({
-  equals: z.string().optional(),
-  notIn: z.array(z.string()).optional(),
-  lt: z.string().optional(),
-  lte: z.string().optional(),
-  gt: z.string().optional(),
-  gte: z.string().optional(),
-  contains: z.string().optional(),
-  startswith: z.string().optional(),
-  endswith: z.string().optional(),
-  in: z.array(z.string()).optional(),
-  get not() {
-    return z.union([z.string(), ShowsModelsStringFilterSchema]).optional();
-  },
-  mode: z.enum(["default", "insensitive"]).optional(),
-  search: z.string().optional(),
-});
-
-export const ShowsModelsUpdateRequestIdSchema = z.uuid();
-
-/**
- * ShowUpdateManyMutationInput
- *
- * Arguments for updating many records
- */
-export const ShowsModelsUpdateRequestDataSchema = z
-  .object({
-    id: z.string().optional(),
-    title: z.string().optional(),
-    description: z.string().nullish(),
-  })
-  .register(z.globalRegistry, {
-    description: "Arguments for updating many records",
-  });
+export const DeleteRequestEventIdSchema = z.uuid();
 
 /**
  * Datetime without timezone.
  */
-export const ShowsModelsNaiveDatetimeSchema = z.iso
+export const DeleteRequestStartSchema = z.iso
   .datetime({ offset: true, local: true })
   .register(z.globalRegistry, {
     description: "Datetime without timezone.",
   });
 
-/**
- * UntilTermination
- *
- * Until termination data.
- */
-export const ShowsModelsUntilTerminationSchema = z
-  .object({
-    type: z
-      .literal("until")
-      .register(z.globalRegistry, {
-        description: "Type of the termination.",
-      })
-      .optional()
-      .default("until"),
-    until: ShowsModelsNaiveDatetimeSchema,
-  })
-  .register(z.globalRegistry, {
-    description: "Until termination data.",
-  });
-
-/**
- * Timezone name.
- */
-export const ShowsModelsTimezoneSchema = z.string().register(z.globalRegistry, {
-  description: "Timezone name.",
-});
-
-/**
- * Duration of time.
- */
-export const ShowsModelsTimedeltaSchema = z
-  .string()
-  .register(z.globalRegistry, {
-    description: "Duration of time.",
-  });
-
-/**
- * CountTermination
- *
- * Count termination data.
- */
-export const ShowsModelsCountTerminationSchema = z
-  .object({
-    type: z
-      .literal("count")
-      .register(z.globalRegistry, {
-        description: "Type of the termination.",
-      })
-      .optional()
-      .default("count"),
-    count: z.int().gt(0).register(z.globalRegistry, {
-      description: "Number of instances of recurring event.",
-    }),
-  })
-  .register(z.globalRegistry, {
-    description: "Count termination data.",
-  });
-
-export const ShowsModelsTerminationSchema = z.union([
-  ShowsModelsCountTerminationSchema,
-  ShowsModelsUntilTerminationSchema,
-]);
-
-/**
- * Exclusion
- *
- * Exclusion data.
- */
-export const ShowsModelsExclusionSchema = z
-  .object({
-    start: ShowsModelsNaiveDatetimeSchema,
-  })
-  .register(z.globalRegistry, {
-    description: "Exclusion data.",
-  });
-
-/**
- * Inclusion
- *
- * Inclusion data.
- */
-export const ShowsModelsInclusionSchema = z
-  .object({
-    start: ShowsModelsNaiveDatetimeSchema,
-  })
-  .register(z.globalRegistry, {
-    description: "Inclusion data.",
-  });
-
-export const ShowsModelsMonthSchema = z.int().gte(1).lte(12);
-
-export const ShowsModelsMonthdaySchema = z.union([
-  z.int().gte(-31).lte(-1),
-  z.int().gte(1).lte(31),
-]);
-
-export const ShowsModelsHourSchema = z.int().gte(0).lte(23);
-
-export const ShowsModelsMinuteSchema = z.int().gte(0).lte(59);
-
-export const ShowsModelsSecondSchema = z.int().gte(0).lte(59);
-
-/**
- * Frequency
- *
- * Frequency options.
- */
-export const ShowsModelsFrequencySchema = z
-  .enum([
-    "secondly",
-    "minutely",
-    "hourly",
-    "daily",
-    "weekly",
-    "monthly",
-    "yearly",
-  ])
-  .register(z.globalRegistry, {
-    description: "Frequency options.",
-  });
-
-/**
- * Recurrence
- *
- * Recurrence rule data.
- */
-export const ShowsModelsRecurrenceSchema = z
-  .object({
-    frequency: ShowsModelsFrequencySchema,
-    termination: ShowsModelsTerminationSchema.nullish().default(null),
-    interval: z.int().gt(0).nullish().default(null),
-    bySeconds: z.array(ShowsModelsSecondSchema).nullish().default(null),
-    byMinutes: z.array(ShowsModelsMinuteSchema).nullish().default(null),
-    byHours: z.array(ShowsModelsHourSchema).nullish().default(null),
-    byWeekdays: z.array(ShowsModelsWeekdayRuleSchema).nullish().default(null),
-    byMonthdays: z.array(ShowsModelsMonthdaySchema).nullish().default(null),
-    byYeardays: z.array(ShowsModelsYeardaySchema).nullish().default(null),
-    byWeeks: z.array(ShowsModelsWeekSchema).nullish().default(null),
-    byMonths: z.array(ShowsModelsMonthSchema).nullish().default(null),
-    bySetPositions: z.array(ShowsModelsYeardaySchema).nullish().default(null),
-    weekStart: ShowsModelsWeekdaySchema.nullish().default(null),
-  })
-  .register(z.globalRegistry, {
-    description: "Recurrence rule data.",
-  });
-
-/**
- * _Show_description_OrderByInput
- */
-export const ShowDescriptionOrderByInputSchema = z.object({
-  description: z.enum(["asc", "desc"]),
-});
-
-/**
- * _Show_title_OrderByInput
- */
-export const ShowTitleOrderByInputSchema = z.object({
-  title: z.enum(["asc", "desc"]),
-});
-
-/**
- * _Show_id_OrderByInput
- */
-export const ShowIdOrderByInputSchema = z.object({
-  id: z.enum(["asc", "desc"]),
-});
-
-export const ShowOrderByInputSchema = z.union([
-  ShowIdOrderByInputSchema,
-  ShowTitleOrderByInputSchema,
-  ShowDescriptionOrderByInputSchema,
-]);
-
-export const ShowsModelsListRequestOrderSchema = z
-  .union([ShowOrderByInputSchema, z.array(ShowOrderByInputSchema)])
-  .nullable();
-
-export const ShowsModelsListRequestOffsetSchema = z.int().nullable();
-
-export const ShowsModelsListRequestLimitSchema = z.int().nullable();
-
-export const ShowsModelsGetRequestIdSchema = z.uuid();
-
-export const ShowsModelsDeleteRequestIdSchema = z.uuid();
-
-/**
- * ShowCreateWithoutRelationsInput
- *
- * Required arguments to the Show create method, without relations
- */
-export const ShowsModelsCreateRequestDataSchema = z
-  .object({
-    id: z.string().optional(),
-    description: z.string().nullish(),
-    title: z.string(),
-  })
-  .register(z.globalRegistry, {
-    description:
-      "Required arguments to the Show create method, without relations",
-  });
-
-/**
- * _Event_type_OrderByInput
- */
-export const InstancesModelsEventTypeOrderByInputSchema = z.object({
-  type: z.enum(["asc", "desc"]),
-});
-
-/**
- * _Event_showId_OrderByInput
- */
-export const InstancesModelsEventShowIdOrderByInputSchema = z.object({
-  showId: z.enum(["asc", "desc"]),
-});
-
-/**
- * _Event_id_OrderByInput
- */
-export const InstancesModelsEventIdOrderByInputSchema = z.object({
-  id: z.enum(["asc", "desc"]),
-});
-
-/**
- * _Event_RelevanceInner
- */
-export const InstancesModelsEventRelevanceInnerSchema = z.object({
-  fields: z.array(z.enum(["id", "type", "showId"])),
-  search: z.string(),
-  sort: z.enum(["asc", "desc"]),
-});
-
-/**
- * _Event_RelevanceOrderByInput
- */
-export const InstancesModelsEventRelevanceOrderByInputSchema = z.object({
-  _relevance: InstancesModelsEventRelevanceInnerSchema,
-});
-
-/**
- * _EventWhereUnique_id_Input
- */
-export const InstancesModelsEventWhereUniqueIdInputSchema = z.object({
-  id: z.string(),
-});
-
-export const InstancesModelsYeardaySchema = z.union([
-  z.int().gte(-366).lte(-1),
-  z.int().gte(1).lte(366),
-]);
-
-export const InstancesModelsWeekSchema = z.union([
-  z.int().gte(-53).lte(-1),
-  z.int().gte(1).lte(53),
-]);
-
-/**
- * Weekday
- *
- * Weekday options.
- */
-export const InstancesModelsWeekdaySchema = z
-  .enum([
-    "monday",
-    "tuesday",
-    "wednesday",
-    "thursday",
-    "friday",
-    "saturday",
-    "sunday",
-  ])
-  .register(z.globalRegistry, {
-    description: "Weekday options.",
-  });
-
-/**
- * WeekdayRule
- *
- * Day rule data.
- */
-export const InstancesModelsWeekdayRuleSchema = z
-  .object({
-    day: InstancesModelsWeekdaySchema,
-    occurrence: InstancesModelsWeekSchema.nullish().default(null),
-  })
-  .register(z.globalRegistry, {
-    description: "Day rule data.",
-  });
-
-/**
- * StringFilter
- */
-export const InstancesModelsStringFilterSchema = z.object({
-  equals: z.string().optional(),
-  notIn: z.array(z.string()).optional(),
-  lt: z.string().optional(),
-  lte: z.string().optional(),
-  gt: z.string().optional(),
-  gte: z.string().optional(),
-  contains: z.string().optional(),
-  startswith: z.string().optional(),
-  endswith: z.string().optional(),
-  in: z.array(z.string()).optional(),
-  get not() {
-    return z.union([z.string(), InstancesModelsStringFilterSchema]).optional();
-  },
-  mode: z.enum(["default", "insensitive"]).optional(),
-  search: z.string().optional(),
-});
-
-/**
- * EventType
- */
-export const InstancesModelsEventTypeSchema = z.enum([
-  "live",
-  "replay",
-  "prerecorded",
-]);
+export const GetRequestEventIdSchema = z.uuid();
 
 /**
  * Datetime without timezone.
  */
-export const InstancesModelsNaiveDatetimeSchema = z.iso
+export const GetRequestStartSchema = z.iso
   .datetime({ offset: true, local: true })
   .register(z.globalRegistry, {
     description: "Datetime without timezone.",
-  });
-
-/**
- * InstanceUpdateInput
- *
- * Data to update an instance.
- */
-export const InstancesModelsUpdateRequestDataSchema = z
-  .object({
-    start: InstancesModelsNaiveDatetimeSchema.optional(),
-  })
-  .register(z.globalRegistry, {
-    description: "Data to update an instance.",
-  });
-
-/**
- * UntilTermination
- *
- * Until termination data.
- */
-export const InstancesModelsUntilTerminationSchema = z
-  .object({
-    type: z
-      .literal("until")
-      .register(z.globalRegistry, {
-        description: "Type of the termination.",
-      })
-      .optional()
-      .default("until"),
-    until: InstancesModelsNaiveDatetimeSchema,
-  })
-  .register(z.globalRegistry, {
-    description: "Until termination data.",
   });
 
 /**
  * Datetime in UTC.
  */
-export const InstancesModelsUtcDatetimeSchema = z.iso
+export const ListRequestEndSchema = z.iso
   .datetime({ offset: true, local: true })
   .register(z.globalRegistry, {
     description: "Datetime in UTC.",
   });
 
 /**
- * Timezone name.
+ * Datetime in UTC.
  */
-export const InstancesModelsTimezoneSchema = z
-  .string()
+export const ListRequestStartSchema = z.iso
+  .datetime({ offset: true, local: true })
   .register(z.globalRegistry, {
-    description: "Timezone name.",
+    description: "Datetime in UTC.",
   });
 
 /**
- * Duration of time.
- */
-export const InstancesModelsTimedeltaSchema = z
-  .string()
-  .register(z.globalRegistry, {
-    description: "Duration of time.",
-  });
-
-/**
- * CountTermination
+ * Parameters
  *
- * Count termination data.
+ * Parameters for testing.
  */
-export const InstancesModelsCountTerminationSchema = z
+export const ParametersSchema = z
+  .object({
+    message: z.string().nullish().default(null),
+  })
+  .register(z.globalRegistry, {
+    description: "Parameters for testing.",
+  });
+
+/**
+ * RecurringQuery
+ *
+ * Query for recurring events.
+ */
+export const RecurringQuerySchema = z
   .object({
     type: z
-      .literal("count")
+      .literal("recurring")
       .register(z.globalRegistry, {
-        description: "Type of the termination.",
+        description: "Type of the query.",
       })
       .optional()
-      .default("count"),
-    count: z.int().gt(0).register(z.globalRegistry, {
-      description: "Number of instances of recurring event.",
+      .default("recurring"),
+    recurring: z.boolean().register(z.globalRegistry, {
+      description: "Whether to search for recurring or non-recurring events.",
     }),
   })
   .register(z.globalRegistry, {
-    description: "Count termination data.",
-  });
-
-export const InstancesModelsTerminationSchema = z.union([
-  InstancesModelsCountTerminationSchema,
-  InstancesModelsUntilTerminationSchema,
-]);
-
-/**
- * Exclusion
- *
- * Exclusion data.
- */
-export const InstancesModelsExclusionSchema = z
-  .object({
-    start: InstancesModelsNaiveDatetimeSchema,
-  })
-  .register(z.globalRegistry, {
-    description: "Exclusion data.",
-  });
-
-/**
- * Inclusion
- *
- * Inclusion data.
- */
-export const InstancesModelsInclusionSchema = z
-  .object({
-    start: InstancesModelsNaiveDatetimeSchema,
-  })
-  .register(z.globalRegistry, {
-    description: "Inclusion data.",
-  });
-
-export const InstancesModelsMonthSchema = z.int().gte(1).lte(12);
-
-export const InstancesModelsMonthdaySchema = z.union([
-  z.int().gte(-31).lte(-1),
-  z.int().gte(1).lte(31),
-]);
-
-export const InstancesModelsHourSchema = z.int().gte(0).lte(23);
-
-export const InstancesModelsMinuteSchema = z.int().gte(0).lte(59);
-
-export const InstancesModelsSecondSchema = z.int().gte(0).lte(59);
-
-/**
- * Frequency
- *
- * Frequency options.
- */
-export const InstancesModelsFrequencySchema = z
-  .enum([
-    "secondly",
-    "minutely",
-    "hourly",
-    "daily",
-    "weekly",
-    "monthly",
-    "yearly",
-  ])
-  .register(z.globalRegistry, {
-    description: "Frequency options.",
-  });
-
-/**
- * Recurrence
- *
- * Recurrence rule data.
- */
-export const InstancesModelsRecurrenceSchema = z
-  .object({
-    frequency: InstancesModelsFrequencySchema,
-    termination: InstancesModelsTerminationSchema.nullish().default(null),
-    interval: z.int().gt(0).nullish().default(null),
-    bySeconds: z.array(InstancesModelsSecondSchema).nullish().default(null),
-    byMinutes: z.array(InstancesModelsMinuteSchema).nullish().default(null),
-    byHours: z.array(InstancesModelsHourSchema).nullish().default(null),
-    byWeekdays: z
-      .array(InstancesModelsWeekdayRuleSchema)
-      .nullish()
-      .default(null),
-    byMonthdays: z.array(InstancesModelsMonthdaySchema).nullish().default(null),
-    byYeardays: z.array(InstancesModelsYeardaySchema).nullish().default(null),
-    byWeeks: z.array(InstancesModelsWeekSchema).nullish().default(null),
-    byMonths: z.array(InstancesModelsMonthSchema).nullish().default(null),
-    bySetPositions: z
-      .array(InstancesModelsYeardaySchema)
-      .nullish()
-      .default(null),
-    weekStart: InstancesModelsWeekdaySchema.nullish().default(null),
-  })
-  .register(z.globalRegistry, {
-    description: "Recurrence rule data.",
+    description: "Query for recurring events.",
   });
 
 export const SortOrderSchema = z.enum(["asc", "desc"]);
-
-/**
- * InstanceOrderByEventIdInput
- *
- * Order by event ID of the instance.
- */
-export const InstanceOrderByEventIdInputSchema = z
-  .object({
-    eventId: SortOrderSchema,
-  })
-  .register(z.globalRegistry, {
-    description: "Order by event ID of the instance.",
-  });
 
 /**
  * InstanceOrderByDurationInput
@@ -685,6 +90,19 @@ export const InstanceOrderByDurationInputSchema = z
   })
   .register(z.globalRegistry, {
     description: "Order by duration of the instance.",
+  });
+
+/**
+ * InstanceOrderByEventIdInput
+ *
+ * Order by event ID of the instance.
+ */
+export const InstanceOrderByEventIdInputSchema = z
+  .object({
+    eventId: SortOrderSchema,
+  })
+  .register(z.globalRegistry, {
+    description: "Order by event ID of the instance.",
   });
 
 /**
@@ -706,74 +124,274 @@ export const InstanceOrderByInputSchema = z.union([
   InstanceOrderByEventIdInputSchema,
 ]);
 
-export const InstancesModelsListRequestOrderSchema = z
-  .union([InstanceOrderByInputSchema, z.array(InstanceOrderByInputSchema)])
-  .nullable();
+export const SplitRequestIdSchema = z.uuid();
+
+export const TestRequestParametersSchema = ParametersSchema.nullable();
 
 /**
- * InstanceCreateInput
+ * Result
  *
- * Data to create an instance.
+ * Result of the test.
  */
-export const InstancesModelsCreateRequestDataSchema = z
+export const TestResponseResultSchema = z
   .object({
-    start: InstancesModelsNaiveDatetimeSchema,
-    eventId: z.string().register(z.globalRegistry, {
-      description: "Identifier of the event the instance belongs to.",
+    success: z.boolean().register(z.globalRegistry, {
+      description: "Indicates if the test was successful.",
+    }),
+    message: z.string().register(z.globalRegistry, {
+      description: "Message returned from the test.",
     }),
   })
   .register(z.globalRegistry, {
-    description: "Data to create an instance.",
+    description: "Result of the test.",
+  });
+
+export const UpdateRequestEventIdSchema = z.uuid();
+
+/**
+ * Datetime without timezone.
+ */
+export const UpdateRequestStartSchema = z.iso
+  .datetime({ offset: true, local: true })
+  .register(z.globalRegistry, {
+    description: "Datetime without timezone.",
   });
 
 /**
- * _Event_type_OrderByInput
+ * _Show_description_OrderByInput
  */
-export const EventsModelsEventTypeOrderByInputSchema = z.object({
-  type: z.enum(["asc", "desc"]),
+export const ShowDescriptionOrderByInputSchema = z.object({
+  description: z.enum(["asc", "desc"]),
 });
 
 /**
- * _Event_showId_OrderByInput
+ * _Show_id_OrderByInput
  */
-export const EventsModelsEventShowIdOrderByInputSchema = z.object({
-  showId: z.enum(["asc", "desc"]),
-});
-
-/**
- * _Event_id_OrderByInput
- */
-export const EventsModelsEventIdOrderByInputSchema = z.object({
+export const ShowIdOrderByInputSchema = z.object({
   id: z.enum(["asc", "desc"]),
 });
 
 /**
- * _Event_RelevanceInner
+ * _Show_title_OrderByInput
  */
-export const EventsModelsEventRelevanceInnerSchema = z.object({
-  fields: z.array(z.enum(["id", "type", "showId"])),
-  search: z.string(),
-  sort: z.enum(["asc", "desc"]),
+export const ShowTitleOrderByInputSchema = z.object({
+  title: z.enum(["asc", "desc"]),
 });
 
-/**
- * _Event_RelevanceOrderByInput
- */
-export const EventsModelsEventRelevanceOrderByInputSchema = z.object({
-  _relevance: EventsModelsEventRelevanceInnerSchema,
-});
-
-/**
- * _EventWhereUnique_id_Input
- */
-export const EventsModelsEventWhereUniqueIdInputSchema = z.object({
-  id: z.string(),
-});
-
-export const EventsModelsYeardaySchema = z.union([
-  z.int().gte(-366).lte(-1),
-  z.int().gte(1).lte(366),
+export const ShowOrderByInputSchema = z.union([
+  ShowIdOrderByInputSchema,
+  ShowTitleOrderByInputSchema,
+  ShowDescriptionOrderByInputSchema,
 ]);
+
+/**
+ * CountTermination
+ *
+ * Count termination data.
+ */
+export const EventsModelsCountTerminationSchema = z
+  .object({
+    type: z
+      .literal("count")
+      .register(z.globalRegistry, {
+        description: "Type of the termination.",
+      })
+      .optional()
+      .default("count"),
+    count: z.int().gt(0).register(z.globalRegistry, {
+      description: "Number of instances of recurring event.",
+    }),
+  })
+  .register(z.globalRegistry, {
+    description: "Count termination data.",
+  });
+
+export const EventsModelsDeleteRequestIdSchema = z.uuid();
+
+/**
+ * EventType
+ */
+export const EventsModelsEventTypeSchema = z.enum([
+  "live",
+  "replay",
+  "prerecorded",
+]);
+
+/**
+ * Frequency
+ *
+ * Frequency options.
+ */
+export const EventsModelsFrequencySchema = z
+  .enum([
+    "secondly",
+    "minutely",
+    "hourly",
+    "daily",
+    "weekly",
+    "monthly",
+    "yearly",
+  ])
+  .register(z.globalRegistry, {
+    description: "Frequency options.",
+  });
+
+export const EventsModelsGetRequestIdSchema = z.uuid();
+
+export const EventsModelsHourSchema = z.int().gte(0).lte(23);
+
+export const EventsModelsListRequestLimitSchema = z.int().nullable();
+
+export const EventsModelsListRequestOffsetSchema = z.int().nullable();
+
+export const EventsModelsMinuteSchema = z.int().gte(0).lte(59);
+
+export const EventsModelsMonthSchema = z.int().gte(1).lte(12);
+
+export const EventsModelsMonthdaySchema = z.union([
+  z.int().gte(-31).lte(-1),
+  z.int().gte(1).lte(31),
+]);
+
+/**
+ * Datetime without timezone.
+ */
+export const EventsModelsNaiveDatetimeSchema = z.iso
+  .datetime({ offset: true, local: true })
+  .register(z.globalRegistry, {
+    description: "Datetime without timezone.",
+  });
+
+/**
+ * Exclusion
+ *
+ * Exclusion data.
+ */
+export const EventsModelsExclusionSchema = z
+  .object({
+    start: EventsModelsNaiveDatetimeSchema,
+  })
+  .register(z.globalRegistry, {
+    description: "Exclusion data.",
+  });
+
+/**
+ * Inclusion
+ *
+ * Inclusion data.
+ */
+export const EventsModelsInclusionSchema = z
+  .object({
+    start: EventsModelsNaiveDatetimeSchema,
+  })
+  .register(z.globalRegistry, {
+    description: "Inclusion data.",
+  });
+
+export const EventsModelsSecondSchema = z.int().gte(0).lte(59);
+
+/**
+ * StringFilter
+ */
+export const EventsModelsStringFilterSchema = z.object({
+  equals: z.string().optional(),
+  notIn: z.array(z.string()).optional(),
+  lt: z.string().optional(),
+  lte: z.string().optional(),
+  gt: z.string().optional(),
+  gte: z.string().optional(),
+  contains: z.string().optional(),
+  startswith: z.string().optional(),
+  endswith: z.string().optional(),
+  in: z.array(z.string()).optional(),
+  get not() {
+    return z.union([z.string(), EventsModelsStringFilterSchema]).optional();
+  },
+  mode: z.enum(["default", "insensitive"]).optional(),
+  search: z.string().optional(),
+});
+
+/**
+ * Duration of time.
+ */
+export const EventsModelsTimedeltaSchema = z
+  .string()
+  .register(z.globalRegistry, {
+    description: "Duration of time.",
+  });
+
+/**
+ * Timezone name.
+ */
+export const EventsModelsTimezoneSchema = z
+  .string()
+  .register(z.globalRegistry, {
+    description: "Timezone name.",
+  });
+
+/**
+ * Datetime in UTC.
+ */
+export const EventsModelsUtcDatetimeSchema = z.iso
+  .datetime({ offset: true, local: true })
+  .register(z.globalRegistry, {
+    description: "Datetime in UTC.",
+  });
+
+/**
+ * TimeRangeQuery
+ *
+ * Query for events in a time range.
+ */
+export const TimeRangeQuerySchema = z
+  .object({
+    type: z
+      .literal("time-range")
+      .register(z.globalRegistry, {
+        description: "Type of the query.",
+      })
+      .optional()
+      .default("time-range"),
+    start: EventsModelsUtcDatetimeSchema.nullish().default(null),
+    end: EventsModelsUtcDatetimeSchema.nullish().default(null),
+  })
+  .register(z.globalRegistry, {
+    description: "Query for events in a time range.",
+  });
+
+export const QuerySchema = z.discriminatedUnion("type", [
+  TimeRangeQuerySchema,
+  RecurringQuerySchema,
+]);
+
+export const ListRequestQuerySchema = QuerySchema.nullable();
+
+/**
+ * UntilTermination
+ *
+ * Until termination data.
+ */
+export const EventsModelsUntilTerminationSchema = z
+  .object({
+    type: z
+      .literal("until")
+      .register(z.globalRegistry, {
+        description: "Type of the termination.",
+      })
+      .optional()
+      .default("until"),
+    until: EventsModelsNaiveDatetimeSchema,
+  })
+  .register(z.globalRegistry, {
+    description: "Until termination data.",
+  });
+
+export const EventsModelsTerminationSchema = z.discriminatedUnion("type", [
+  EventsModelsCountTerminationSchema,
+  EventsModelsUntilTerminationSchema,
+]);
+
+export const EventsModelsUpdateRequestIdSchema = z.uuid();
 
 export const EventsModelsWeekSchema = z.union([
   z.int().gte(-53).lte(-1),
@@ -813,151 +431,10 @@ export const EventsModelsWeekdayRuleSchema = z
     description: "Day rule data.",
   });
 
-/**
- * StringFilter
- */
-export const EventsModelsStringFilterSchema = z.object({
-  equals: z.string().optional(),
-  notIn: z.array(z.string()).optional(),
-  lt: z.string().optional(),
-  lte: z.string().optional(),
-  gt: z.string().optional(),
-  gte: z.string().optional(),
-  contains: z.string().optional(),
-  startswith: z.string().optional(),
-  endswith: z.string().optional(),
-  in: z.array(z.string()).optional(),
-  get not() {
-    return z.union([z.string(), EventsModelsStringFilterSchema]).optional();
-  },
-  mode: z.enum(["default", "insensitive"]).optional(),
-  search: z.string().optional(),
-});
-
-/**
- * EventType
- */
-export const EventsModelsEventTypeSchema = z.enum([
-  "live",
-  "replay",
-  "prerecorded",
+export const EventsModelsYeardaySchema = z.union([
+  z.int().gte(-366).lte(-1),
+  z.int().gte(1).lte(366),
 ]);
-
-export const EventsModelsUpdateRequestIdSchema = z.uuid();
-
-/**
- * Datetime without timezone.
- */
-export const EventsModelsNaiveDatetimeSchema = z.iso
-  .datetime({ offset: true, local: true })
-  .register(z.globalRegistry, {
-    description: "Datetime without timezone.",
-  });
-
-/**
- * Exclusion
- *
- * Exclusion data.
- */
-export const EventsModelsExclusionSchema = z
-  .object({
-    start: EventsModelsNaiveDatetimeSchema,
-  })
-  .register(z.globalRegistry, {
-    description: "Exclusion data.",
-  });
-
-/**
- * Inclusion
- *
- * Inclusion data.
- */
-export const EventsModelsInclusionSchema = z
-  .object({
-    start: EventsModelsNaiveDatetimeSchema,
-  })
-  .register(z.globalRegistry, {
-    description: "Inclusion data.",
-  });
-
-export const EventsModelsMonthSchema = z.int().gte(1).lte(12);
-
-export const EventsModelsMonthdaySchema = z.union([
-  z.int().gte(-31).lte(-1),
-  z.int().gte(1).lte(31),
-]);
-
-export const EventsModelsHourSchema = z.int().gte(0).lte(23);
-
-export const EventsModelsMinuteSchema = z.int().gte(0).lte(59);
-
-export const EventsModelsSecondSchema = z.int().gte(0).lte(59);
-
-/**
- * UntilTermination
- *
- * Until termination data.
- */
-export const EventsModelsUntilTerminationSchema = z
-  .object({
-    type: z
-      .literal("until")
-      .register(z.globalRegistry, {
-        description: "Type of the termination.",
-      })
-      .optional()
-      .default("until"),
-    until: EventsModelsNaiveDatetimeSchema,
-  })
-  .register(z.globalRegistry, {
-    description: "Until termination data.",
-  });
-
-/**
- * CountTermination
- *
- * Count termination data.
- */
-export const EventsModelsCountTerminationSchema = z
-  .object({
-    type: z
-      .literal("count")
-      .register(z.globalRegistry, {
-        description: "Type of the termination.",
-      })
-      .optional()
-      .default("count"),
-    count: z.int().gt(0).register(z.globalRegistry, {
-      description: "Number of instances of recurring event.",
-    }),
-  })
-  .register(z.globalRegistry, {
-    description: "Count termination data.",
-  });
-
-export const EventsModelsTerminationSchema = z.union([
-  EventsModelsCountTerminationSchema,
-  EventsModelsUntilTerminationSchema,
-]);
-
-/**
- * Frequency
- *
- * Frequency options.
- */
-export const EventsModelsFrequencySchema = z
-  .enum([
-    "secondly",
-    "minutely",
-    "hourly",
-    "daily",
-    "weekly",
-    "monthly",
-    "yearly",
-  ])
-  .register(z.globalRegistry, {
-    description: "Frequency options.",
-  });
 
 /**
  * RecurrenceUpdateInput
@@ -983,188 +460,6 @@ export const RecurrenceUpdateInputSchema = z
   .register(z.globalRegistry, {
     description: "Data to update a recurrence rule.",
   });
-
-/**
- * Timezone name.
- */
-export const EventsModelsTimezoneSchema = z
-  .string()
-  .register(z.globalRegistry, {
-    description: "Timezone name.",
-  });
-
-/**
- * Duration of time.
- */
-export const EventsModelsTimedeltaSchema = z
-  .string()
-  .register(z.globalRegistry, {
-    description: "Duration of time.",
-  });
-
-/**
- * EventUpdateInput
- *
- * Data to update an event.
- */
-export const EventsModelsUpdateRequestDataSchema = z
-  .object({
-    id: z.string().optional(),
-    type: EventsModelsEventTypeSchema.optional(),
-    start: EventsModelsNaiveDatetimeSchema.optional(),
-    duration: EventsModelsTimedeltaSchema.optional(),
-    timezone: EventsModelsTimezoneSchema.optional(),
-    recurrence: RecurrenceUpdateInputSchema.nullish(),
-    include: z.array(EventsModelsInclusionSchema).nullish(),
-    exclude: z.array(EventsModelsExclusionSchema).nullish(),
-  })
-  .register(z.globalRegistry, {
-    description: "Data to update an event.",
-  });
-
-/**
- * Datetime in UTC.
- */
-export const EventsModelsUtcDatetimeSchema = z.iso
-  .datetime({ offset: true, local: true })
-  .register(z.globalRegistry, {
-    description: "Datetime in UTC.",
-  });
-
-/**
- * Recurrence
- *
- * Recurrence rule data.
- */
-export const EventsModelsRecurrenceSchema = z
-  .object({
-    frequency: EventsModelsFrequencySchema,
-    termination: EventsModelsTerminationSchema.nullish().default(null),
-    interval: z.int().gt(0).nullish().default(null),
-    bySeconds: z.array(EventsModelsSecondSchema).nullish().default(null),
-    byMinutes: z.array(EventsModelsMinuteSchema).nullish().default(null),
-    byHours: z.array(EventsModelsHourSchema).nullish().default(null),
-    byWeekdays: z.array(EventsModelsWeekdayRuleSchema).nullish().default(null),
-    byMonthdays: z.array(EventsModelsMonthdaySchema).nullish().default(null),
-    byYeardays: z.array(EventsModelsYeardaySchema).nullish().default(null),
-    byWeeks: z.array(EventsModelsWeekSchema).nullish().default(null),
-    byMonths: z.array(EventsModelsMonthSchema).nullish().default(null),
-    bySetPositions: z.array(EventsModelsYeardaySchema).nullish().default(null),
-    weekStart: EventsModelsWeekdaySchema.nullish().default(null),
-  })
-  .register(z.globalRegistry, {
-    description: "Recurrence rule data.",
-  });
-
-export const EventOrderByInputSchema = z.union([
-  EventsModelsEventIdOrderByInputSchema,
-  EventsModelsEventTypeOrderByInputSchema,
-  EventsModelsEventShowIdOrderByInputSchema,
-]);
-
-export const EventsModelsListRequestOrderSchema = z
-  .union([EventOrderByInputSchema, z.array(EventOrderByInputSchema)])
-  .nullable();
-
-export const EventsModelsListRequestOffsetSchema = z.int().nullable();
-
-export const EventsModelsListRequestLimitSchema = z.int().nullable();
-
-export const EventsModelsGetRequestIdSchema = z.uuid();
-
-export const EventsModelsDeleteRequestIdSchema = z.uuid();
-
-/**
- * EventCreateInput
- *
- * Data to create an event.
- */
-export const EventsModelsCreateRequestDataSchema = z
-  .object({
-    id: z.string().optional(),
-    showId: z.string().nullish(),
-    type: EventsModelsEventTypeSchema,
-    start: EventsModelsNaiveDatetimeSchema,
-    duration: EventsModelsTimedeltaSchema,
-    timezone: EventsModelsTimezoneSchema,
-    recurrence: EventsModelsRecurrenceSchema.nullish(),
-    include: z.array(EventsModelsInclusionSchema).nullish(),
-    exclude: z.array(EventsModelsExclusionSchema).nullish(),
-  })
-  .register(z.globalRegistry, {
-    description: "Data to create an event.",
-  });
-
-/**
- * Datetime without timezone.
- */
-export const UpdateRequestStartSchema = z.iso
-  .datetime({ offset: true, local: true })
-  .register(z.globalRegistry, {
-    description: "Datetime without timezone.",
-  });
-
-export const UpdateRequestEventIdSchema = z.uuid();
-
-/**
- * TimeRangeQuery
- *
- * Query for events in a time range.
- */
-export const TimeRangeQuerySchema = z
-  .object({
-    type: z
-      .literal("time-range")
-      .register(z.globalRegistry, {
-        description: "Type of the query.",
-      })
-      .optional()
-      .default("time-range"),
-    start: EventsModelsUtcDatetimeSchema.nullish().default(null),
-    end: EventsModelsUtcDatetimeSchema.nullish().default(null),
-  })
-  .register(z.globalRegistry, {
-    description: "Query for events in a time range.",
-  });
-
-/**
- * Result
- *
- * Result of the test.
- */
-export const TestResponseResultSchema = z
-  .object({
-    success: z.boolean().register(z.globalRegistry, {
-      description: "Indicates if the test was successful.",
-    }),
-    message: z.string().register(z.globalRegistry, {
-      description: "Message returned from the test.",
-    }),
-  })
-  .register(z.globalRegistry, {
-    description: "Result of the test.",
-  });
-
-/**
- * Parameters
- *
- * Parameters for testing.
- */
-export const ParametersSchema = z
-  .object({
-    message: z.string().nullish().default(null),
-  })
-  .register(z.globalRegistry, {
-    description: "Parameters for testing.",
-  });
-
-export const TestRequestParametersSchema = ParametersSchema.nullable();
-
-export const SubscribeRequestTypesSchema = z
-  .union([z.string(), z.array(SseModelsEventTypeSchema)])
-  .nullable();
-
-export const SplitRequestIdSchema = z.uuid();
 
 /**
  * EventUpdateInput
@@ -1201,240 +496,823 @@ export const SplitRequestDataSchema = z
   });
 
 /**
- * RecurringQuery
+ * Recurrence
  *
- * Query for recurring events.
+ * Recurrence rule data.
  */
-export const RecurringQuerySchema = z
+export const EventsModelsRecurrenceSchema = z
   .object({
-    type: z
-      .literal("recurring")
-      .register(z.globalRegistry, {
-        description: "Type of the query.",
-      })
-      .optional()
-      .default("recurring"),
-    recurring: z.boolean().register(z.globalRegistry, {
-      description: "Whether to search for recurring or non-recurring events.",
-    }),
+    frequency: EventsModelsFrequencySchema,
+    termination: EventsModelsTerminationSchema.nullish().default(null),
+    interval: z.int().gt(0).nullish().default(null),
+    bySeconds: z.array(EventsModelsSecondSchema).nullish().default(null),
+    byMinutes: z.array(EventsModelsMinuteSchema).nullish().default(null),
+    byHours: z.array(EventsModelsHourSchema).nullish().default(null),
+    byWeekdays: z.array(EventsModelsWeekdayRuleSchema).nullish().default(null),
+    byMonthdays: z.array(EventsModelsMonthdaySchema).nullish().default(null),
+    byYeardays: z.array(EventsModelsYeardaySchema).nullish().default(null),
+    byWeeks: z.array(EventsModelsWeekSchema).nullish().default(null),
+    byMonths: z.array(EventsModelsMonthSchema).nullish().default(null),
+    bySetPositions: z.array(EventsModelsYeardaySchema).nullish().default(null),
+    weekStart: EventsModelsWeekdaySchema.nullish().default(null),
   })
   .register(z.globalRegistry, {
-    description: "Query for recurring events.",
+    description: "Recurrence rule data.",
   });
 
-export const QuerySchema = z.union([
-  z
-    .object({
-      type: z.literal("TimeRangeQuery"),
-    })
-    .and(TimeRangeQuerySchema),
-  z
-    .object({
-      type: z.literal("RecurringQuery"),
-    })
-    .and(RecurringQuerySchema),
+/**
+ * EventCreateInput
+ *
+ * Data to create an event.
+ */
+export const EventsModelsCreateRequestDataSchema = z
+  .object({
+    id: z.string().optional(),
+    showId: z.string().nullish(),
+    type: EventsModelsEventTypeSchema,
+    start: EventsModelsNaiveDatetimeSchema,
+    duration: EventsModelsTimedeltaSchema,
+    timezone: EventsModelsTimezoneSchema,
+    recurrence: EventsModelsRecurrenceSchema.nullish(),
+    include: z.array(EventsModelsInclusionSchema).nullish(),
+    exclude: z.array(EventsModelsExclusionSchema).nullish(),
+  })
+  .register(z.globalRegistry, {
+    description: "Data to create an event.",
+  });
+
+/**
+ * EventUpdateInput
+ *
+ * Data to update an event.
+ */
+export const EventsModelsUpdateRequestDataSchema = z
+  .object({
+    id: z.string().optional(),
+    type: EventsModelsEventTypeSchema.optional(),
+    start: EventsModelsNaiveDatetimeSchema.optional(),
+    duration: EventsModelsTimedeltaSchema.optional(),
+    timezone: EventsModelsTimezoneSchema.optional(),
+    recurrence: RecurrenceUpdateInputSchema.nullish(),
+    include: z.array(EventsModelsInclusionSchema).nullish(),
+    exclude: z.array(EventsModelsExclusionSchema).nullish(),
+  })
+  .register(z.globalRegistry, {
+    description: "Data to update an event.",
+  });
+
+/**
+ * _EventWhereUnique_id_Input
+ */
+export const EventsModelsEventWhereUniqueIdInputSchema = z.object({
+  id: z.string(),
+});
+
+/**
+ * _Event_RelevanceInner
+ */
+export const EventsModelsEventRelevanceInnerSchema = z.object({
+  fields: z.array(z.enum(["id", "type", "showId"])),
+  search: z.string(),
+  sort: z.enum(["asc", "desc"]),
+});
+
+/**
+ * _Event_RelevanceOrderByInput
+ */
+export const EventsModelsEventRelevanceOrderByInputSchema = z.object({
+  _relevance: EventsModelsEventRelevanceInnerSchema,
+});
+
+/**
+ * _Event_id_OrderByInput
+ */
+export const EventsModelsEventIdOrderByInputSchema = z.object({
+  id: z.enum(["asc", "desc"]),
+});
+
+/**
+ * _Event_showId_OrderByInput
+ */
+export const EventsModelsEventShowIdOrderByInputSchema = z.object({
+  showId: z.enum(["asc", "desc"]),
+});
+
+/**
+ * _Event_type_OrderByInput
+ */
+export const EventsModelsEventTypeOrderByInputSchema = z.object({
+  type: z.enum(["asc", "desc"]),
+});
+
+export const EventOrderByInputSchema = z.union([
+  EventsModelsEventIdOrderByInputSchema,
+  EventsModelsEventTypeOrderByInputSchema,
+  EventsModelsEventShowIdOrderByInputSchema,
 ]);
 
-/**
- * Datetime in UTC.
- */
-export const ListRequestStartSchema = z.iso
-  .datetime({ offset: true, local: true })
-  .register(z.globalRegistry, {
-    description: "Datetime in UTC.",
-  });
-
-export const ListRequestQuerySchema = QuerySchema.nullable();
-
-/**
- * Datetime in UTC.
- */
-export const ListRequestEndSchema = z.iso
-  .datetime({ offset: true, local: true })
-  .register(z.globalRegistry, {
-    description: "Datetime in UTC.",
-  });
-
-/**
- * Datetime without timezone.
- */
-export const GetRequestStartSchema = z.iso
-  .datetime({ offset: true, local: true })
-  .register(z.globalRegistry, {
-    description: "Datetime without timezone.",
-  });
-
-export const GetRequestEventIdSchema = z.uuid();
-
-/**
- * Datetime without timezone.
- */
-export const DeleteRequestStartSchema = z.iso
-  .datetime({ offset: true, local: true })
-  .register(z.globalRegistry, {
-    description: "Datetime without timezone.",
-  });
-
-export const DeleteRequestEventIdSchema = z.uuid();
-
-export const ShowsModelsUpdateRequestIncludeSchema = z
-  .lazy(() => ShowIncludeSchema)
+export const EventsModelsListRequestOrderSchema = z
+  .union([EventOrderByInputSchema, z.array(EventOrderByInputSchema)])
   .nullable();
 
 /**
- * ShowIncludeFromShow
+ * CountTermination
  *
- * Relational arguments for Show
+ * Count termination data.
  */
-export const ShowsModelsShowIncludeFromShowSchema = z
+export const InstancesModelsCountTerminationSchema = z
   .object({
-    events: z
-      .union([
-        z.boolean(),
-        z.lazy((): any => ShowsModelsFindManyEventArgsFromShowSchema),
-      ])
-      .optional(),
+    type: z
+      .literal("count")
+      .register(z.globalRegistry, {
+        description: "Type of the termination.",
+      })
+      .optional()
+      .default("count"),
+    count: z.int().gt(0).register(z.globalRegistry, {
+      description: "Number of instances of recurring event.",
+    }),
   })
   .register(z.globalRegistry, {
-    description: "Relational arguments for Show",
+    description: "Count termination data.",
   });
 
 /**
- * FindManyEventArgsFromShow
- *
- * Arguments for Show
+ * EventType
  */
-export const ShowsModelsFindManyEventArgsFromShowSchema = z
-  .object({
-    take: z.int().optional(),
-    skip: z.int().optional(),
-    orderBy: z
-      .union([
-        ShowsModelsEventIdOrderByInputSchema,
-        ShowsModelsEventTypeOrderByInputSchema,
-        ShowsModelsEventShowIdOrderByInputSchema,
-        ShowsModelsEventRelevanceOrderByInputSchema,
-        z.array(
-          z.union([
-            ShowsModelsEventIdOrderByInputSchema,
-            ShowsModelsEventTypeOrderByInputSchema,
-            ShowsModelsEventShowIdOrderByInputSchema,
-            ShowsModelsEventRelevanceOrderByInputSchema,
-          ]),
-        ),
-      ])
-      .optional(),
-    where: z.lazy((): any => ShowsModelsEventWhereInputSchema).optional(),
-    cursor: ShowsModelsEventWhereUniqueIdInputSchema.optional(),
-    distinct: z.array(z.enum(["id", "type", "showId"])).optional(),
-    include: z
-      .lazy((): any => ShowsModelsEventIncludeFromEventSchema)
-      .optional(),
-  })
+export const InstancesModelsEventTypeSchema = z.enum([
+  "live",
+  "replay",
+  "prerecorded",
+]);
+
+/**
+ * Frequency
+ *
+ * Frequency options.
+ */
+export const InstancesModelsFrequencySchema = z
+  .enum([
+    "secondly",
+    "minutely",
+    "hourly",
+    "daily",
+    "weekly",
+    "monthly",
+    "yearly",
+  ])
   .register(z.globalRegistry, {
-    description: "Arguments for Show",
+    description: "Frequency options.",
+  });
+
+export const InstancesModelsHourSchema = z.int().gte(0).lte(23);
+
+export const InstancesModelsListRequestOrderSchema = z
+  .union([InstanceOrderByInputSchema, z.array(InstanceOrderByInputSchema)])
+  .nullable();
+
+export const InstancesModelsMinuteSchema = z.int().gte(0).lte(59);
+
+export const InstancesModelsMonthSchema = z.int().gte(1).lte(12);
+
+export const InstancesModelsMonthdaySchema = z.union([
+  z.int().gte(-31).lte(-1),
+  z.int().gte(1).lte(31),
+]);
+
+/**
+ * Datetime without timezone.
+ */
+export const InstancesModelsNaiveDatetimeSchema = z.iso
+  .datetime({ offset: true, local: true })
+  .register(z.globalRegistry, {
+    description: "Datetime without timezone.",
   });
 
 /**
- * ShowArgsFromEvent
+ * InstanceCreateInput
  *
- * Arguments for Event
+ * Data to create an instance.
  */
-export const ShowsModelsShowArgsFromEventSchema = z
+export const InstancesModelsCreateRequestDataSchema = z
   .object({
-    include: ShowsModelsShowIncludeFromShowSchema.optional(),
+    start: InstancesModelsNaiveDatetimeSchema,
+    eventId: z.string().register(z.globalRegistry, {
+      description: "Identifier of the event the instance belongs to.",
+    }),
   })
   .register(z.globalRegistry, {
-    description: "Arguments for Event",
+    description: "Data to create an instance.",
   });
 
 /**
- * EventIncludeFromEvent
+ * Exclusion
  *
- * Relational arguments for Event
+ * Exclusion data.
  */
-export const ShowsModelsEventIncludeFromEventSchema = z
+export const InstancesModelsExclusionSchema = z
   .object({
-    show: z.union([z.boolean(), ShowsModelsShowArgsFromEventSchema]).optional(),
+    start: InstancesModelsNaiveDatetimeSchema,
   })
   .register(z.globalRegistry, {
-    description: "Relational arguments for Event",
+    description: "Exclusion data.",
   });
 
 /**
- * ShowWhereInput
+ * Inclusion
  *
- * Show arguments for searching
+ * Inclusion data.
  */
-export const ShowsModelsShowWhereInputSchema = z
+export const InstancesModelsInclusionSchema = z
   .object({
-    id: z.union([z.string(), ShowsModelsStringFilterSchema]).optional(),
-    title: z.union([z.string(), ShowsModelsStringFilterSchema]).optional(),
-    description: z.union([z.string(), ShowsModelsStringFilterSchema]).nullish(),
-    events: z
-      .lazy((): any => ShowsModelsEventListRelationFilterSchema)
-      .optional(),
-    and: z.array(z.lazy((): any => ShowsModelsShowWhereInputSchema)).optional(),
-    or: z.array(z.lazy((): any => ShowsModelsShowWhereInputSchema)).optional(),
-    not: z.array(z.lazy((): any => ShowsModelsShowWhereInputSchema)).optional(),
+    start: InstancesModelsNaiveDatetimeSchema,
   })
   .register(z.globalRegistry, {
-    description: "Show arguments for searching",
+    description: "Inclusion data.",
   });
 
+export const InstancesModelsSecondSchema = z.int().gte(0).lte(59);
+
 /**
- * ShowRelationFilter
+ * StringFilter
  */
-export const ShowsModelsShowRelationFilterSchema = z.object({
-  is: ShowsModelsShowWhereInputSchema.optional(),
-  isNot: ShowsModelsShowWhereInputSchema.optional(),
+export const InstancesModelsStringFilterSchema = z.object({
+  equals: z.string().optional(),
+  notIn: z.array(z.string()).optional(),
+  lt: z.string().optional(),
+  lte: z.string().optional(),
+  gt: z.string().optional(),
+  gte: z.string().optional(),
+  contains: z.string().optional(),
+  startswith: z.string().optional(),
+  endswith: z.string().optional(),
+  in: z.array(z.string()).optional(),
+  get not() {
+    return z.union([z.string(), InstancesModelsStringFilterSchema]).optional();
+  },
+  mode: z.enum(["default", "insensitive"]).optional(),
+  search: z.string().optional(),
 });
 
 /**
- * EventWhereInput
- *
- * Event arguments for searching
+ * Duration of time.
  */
-export const ShowsModelsEventWhereInputSchema = z
-  .object({
-    id: z.union([z.string(), ShowsModelsStringFilterSchema]).optional(),
-    type: ShowsModelsEventTypeSchema.optional(),
-    showId: z.union([z.string(), ShowsModelsStringFilterSchema]).nullish(),
-    show: ShowsModelsShowRelationFilterSchema.optional(),
-    and: z
-      .array(z.lazy((): any => ShowsModelsEventWhereInputSchema))
-      .optional(),
-    or: z.array(z.lazy((): any => ShowsModelsEventWhereInputSchema)).optional(),
-    not: z
-      .array(z.lazy((): any => ShowsModelsEventWhereInputSchema))
-      .optional(),
-  })
+export const InstancesModelsTimedeltaSchema = z
+  .string()
   .register(z.globalRegistry, {
-    description: "Event arguments for searching",
+    description: "Duration of time.",
   });
 
 /**
- * EventListRelationFilter
+ * Timezone name.
  */
-export const ShowsModelsEventListRelationFilterSchema = z.object({
-  some: ShowsModelsEventWhereInputSchema.optional(),
-  none: ShowsModelsEventWhereInputSchema.optional(),
-  every: ShowsModelsEventWhereInputSchema.optional(),
+export const InstancesModelsTimezoneSchema = z
+  .string()
+  .register(z.globalRegistry, {
+    description: "Timezone name.",
+  });
+
+/**
+ * Datetime in UTC.
+ */
+export const InstancesModelsUtcDatetimeSchema = z.iso
+  .datetime({ offset: true, local: true })
+  .register(z.globalRegistry, {
+    description: "Datetime in UTC.",
+  });
+
+/**
+ * UntilTermination
+ *
+ * Until termination data.
+ */
+export const InstancesModelsUntilTerminationSchema = z
+  .object({
+    type: z
+      .literal("until")
+      .register(z.globalRegistry, {
+        description: "Type of the termination.",
+      })
+      .optional()
+      .default("until"),
+    until: InstancesModelsNaiveDatetimeSchema,
+  })
+  .register(z.globalRegistry, {
+    description: "Until termination data.",
+  });
+
+export const InstancesModelsTerminationSchema = z.discriminatedUnion("type", [
+  InstancesModelsCountTerminationSchema,
+  InstancesModelsUntilTerminationSchema,
+]);
+
+/**
+ * InstanceUpdateInput
+ *
+ * Data to update an instance.
+ */
+export const InstancesModelsUpdateRequestDataSchema = z
+  .object({
+    start: InstancesModelsNaiveDatetimeSchema.optional(),
+  })
+  .register(z.globalRegistry, {
+    description: "Data to update an instance.",
+  });
+
+export const InstancesModelsWeekSchema = z.union([
+  z.int().gte(-53).lte(-1),
+  z.int().gte(1).lte(53),
+]);
+
+/**
+ * Weekday
+ *
+ * Weekday options.
+ */
+export const InstancesModelsWeekdaySchema = z
+  .enum([
+    "monday",
+    "tuesday",
+    "wednesday",
+    "thursday",
+    "friday",
+    "saturday",
+    "sunday",
+  ])
+  .register(z.globalRegistry, {
+    description: "Weekday options.",
+  });
+
+/**
+ * WeekdayRule
+ *
+ * Day rule data.
+ */
+export const InstancesModelsWeekdayRuleSchema = z
+  .object({
+    day: InstancesModelsWeekdaySchema,
+    occurrence: InstancesModelsWeekSchema.nullish().default(null),
+  })
+  .register(z.globalRegistry, {
+    description: "Day rule data.",
+  });
+
+export const InstancesModelsYeardaySchema = z.union([
+  z.int().gte(-366).lte(-1),
+  z.int().gte(1).lte(366),
+]);
+
+/**
+ * Recurrence
+ *
+ * Recurrence rule data.
+ */
+export const InstancesModelsRecurrenceSchema = z
+  .object({
+    frequency: InstancesModelsFrequencySchema,
+    termination: InstancesModelsTerminationSchema.nullish().default(null),
+    interval: z.int().gt(0).nullish().default(null),
+    bySeconds: z.array(InstancesModelsSecondSchema).nullish().default(null),
+    byMinutes: z.array(InstancesModelsMinuteSchema).nullish().default(null),
+    byHours: z.array(InstancesModelsHourSchema).nullish().default(null),
+    byWeekdays: z
+      .array(InstancesModelsWeekdayRuleSchema)
+      .nullish()
+      .default(null),
+    byMonthdays: z.array(InstancesModelsMonthdaySchema).nullish().default(null),
+    byYeardays: z.array(InstancesModelsYeardaySchema).nullish().default(null),
+    byWeeks: z.array(InstancesModelsWeekSchema).nullish().default(null),
+    byMonths: z.array(InstancesModelsMonthSchema).nullish().default(null),
+    bySetPositions: z
+      .array(InstancesModelsYeardaySchema)
+      .nullish()
+      .default(null),
+    weekStart: InstancesModelsWeekdaySchema.nullish().default(null),
+  })
+  .register(z.globalRegistry, {
+    description: "Recurrence rule data.",
+  });
+
+/**
+ * _EventWhereUnique_id_Input
+ */
+export const InstancesModelsEventWhereUniqueIdInputSchema = z.object({
+  id: z.string(),
 });
 
 /**
- * ShowInclude
- *
- * Show relational arguments
+ * _Event_RelevanceInner
  */
-export const ShowIncludeSchema = z
+export const InstancesModelsEventRelevanceInnerSchema = z.object({
+  fields: z.array(z.enum(["id", "type", "showId"])),
+  search: z.string(),
+  sort: z.enum(["asc", "desc"]),
+});
+
+/**
+ * _Event_RelevanceOrderByInput
+ */
+export const InstancesModelsEventRelevanceOrderByInputSchema = z.object({
+  _relevance: InstancesModelsEventRelevanceInnerSchema,
+});
+
+/**
+ * _Event_id_OrderByInput
+ */
+export const InstancesModelsEventIdOrderByInputSchema = z.object({
+  id: z.enum(["asc", "desc"]),
+});
+
+/**
+ * _Event_showId_OrderByInput
+ */
+export const InstancesModelsEventShowIdOrderByInputSchema = z.object({
+  showId: z.enum(["asc", "desc"]),
+});
+
+/**
+ * _Event_type_OrderByInput
+ */
+export const InstancesModelsEventTypeOrderByInputSchema = z.object({
+  type: z.enum(["asc", "desc"]),
+});
+
+/**
+ * CountTermination
+ *
+ * Count termination data.
+ */
+export const ShowsModelsCountTerminationSchema = z
   .object({
-    events: z
-      .union([z.boolean(), ShowsModelsFindManyEventArgsFromShowSchema])
-      .optional(),
+    type: z
+      .literal("count")
+      .register(z.globalRegistry, {
+        description: "Type of the termination.",
+      })
+      .optional()
+      .default("count"),
+    count: z.int().gt(0).register(z.globalRegistry, {
+      description: "Number of instances of recurring event.",
+    }),
   })
   .register(z.globalRegistry, {
-    description: "Show relational arguments",
+    description: "Count termination data.",
+  });
+
+/**
+ * ShowCreateWithoutRelationsInput
+ *
+ * Required arguments to the Show create method, without relations
+ */
+export const ShowsModelsCreateRequestDataSchema = z
+  .object({
+    id: z.string().optional(),
+    description: z.string().nullish(),
+    title: z.string(),
+  })
+  .register(z.globalRegistry, {
+    description:
+      "Required arguments to the Show create method, without relations",
+  });
+
+export const ShowsModelsDeleteRequestIdSchema = z.uuid();
+
+/**
+ * EventType
+ */
+export const ShowsModelsEventTypeSchema = z.enum([
+  "live",
+  "replay",
+  "prerecorded",
+]);
+
+/**
+ * Frequency
+ *
+ * Frequency options.
+ */
+export const ShowsModelsFrequencySchema = z
+  .enum([
+    "secondly",
+    "minutely",
+    "hourly",
+    "daily",
+    "weekly",
+    "monthly",
+    "yearly",
+  ])
+  .register(z.globalRegistry, {
+    description: "Frequency options.",
+  });
+
+export const ShowsModelsGetRequestIdSchema = z.uuid();
+
+export const ShowsModelsHourSchema = z.int().gte(0).lte(23);
+
+export const ShowsModelsListRequestLimitSchema = z.int().nullable();
+
+export const ShowsModelsListRequestOffsetSchema = z.int().nullable();
+
+export const ShowsModelsListRequestOrderSchema = z
+  .union([ShowOrderByInputSchema, z.array(ShowOrderByInputSchema)])
+  .nullable();
+
+export const ShowsModelsMinuteSchema = z.int().gte(0).lte(59);
+
+export const ShowsModelsMonthSchema = z.int().gte(1).lte(12);
+
+export const ShowsModelsMonthdaySchema = z.union([
+  z.int().gte(-31).lte(-1),
+  z.int().gte(1).lte(31),
+]);
+
+/**
+ * Datetime without timezone.
+ */
+export const ShowsModelsNaiveDatetimeSchema = z.iso
+  .datetime({ offset: true, local: true })
+  .register(z.globalRegistry, {
+    description: "Datetime without timezone.",
+  });
+
+/**
+ * Exclusion
+ *
+ * Exclusion data.
+ */
+export const ShowsModelsExclusionSchema = z
+  .object({
+    start: ShowsModelsNaiveDatetimeSchema,
+  })
+  .register(z.globalRegistry, {
+    description: "Exclusion data.",
+  });
+
+/**
+ * Inclusion
+ *
+ * Inclusion data.
+ */
+export const ShowsModelsInclusionSchema = z
+  .object({
+    start: ShowsModelsNaiveDatetimeSchema,
+  })
+  .register(z.globalRegistry, {
+    description: "Inclusion data.",
+  });
+
+export const ShowsModelsSecondSchema = z.int().gte(0).lte(59);
+
+/**
+ * StringFilter
+ */
+export const ShowsModelsStringFilterSchema = z.object({
+  equals: z.string().optional(),
+  notIn: z.array(z.string()).optional(),
+  lt: z.string().optional(),
+  lte: z.string().optional(),
+  gt: z.string().optional(),
+  gte: z.string().optional(),
+  contains: z.string().optional(),
+  startswith: z.string().optional(),
+  endswith: z.string().optional(),
+  in: z.array(z.string()).optional(),
+  get not() {
+    return z.union([z.string(), ShowsModelsStringFilterSchema]).optional();
+  },
+  mode: z.enum(["default", "insensitive"]).optional(),
+  search: z.string().optional(),
+});
+
+/**
+ * Duration of time.
+ */
+export const ShowsModelsTimedeltaSchema = z
+  .string()
+  .register(z.globalRegistry, {
+    description: "Duration of time.",
+  });
+
+/**
+ * Timezone name.
+ */
+export const ShowsModelsTimezoneSchema = z.string().register(z.globalRegistry, {
+  description: "Timezone name.",
+});
+
+/**
+ * UntilTermination
+ *
+ * Until termination data.
+ */
+export const ShowsModelsUntilTerminationSchema = z
+  .object({
+    type: z
+      .literal("until")
+      .register(z.globalRegistry, {
+        description: "Type of the termination.",
+      })
+      .optional()
+      .default("until"),
+    until: ShowsModelsNaiveDatetimeSchema,
+  })
+  .register(z.globalRegistry, {
+    description: "Until termination data.",
+  });
+
+export const ShowsModelsTerminationSchema = z.discriminatedUnion("type", [
+  ShowsModelsCountTerminationSchema,
+  ShowsModelsUntilTerminationSchema,
+]);
+
+/**
+ * ShowUpdateManyMutationInput
+ *
+ * Arguments for updating many records
+ */
+export const ShowsModelsUpdateRequestDataSchema = z
+  .object({
+    id: z.string().optional(),
+    title: z.string().optional(),
+    description: z.string().nullish(),
+  })
+  .register(z.globalRegistry, {
+    description: "Arguments for updating many records",
+  });
+
+export const ShowsModelsUpdateRequestIdSchema = z.uuid();
+
+export const ShowsModelsWeekSchema = z.union([
+  z.int().gte(-53).lte(-1),
+  z.int().gte(1).lte(53),
+]);
+
+/**
+ * Weekday
+ *
+ * Weekday options.
+ */
+export const ShowsModelsWeekdaySchema = z
+  .enum([
+    "monday",
+    "tuesday",
+    "wednesday",
+    "thursday",
+    "friday",
+    "saturday",
+    "sunday",
+  ])
+  .register(z.globalRegistry, {
+    description: "Weekday options.",
+  });
+
+/**
+ * WeekdayRule
+ *
+ * Day rule data.
+ */
+export const ShowsModelsWeekdayRuleSchema = z
+  .object({
+    day: ShowsModelsWeekdaySchema,
+    occurrence: ShowsModelsWeekSchema.nullish().default(null),
+  })
+  .register(z.globalRegistry, {
+    description: "Day rule data.",
+  });
+
+export const ShowsModelsYeardaySchema = z.union([
+  z.int().gte(-366).lte(-1),
+  z.int().gte(1).lte(366),
+]);
+
+/**
+ * Recurrence
+ *
+ * Recurrence rule data.
+ */
+export const ShowsModelsRecurrenceSchema = z
+  .object({
+    frequency: ShowsModelsFrequencySchema,
+    termination: ShowsModelsTerminationSchema.nullish().default(null),
+    interval: z.int().gt(0).nullish().default(null),
+    bySeconds: z.array(ShowsModelsSecondSchema).nullish().default(null),
+    byMinutes: z.array(ShowsModelsMinuteSchema).nullish().default(null),
+    byHours: z.array(ShowsModelsHourSchema).nullish().default(null),
+    byWeekdays: z.array(ShowsModelsWeekdayRuleSchema).nullish().default(null),
+    byMonthdays: z.array(ShowsModelsMonthdaySchema).nullish().default(null),
+    byYeardays: z.array(ShowsModelsYeardaySchema).nullish().default(null),
+    byWeeks: z.array(ShowsModelsWeekSchema).nullish().default(null),
+    byMonths: z.array(ShowsModelsMonthSchema).nullish().default(null),
+    bySetPositions: z.array(ShowsModelsYeardaySchema).nullish().default(null),
+    weekStart: ShowsModelsWeekdaySchema.nullish().default(null),
+  })
+  .register(z.globalRegistry, {
+    description: "Recurrence rule data.",
+  });
+
+/**
+ * _EventWhereUnique_id_Input
+ */
+export const ShowsModelsEventWhereUniqueIdInputSchema = z.object({
+  id: z.string(),
+});
+
+/**
+ * _Event_RelevanceInner
+ */
+export const ShowsModelsEventRelevanceInnerSchema = z.object({
+  fields: z.array(z.enum(["id", "type", "showId"])),
+  search: z.string(),
+  sort: z.enum(["asc", "desc"]),
+});
+
+/**
+ * _Event_RelevanceOrderByInput
+ */
+export const ShowsModelsEventRelevanceOrderByInputSchema = z.object({
+  _relevance: ShowsModelsEventRelevanceInnerSchema,
+});
+
+/**
+ * _Event_id_OrderByInput
+ */
+export const ShowsModelsEventIdOrderByInputSchema = z.object({
+  id: z.enum(["asc", "desc"]),
+});
+
+/**
+ * _Event_showId_OrderByInput
+ */
+export const ShowsModelsEventShowIdOrderByInputSchema = z.object({
+  showId: z.enum(["asc", "desc"]),
+});
+
+/**
+ * _Event_type_OrderByInput
+ */
+export const ShowsModelsEventTypeOrderByInputSchema = z.object({
+  type: z.enum(["asc", "desc"]),
+});
+
+/**
+ * EventType
+ *
+ * Event types.
+ */
+export const SseModelsEventTypeSchema = z
+  .enum(["test"])
+  .register(z.globalRegistry, {
+    description: "Event types.",
+  });
+
+export const SubscribeRequestTypesSchema = z
+  .union([z.string(), z.array(SseModelsEventTypeSchema)])
+  .nullable();
+
+/**
+ * Event
+ *
+ * Event data.
+ */
+export const CreateResponseEventSchema = z
+  .object({
+    id: z.uuid().register(z.globalRegistry, {
+      description: "Identifier of the event.",
+    }),
+    type: EventsModelsEventTypeSchema,
+    showId: z.uuid().nullable(),
+    get show() {
+      return EventsModelsShowSchema.nullable();
+    },
+    start: EventsModelsNaiveDatetimeSchema,
+    duration: EventsModelsTimedeltaSchema,
+    timezone: EventsModelsTimezoneSchema,
+    recurrence: EventsModelsRecurrenceSchema.nullish().default(null),
+    include: z.array(EventsModelsInclusionSchema).nullish().default(null),
+    exclude: z.array(EventsModelsExclusionSchema).nullish().default(null),
+  })
+  .register(z.globalRegistry, {
+    description: "Event data.",
+  });
+
+/**
+ * Instance
+ *
+ * Instance data.
+ */
+export const CreateResponseInstanceSchema = z
+  .object({
+    start: InstancesModelsNaiveDatetimeSchema,
+    duration: InstancesModelsTimedeltaSchema,
+    eventId: z.uuid().register(z.globalRegistry, {
+      description: "Identifier of the event the instance belongs to.",
+    }),
+    get event() {
+      return InstancesModelsEventSchema.nullable();
+    },
+  })
+  .register(z.globalRegistry, {
+    description: "Instance data.",
   });
 
 /**
@@ -1442,7 +1320,7 @@ export const ShowIncludeSchema = z
  *
  * Show data.
  */
-export const ShowsModelsShowSchema = z
+export const CreateResponseShowSchema = z
   .object({
     id: z.uuid().register(z.globalRegistry, {
       description: "Identifier of the show.",
@@ -1451,240 +1329,12 @@ export const ShowsModelsShowSchema = z
       description: "Title of the show.",
     }),
     description: z.string().nullable(),
-    events: z.array(z.lazy((): any => ShowsModelsEventSchema)).nullable(),
+    get events() {
+      return z.array(ShowsModelsEventSchema).nullable();
+    },
   })
   .register(z.globalRegistry, {
     description: "Show data.",
-  });
-
-/**
- * Event
- *
- * Event data.
- */
-export const ShowsModelsEventSchema = z
-  .object({
-    id: z.uuid().register(z.globalRegistry, {
-      description: "Identifier of the event.",
-    }),
-    type: ShowsModelsEventTypeSchema,
-    showId: z.uuid().nullable(),
-    show: ShowsModelsShowSchema.nullable(),
-    start: ShowsModelsNaiveDatetimeSchema,
-    duration: ShowsModelsTimedeltaSchema,
-    timezone: ShowsModelsTimezoneSchema,
-    recurrence: ShowsModelsRecurrenceSchema.nullish().default(null),
-    include: z.array(ShowsModelsInclusionSchema).nullish().default(null),
-    exclude: z.array(ShowsModelsExclusionSchema).nullish().default(null),
-  })
-  .register(z.globalRegistry, {
-    description: "Event data.",
-  });
-
-/**
- * ShowList
- *
- * List of shows.
- */
-export const ShowsModelsListResponseResultsSchema = z
-  .object({
-    count: z.int().register(z.globalRegistry, {
-      description: "Total number of shows that matched the query.",
-    }),
-    limit: z.int().nullable(),
-    offset: z.int().nullable(),
-    shows: z.array(ShowsModelsShowSchema).register(z.globalRegistry, {
-      description: "Shows that matched the request.",
-    }),
-  })
-  .register(z.globalRegistry, {
-    description: "List of shows.",
-  });
-
-export const ShowsModelsListRequestWhereSchema =
-  ShowsModelsShowWhereInputSchema.nullable();
-
-export const ShowsModelsListRequestIncludeSchema = ShowIncludeSchema.nullable();
-
-export const ShowsModelsGetRequestIncludeSchema = ShowIncludeSchema.nullable();
-
-export const ShowsModelsCreateRequestIncludeSchema =
-  ShowIncludeSchema.nullable();
-
-export const InstancesModelsUpdateRequestIncludeSchema = z
-  .lazy(() => InstanceIncludeSchema)
-  .nullable();
-
-/**
- * EventIncludeFromEvent
- *
- * Relational arguments for Event
- */
-export const InstancesModelsEventIncludeFromEventSchema = z
-  .object({
-    show: z
-      .union([
-        z.boolean(),
-        z.lazy((): any => InstancesModelsShowArgsFromEventSchema),
-      ])
-      .optional(),
-  })
-  .register(z.globalRegistry, {
-    description: "Relational arguments for Event",
-  });
-
-/**
- * ShowArgsFromEvent
- *
- * Arguments for Event
- */
-export const InstancesModelsShowArgsFromEventSchema = z
-  .object({
-    include: z
-      .lazy((): any => InstancesModelsShowIncludeFromShowSchema)
-      .optional(),
-  })
-  .register(z.globalRegistry, {
-    description: "Arguments for Event",
-  });
-
-/**
- * EventListRelationFilter
- */
-export const InstancesModelsEventListRelationFilterSchema = z.object({
-  get some() {
-    return InstancesModelsEventWhereInputSchema.optional();
-  },
-  get none() {
-    return InstancesModelsEventWhereInputSchema.optional();
-  },
-  get every() {
-    return InstancesModelsEventWhereInputSchema.optional();
-  },
-});
-
-/**
- * EventWhereInput
- *
- * Event arguments for searching
- */
-export const InstancesModelsEventWhereInputSchema = z
-  .object({
-    id: z.union([z.string(), InstancesModelsStringFilterSchema]).optional(),
-    type: InstancesModelsEventTypeSchema.optional(),
-    showId: z.union([z.string(), InstancesModelsStringFilterSchema]).nullish(),
-    show: z.lazy((): any => InstancesModelsShowRelationFilterSchema).optional(),
-    and: z
-      .array(z.lazy((): any => InstancesModelsEventWhereInputSchema))
-      .optional(),
-    or: z
-      .array(z.lazy((): any => InstancesModelsEventWhereInputSchema))
-      .optional(),
-    not: z
-      .array(z.lazy((): any => InstancesModelsEventWhereInputSchema))
-      .optional(),
-  })
-  .register(z.globalRegistry, {
-    description: "Event arguments for searching",
-  });
-
-/**
- * ShowWhereInput
- *
- * Show arguments for searching
- */
-export const InstancesModelsShowWhereInputSchema = z
-  .object({
-    id: z.union([z.string(), InstancesModelsStringFilterSchema]).optional(),
-    title: z.union([z.string(), InstancesModelsStringFilterSchema]).optional(),
-    description: z
-      .union([z.string(), InstancesModelsStringFilterSchema])
-      .nullish(),
-    events: InstancesModelsEventListRelationFilterSchema.optional(),
-    and: z
-      .array(z.lazy((): any => InstancesModelsShowWhereInputSchema))
-      .optional(),
-    or: z
-      .array(z.lazy((): any => InstancesModelsShowWhereInputSchema))
-      .optional(),
-    not: z
-      .array(z.lazy((): any => InstancesModelsShowWhereInputSchema))
-      .optional(),
-  })
-  .register(z.globalRegistry, {
-    description: "Show arguments for searching",
-  });
-
-/**
- * ShowRelationFilter
- */
-export const InstancesModelsShowRelationFilterSchema = z.object({
-  is: InstancesModelsShowWhereInputSchema.optional(),
-  isNot: InstancesModelsShowWhereInputSchema.optional(),
-});
-
-/**
- * FindManyEventArgsFromShow
- *
- * Arguments for Show
- */
-export const InstancesModelsFindManyEventArgsFromShowSchema = z
-  .object({
-    take: z.int().optional(),
-    skip: z.int().optional(),
-    orderBy: z
-      .union([
-        InstancesModelsEventIdOrderByInputSchema,
-        InstancesModelsEventTypeOrderByInputSchema,
-        InstancesModelsEventShowIdOrderByInputSchema,
-        InstancesModelsEventRelevanceOrderByInputSchema,
-        z.array(
-          z.union([
-            InstancesModelsEventIdOrderByInputSchema,
-            InstancesModelsEventTypeOrderByInputSchema,
-            InstancesModelsEventShowIdOrderByInputSchema,
-            InstancesModelsEventRelevanceOrderByInputSchema,
-          ]),
-        ),
-      ])
-      .optional(),
-    where: InstancesModelsEventWhereInputSchema.optional(),
-    cursor: InstancesModelsEventWhereUniqueIdInputSchema.optional(),
-    distinct: z.array(z.enum(["id", "type", "showId"])).optional(),
-    include: InstancesModelsEventIncludeFromEventSchema.optional(),
-  })
-  .register(z.globalRegistry, {
-    description: "Arguments for Show",
-  });
-
-/**
- * ShowIncludeFromShow
- *
- * Relational arguments for Show
- */
-export const InstancesModelsShowIncludeFromShowSchema = z
-  .object({
-    events: z
-      .union([z.boolean(), InstancesModelsFindManyEventArgsFromShowSchema])
-      .optional(),
-  })
-  .register(z.globalRegistry, {
-    description: "Relational arguments for Show",
-  });
-
-/**
- * EventInclude
- *
- * Event relational arguments
- */
-export const InstancesModelsEventIncludeSchema = z
-  .object({
-    show: z
-      .union([z.boolean(), InstancesModelsShowArgsFromEventSchema])
-      .optional(),
-  })
-  .register(z.globalRegistry, {
-    description: "Event relational arguments",
   });
 
 /**
@@ -1694,86 +1344,44 @@ export const InstancesModelsEventIncludeSchema = z
  */
 export const EventArgsFromInstanceSchema = z
   .object({
-    include: InstancesModelsEventIncludeSchema.optional(),
+    get include() {
+      return InstancesModelsEventIncludeSchema.optional();
+    },
   })
   .register(z.globalRegistry, {
     description: "Event arguments to include when querying instances.",
   });
 
 /**
- * InstanceInclude
- *
- * Relations to include when querying instances.
+ * EventRelationFilter
  */
-export const InstanceIncludeSchema = z
-  .object({
-    event: z.union([z.boolean(), EventArgsFromInstanceSchema]).optional(),
-  })
-  .register(z.globalRegistry, {
-    description: "Relations to include when querying instances.",
-  });
+export const EventRelationFilterSchema = z.object({
+  get is() {
+    return InstancesModelsEventWhereInputSchema.optional();
+  },
+  get isNot() {
+    return InstancesModelsEventWhereInputSchema.optional();
+  },
+});
 
 /**
- * Show
+ * Instance
  *
- * Show data.
+ * Instance data.
  */
-export const InstancesModelsShowSchema = z
+export const GetResponseInstanceSchema = z
   .object({
-    id: z.uuid().register(z.globalRegistry, {
-      description: "Identifier of the show.",
-    }),
-    title: z.string().register(z.globalRegistry, {
-      description: "Title of the show.",
-    }),
-    description: z.string().nullable(),
-    events: z.array(z.lazy((): any => InstancesModelsEventSchema)).nullable(),
-  })
-  .register(z.globalRegistry, {
-    description: "Show data.",
-  });
-
-/**
- * Event
- *
- * Event data.
- */
-export const InstancesModelsEventSchema = z
-  .object({
-    id: z.uuid().register(z.globalRegistry, {
-      description: "Identifier of the event.",
-    }),
-    type: InstancesModelsEventTypeSchema,
-    showId: z.uuid().nullable(),
-    show: InstancesModelsShowSchema.nullable(),
     start: InstancesModelsNaiveDatetimeSchema,
     duration: InstancesModelsTimedeltaSchema,
-    timezone: InstancesModelsTimezoneSchema,
-    recurrence: InstancesModelsRecurrenceSchema.nullish().default(null),
-    include: z.array(InstancesModelsInclusionSchema).nullish().default(null),
-    exclude: z.array(InstancesModelsExclusionSchema).nullish().default(null),
+    eventId: z.uuid().register(z.globalRegistry, {
+      description: "Identifier of the event the instance belongs to.",
+    }),
+    get event() {
+      return InstancesModelsEventSchema.nullable();
+    },
   })
   .register(z.globalRegistry, {
-    description: "Event data.",
-  });
-
-/**
- * InstanceList
- *
- * List of instances.
- */
-export const InstancesModelsListResponseResultsSchema = z
-  .object({
-    start: InstancesModelsUtcDatetimeSchema,
-    end: InstancesModelsUtcDatetimeSchema,
-    instances: z
-      .array(z.lazy(() => InstanceSchema))
-      .register(z.globalRegistry, {
-        description: "Instances that matched the request.",
-      }),
-  })
-  .register(z.globalRegistry, {
-    description: "List of instances.",
+    description: "Instance data.",
   });
 
 /**
@@ -1788,23 +1396,28 @@ export const InstanceSchema = z
     eventId: z.uuid().register(z.globalRegistry, {
       description: "Identifier of the event the instance belongs to.",
     }),
-    event: InstancesModelsEventSchema.nullable(),
+    get event() {
+      return InstancesModelsEventSchema.nullable();
+    },
   })
   .register(z.globalRegistry, {
     description: "Instance data.",
   });
 
-export const InstancesModelsListRequestWhereSchema = z
-  .lazy(() => InstanceWhereInputSchema)
-  .nullable();
-
 /**
- * EventRelationFilter
+ * InstanceInclude
+ *
+ * Relations to include when querying instances.
  */
-export const EventRelationFilterSchema = z.object({
-  is: InstancesModelsEventWhereInputSchema.optional(),
-  isNot: InstancesModelsEventWhereInputSchema.optional(),
-});
+export const InstanceIncludeSchema = z
+  .object({
+    get event() {
+      return z.union([z.boolean(), EventArgsFromInstanceSchema]).optional();
+    },
+  })
+  .register(z.globalRegistry, {
+    description: "Relations to include when querying instances.",
+  });
 
 /**
  * InstanceWhereInput
@@ -1813,24 +1426,119 @@ export const EventRelationFilterSchema = z.object({
  */
 export const InstanceWhereInputSchema = z
   .object({
-    event: EventRelationFilterSchema.optional(),
+    get event() {
+      return EventRelationFilterSchema.optional();
+    },
   })
   .register(z.globalRegistry, {
     description: "Instance arguments for searching.",
   });
 
-export const InstancesModelsListRequestIncludeSchema =
-  InstanceIncludeSchema.nullable();
+/**
+ * ShowInclude
+ *
+ * Show relational arguments
+ */
+export const ShowIncludeSchema = z
+  .object({
+    get events() {
+      return z
+        .union([z.boolean(), ShowsModelsFindManyEventArgsFromShowSchema])
+        .optional();
+    },
+  })
+  .register(z.globalRegistry, {
+    description: "Show relational arguments",
+  });
 
-export const InstancesModelsGetRequestIncludeSchema =
-  InstanceIncludeSchema.nullable();
-
-export const InstancesModelsCreateRequestIncludeSchema =
-  InstanceIncludeSchema.nullable();
-
-export const EventsModelsUpdateRequestIncludeSchema = z
+export const SplitRequestIncludeSchema = z
   .lazy(() => EventsModelsEventIncludeSchema)
   .nullable();
+
+/**
+ * SplitResult
+ *
+ * Result of splitting an event.
+ */
+export const SplitResponseResultSchema = z
+  .object({
+    get before() {
+      return CreateResponseEventSchema;
+    },
+    get after() {
+      return EventsModelsEventSchema;
+    },
+  })
+  .register(z.globalRegistry, {
+    description: "Result of splitting an event.",
+  });
+
+/**
+ * Instance
+ *
+ * Instance data.
+ */
+export const UpdateResponseInstanceSchema = z
+  .object({
+    start: InstancesModelsNaiveDatetimeSchema,
+    duration: InstancesModelsTimedeltaSchema,
+    eventId: z.uuid().register(z.globalRegistry, {
+      description: "Identifier of the event the instance belongs to.",
+    }),
+    get event() {
+      return InstancesModelsEventSchema.nullable();
+    },
+  })
+  .register(z.globalRegistry, {
+    description: "Instance data.",
+  });
+
+export const EventsModelsCreateRequestIncludeSchema = z
+  .lazy(() => EventsModelsEventIncludeSchema)
+  .nullable();
+
+/**
+ * Event
+ *
+ * Event data.
+ */
+export const EventsModelsEventSchema = z
+  .object({
+    id: z.uuid().register(z.globalRegistry, {
+      description: "Identifier of the event.",
+    }),
+    type: EventsModelsEventTypeSchema,
+    showId: z.uuid().nullable(),
+    get show() {
+      return EventsModelsShowSchema.nullable();
+    },
+    start: EventsModelsNaiveDatetimeSchema,
+    duration: EventsModelsTimedeltaSchema,
+    timezone: EventsModelsTimezoneSchema,
+    recurrence: EventsModelsRecurrenceSchema.nullish().default(null),
+    include: z.array(EventsModelsInclusionSchema).nullish().default(null),
+    exclude: z.array(EventsModelsExclusionSchema).nullish().default(null),
+  })
+  .register(z.globalRegistry, {
+    description: "Event data.",
+  });
+
+/**
+ * EventInclude
+ *
+ * Event relational arguments
+ */
+export const EventsModelsEventIncludeSchema = z
+  .object({
+    get show() {
+      return z
+        .union([z.boolean(), EventsModelsShowArgsFromEventSchema])
+        .optional();
+    },
+  })
+  .register(z.globalRegistry, {
+    description: "Event relational arguments",
+  });
 
 /**
  * EventIncludeFromEvent
@@ -1839,30 +1547,14 @@ export const EventsModelsUpdateRequestIncludeSchema = z
  */
 export const EventsModelsEventIncludeFromEventSchema = z
   .object({
-    show: z
-      .union([
-        z.boolean(),
-        z.lazy((): any => EventsModelsShowArgsFromEventSchema),
-      ])
-      .optional(),
+    get show() {
+      return z
+        .union([z.boolean(), EventsModelsShowArgsFromEventSchema])
+        .optional();
+    },
   })
   .register(z.globalRegistry, {
     description: "Relational arguments for Event",
-  });
-
-/**
- * ShowArgsFromEvent
- *
- * Arguments for Event
- */
-export const EventsModelsShowArgsFromEventSchema = z
-  .object({
-    include: z
-      .lazy((): any => EventsModelsShowIncludeFromShowSchema)
-      .optional(),
-  })
-  .register(z.globalRegistry, {
-    description: "Arguments for Event",
   });
 
 /**
@@ -1890,53 +1582,28 @@ export const EventsModelsEventWhereInputSchema = z
     id: z.union([z.string(), EventsModelsStringFilterSchema]).optional(),
     type: EventsModelsEventTypeSchema.optional(),
     showId: z.union([z.string(), EventsModelsStringFilterSchema]).nullish(),
-    show: z.lazy((): any => EventsModelsShowRelationFilterSchema).optional(),
-    and: z
-      .array(z.lazy((): any => EventsModelsEventWhereInputSchema))
-      .optional(),
-    or: z
-      .array(z.lazy((): any => EventsModelsEventWhereInputSchema))
-      .optional(),
-    not: z
-      .array(z.lazy((): any => EventsModelsEventWhereInputSchema))
-      .optional(),
+    get show() {
+      return EventsModelsShowRelationFilterSchema.optional();
+    },
+    get and() {
+      return z
+        .array(z.lazy((): any => EventsModelsEventWhereInputSchema))
+        .optional();
+    },
+    get or() {
+      return z
+        .array(z.lazy((): any => EventsModelsEventWhereInputSchema))
+        .optional();
+    },
+    get not() {
+      return z
+        .array(z.lazy((): any => EventsModelsEventWhereInputSchema))
+        .optional();
+    },
   })
   .register(z.globalRegistry, {
     description: "Event arguments for searching",
   });
-
-/**
- * ShowWhereInput
- *
- * Show arguments for searching
- */
-export const EventsModelsShowWhereInputSchema = z
-  .object({
-    id: z.union([z.string(), EventsModelsStringFilterSchema]).optional(),
-    title: z.union([z.string(), EventsModelsStringFilterSchema]).optional(),
-    description: z
-      .union([z.string(), EventsModelsStringFilterSchema])
-      .nullish(),
-    events: EventsModelsEventListRelationFilterSchema.optional(),
-    and: z
-      .array(z.lazy((): any => EventsModelsShowWhereInputSchema))
-      .optional(),
-    or: z.array(z.lazy((): any => EventsModelsShowWhereInputSchema)).optional(),
-    not: z
-      .array(z.lazy((): any => EventsModelsShowWhereInputSchema))
-      .optional(),
-  })
-  .register(z.globalRegistry, {
-    description: "Show arguments for searching",
-  });
-
-/**
- * ShowRelationFilter
- */
-export const EventsModelsShowRelationFilterSchema = z.object({
-  is: EventsModelsShowWhereInputSchema.optional(),
-  isNot: EventsModelsShowWhereInputSchema.optional(),
-});
 
 /**
  * FindManyEventArgsFromShow
@@ -1963,43 +1630,53 @@ export const EventsModelsFindManyEventArgsFromShowSchema = z
         ),
       ])
       .optional(),
-    where: EventsModelsEventWhereInputSchema.optional(),
+    get where() {
+      return z.lazy((): any => EventsModelsEventWhereInputSchema).optional();
+    },
     cursor: EventsModelsEventWhereUniqueIdInputSchema.optional(),
     distinct: z.array(z.enum(["id", "type", "showId"])).optional(),
-    include: EventsModelsEventIncludeFromEventSchema.optional(),
+    get include() {
+      return z
+        .lazy((): any => EventsModelsEventIncludeFromEventSchema)
+        .optional();
+    },
   })
   .register(z.globalRegistry, {
     description: "Arguments for Show",
   });
 
-/**
- * ShowIncludeFromShow
- *
- * Relational arguments for Show
- */
-export const EventsModelsShowIncludeFromShowSchema = z
-  .object({
-    events: z
-      .union([z.boolean(), EventsModelsFindManyEventArgsFromShowSchema])
-      .optional(),
-  })
-  .register(z.globalRegistry, {
-    description: "Relational arguments for Show",
-  });
+export const EventsModelsGetRequestIncludeSchema = z
+  .lazy(() => EventsModelsEventIncludeSchema)
+  .nullable();
+
+export const EventsModelsListRequestIncludeSchema = z
+  .lazy(() => EventsModelsEventIncludeSchema)
+  .nullable();
+
+export const EventsModelsListRequestWhereSchema = z
+  .lazy(() => EventsModelsEventWhereInputSchema)
+  .nullable();
 
 /**
- * EventInclude
+ * EventList
  *
- * Event relational arguments
+ * List of events.
  */
-export const EventsModelsEventIncludeSchema = z
+export const EventsModelsListResponseResultsSchema = z
   .object({
-    show: z
-      .union([z.boolean(), EventsModelsShowArgsFromEventSchema])
-      .optional(),
+    count: z.int().register(z.globalRegistry, {
+      description: "Total number of events that matched the query.",
+    }),
+    limit: z.int().nullable(),
+    offset: z.int().nullable(),
+    get events() {
+      return z.array(EventsModelsEventSchema).register(z.globalRegistry, {
+        description: "Events that matched the request.",
+      });
+    },
   })
   .register(z.globalRegistry, {
-    description: "Event relational arguments",
+    description: "List of events.",
   });
 
 /**
@@ -2016,133 +1693,286 @@ export const EventsModelsShowSchema = z
       description: "Title of the show.",
     }),
     description: z.string().nullable(),
-    events: z.array(z.lazy((): any => EventsModelsEventSchema)).nullable(),
+    get events() {
+      return z.array(z.lazy((): any => EventsModelsEventSchema)).nullable();
+    },
   })
   .register(z.globalRegistry, {
     description: "Show data.",
   });
 
 /**
+ * ShowArgsFromEvent
+ *
+ * Arguments for Event
+ */
+export const EventsModelsShowArgsFromEventSchema = z
+  .object({
+    get include() {
+      return EventsModelsShowIncludeFromShowSchema.optional();
+    },
+  })
+  .register(z.globalRegistry, {
+    description: "Arguments for Event",
+  });
+
+/**
+ * ShowIncludeFromShow
+ *
+ * Relational arguments for Show
+ */
+export const EventsModelsShowIncludeFromShowSchema = z
+  .object({
+    get events() {
+      return z
+        .union([z.boolean(), EventsModelsFindManyEventArgsFromShowSchema])
+        .optional();
+    },
+  })
+  .register(z.globalRegistry, {
+    description: "Relational arguments for Show",
+  });
+
+/**
+ * ShowRelationFilter
+ */
+export const EventsModelsShowRelationFilterSchema = z.object({
+  get is() {
+    return EventsModelsShowWhereInputSchema.optional();
+  },
+  get isNot() {
+    return EventsModelsShowWhereInputSchema.optional();
+  },
+});
+
+/**
+ * ShowWhereInput
+ *
+ * Show arguments for searching
+ */
+export const EventsModelsShowWhereInputSchema = z
+  .object({
+    id: z.union([z.string(), EventsModelsStringFilterSchema]).optional(),
+    title: z.union([z.string(), EventsModelsStringFilterSchema]).optional(),
+    description: z
+      .union([z.string(), EventsModelsStringFilterSchema])
+      .nullish(),
+    get events() {
+      return EventsModelsEventListRelationFilterSchema.optional();
+    },
+    get and() {
+      return z
+        .array(z.lazy((): any => EventsModelsShowWhereInputSchema))
+        .optional();
+    },
+    get or() {
+      return z
+        .array(z.lazy((): any => EventsModelsShowWhereInputSchema))
+        .optional();
+    },
+    get not() {
+      return z
+        .array(z.lazy((): any => EventsModelsShowWhereInputSchema))
+        .optional();
+    },
+  })
+  .register(z.globalRegistry, {
+    description: "Show arguments for searching",
+  });
+
+export const EventsModelsUpdateRequestIncludeSchema = z
+  .lazy(() => EventsModelsEventIncludeSchema)
+  .nullable();
+
+export const InstancesModelsCreateRequestIncludeSchema = z
+  .lazy(() => InstanceIncludeSchema)
+  .nullable();
+
+/**
  * Event
  *
  * Event data.
  */
-export const EventsModelsEventSchema = z
+export const InstancesModelsEventSchema = z
   .object({
     id: z.uuid().register(z.globalRegistry, {
       description: "Identifier of the event.",
     }),
-    type: EventsModelsEventTypeSchema,
+    type: InstancesModelsEventTypeSchema,
     showId: z.uuid().nullable(),
-    show: EventsModelsShowSchema.nullable(),
-    start: EventsModelsNaiveDatetimeSchema,
-    duration: EventsModelsTimedeltaSchema,
-    timezone: EventsModelsTimezoneSchema,
-    recurrence: EventsModelsRecurrenceSchema.nullish().default(null),
-    include: z.array(EventsModelsInclusionSchema).nullish().default(null),
-    exclude: z.array(EventsModelsExclusionSchema).nullish().default(null),
-  })
-  .register(z.globalRegistry, {
-    description: "Event data.",
-  });
-
-/**
- * EventList
- *
- * List of events.
- */
-export const EventsModelsListResponseResultsSchema = z
-  .object({
-    count: z.int().register(z.globalRegistry, {
-      description: "Total number of events that matched the query.",
-    }),
-    limit: z.int().nullable(),
-    offset: z.int().nullable(),
-    events: z.array(EventsModelsEventSchema).register(z.globalRegistry, {
-      description: "Events that matched the request.",
-    }),
-  })
-  .register(z.globalRegistry, {
-    description: "List of events.",
-  });
-
-export const EventsModelsListRequestWhereSchema =
-  EventsModelsEventWhereInputSchema.nullable();
-
-export const EventsModelsListRequestIncludeSchema =
-  EventsModelsEventIncludeSchema.nullable();
-
-export const EventsModelsGetRequestIncludeSchema =
-  EventsModelsEventIncludeSchema.nullable();
-
-export const EventsModelsCreateRequestIncludeSchema =
-  EventsModelsEventIncludeSchema.nullable();
-
-/**
- * Instance
- *
- * Instance data.
- */
-export const UpdateResponseInstanceSchema = z
-  .object({
+    get show() {
+      return z.lazy((): any => InstancesModelsShowSchema).nullable();
+    },
     start: InstancesModelsNaiveDatetimeSchema,
     duration: InstancesModelsTimedeltaSchema,
-    eventId: z.uuid().register(z.globalRegistry, {
-      description: "Identifier of the event the instance belongs to.",
-    }),
-    event: InstancesModelsEventSchema.nullable(),
-  })
-  .register(z.globalRegistry, {
-    description: "Instance data.",
-  });
-
-/**
- * SplitResult
- *
- * Result of splitting an event.
- */
-export const SplitResponseResultSchema = z
-  .object({
-    before: z.lazy((): any => GetResponseEventSchema),
-    after: EventsModelsEventSchema,
-  })
-  .register(z.globalRegistry, {
-    description: "Result of splitting an event.",
-  });
-
-/**
- * Event
- *
- * Event data.
- */
-export const GetResponseEventSchema = z
-  .object({
-    id: z.uuid().register(z.globalRegistry, {
-      description: "Identifier of the event.",
-    }),
-    type: EventsModelsEventTypeSchema,
-    showId: z.uuid().nullable(),
-    show: EventsModelsShowSchema.nullable(),
-    start: EventsModelsNaiveDatetimeSchema,
-    duration: EventsModelsTimedeltaSchema,
-    timezone: EventsModelsTimezoneSchema,
-    recurrence: EventsModelsRecurrenceSchema.nullish().default(null),
-    include: z.array(EventsModelsInclusionSchema).nullish().default(null),
-    exclude: z.array(EventsModelsExclusionSchema).nullish().default(null),
+    timezone: InstancesModelsTimezoneSchema,
+    recurrence: InstancesModelsRecurrenceSchema.nullish().default(null),
+    include: z.array(InstancesModelsInclusionSchema).nullish().default(null),
+    exclude: z.array(InstancesModelsExclusionSchema).nullish().default(null),
   })
   .register(z.globalRegistry, {
     description: "Event data.",
   });
 
-export const SplitRequestIncludeSchema =
-  EventsModelsEventIncludeSchema.nullable();
+/**
+ * EventInclude
+ *
+ * Event relational arguments
+ */
+export const InstancesModelsEventIncludeSchema = z
+  .object({
+    get show() {
+      return z
+        .union([z.boolean(), InstancesModelsShowArgsFromEventSchema])
+        .optional();
+    },
+  })
+  .register(z.globalRegistry, {
+    description: "Event relational arguments",
+  });
+
+/**
+ * EventIncludeFromEvent
+ *
+ * Relational arguments for Event
+ */
+export const InstancesModelsEventIncludeFromEventSchema = z
+  .object({
+    get show() {
+      return z
+        .union([z.boolean(), InstancesModelsShowArgsFromEventSchema])
+        .optional();
+    },
+  })
+  .register(z.globalRegistry, {
+    description: "Relational arguments for Event",
+  });
+
+/**
+ * EventListRelationFilter
+ */
+export const InstancesModelsEventListRelationFilterSchema = z.object({
+  get some() {
+    return InstancesModelsEventWhereInputSchema.optional();
+  },
+  get none() {
+    return InstancesModelsEventWhereInputSchema.optional();
+  },
+  get every() {
+    return InstancesModelsEventWhereInputSchema.optional();
+  },
+});
+
+/**
+ * EventWhereInput
+ *
+ * Event arguments for searching
+ */
+export const InstancesModelsEventWhereInputSchema = z
+  .object({
+    id: z.union([z.string(), InstancesModelsStringFilterSchema]).optional(),
+    type: InstancesModelsEventTypeSchema.optional(),
+    showId: z.union([z.string(), InstancesModelsStringFilterSchema]).nullish(),
+    get show() {
+      return InstancesModelsShowRelationFilterSchema.optional();
+    },
+    get and() {
+      return z
+        .array(z.lazy((): any => InstancesModelsEventWhereInputSchema))
+        .optional();
+    },
+    get or() {
+      return z
+        .array(z.lazy((): any => InstancesModelsEventWhereInputSchema))
+        .optional();
+    },
+    get not() {
+      return z
+        .array(z.lazy((): any => InstancesModelsEventWhereInputSchema))
+        .optional();
+    },
+  })
+  .register(z.globalRegistry, {
+    description: "Event arguments for searching",
+  });
+
+/**
+ * FindManyEventArgsFromShow
+ *
+ * Arguments for Show
+ */
+export const InstancesModelsFindManyEventArgsFromShowSchema = z
+  .object({
+    take: z.int().optional(),
+    skip: z.int().optional(),
+    orderBy: z
+      .union([
+        InstancesModelsEventIdOrderByInputSchema,
+        InstancesModelsEventTypeOrderByInputSchema,
+        InstancesModelsEventShowIdOrderByInputSchema,
+        InstancesModelsEventRelevanceOrderByInputSchema,
+        z.array(
+          z.union([
+            InstancesModelsEventIdOrderByInputSchema,
+            InstancesModelsEventTypeOrderByInputSchema,
+            InstancesModelsEventShowIdOrderByInputSchema,
+            InstancesModelsEventRelevanceOrderByInputSchema,
+          ]),
+        ),
+      ])
+      .optional(),
+    get where() {
+      return z.lazy((): any => InstancesModelsEventWhereInputSchema).optional();
+    },
+    cursor: InstancesModelsEventWhereUniqueIdInputSchema.optional(),
+    distinct: z.array(z.enum(["id", "type", "showId"])).optional(),
+    get include() {
+      return z
+        .lazy((): any => InstancesModelsEventIncludeFromEventSchema)
+        .optional();
+    },
+  })
+  .register(z.globalRegistry, {
+    description: "Arguments for Show",
+  });
+
+export const InstancesModelsGetRequestIncludeSchema = z
+  .lazy(() => InstanceIncludeSchema)
+  .nullable();
+
+export const InstancesModelsListRequestIncludeSchema = z
+  .lazy(() => InstanceIncludeSchema)
+  .nullable();
+
+export const InstancesModelsListRequestWhereSchema = z
+  .lazy(() => InstanceWhereInputSchema)
+  .nullable();
+
+/**
+ * InstanceList
+ *
+ * List of instances.
+ */
+export const InstancesModelsListResponseResultsSchema = z
+  .object({
+    start: InstancesModelsUtcDatetimeSchema,
+    end: InstancesModelsUtcDatetimeSchema,
+    get instances() {
+      return z.array(InstanceSchema).register(z.globalRegistry, {
+        description: "Instances that matched the request.",
+      });
+    },
+  })
+  .register(z.globalRegistry, {
+    description: "List of instances.",
+  });
 
 /**
  * Show
  *
  * Show data.
  */
-export const GetResponseShowSchema = z
+export const InstancesModelsShowSchema = z
   .object({
     id: z.uuid().register(z.globalRegistry, {
       description: "Identifier of the show.",
@@ -2151,54 +1981,371 @@ export const GetResponseShowSchema = z
       description: "Title of the show.",
     }),
     description: z.string().nullable(),
-    events: z.array(ShowsModelsEventSchema).nullable(),
+    get events() {
+      return z.array(z.lazy((): any => InstancesModelsEventSchema)).nullable();
+    },
   })
   .register(z.globalRegistry, {
     description: "Show data.",
   });
 
 /**
- * Instance
+ * ShowArgsFromEvent
  *
- * Instance data.
+ * Arguments for Event
  */
-export const GetResponseInstanceSchema = z
+export const InstancesModelsShowArgsFromEventSchema = z
   .object({
-    start: InstancesModelsNaiveDatetimeSchema,
-    duration: InstancesModelsTimedeltaSchema,
-    eventId: z.uuid().register(z.globalRegistry, {
-      description: "Identifier of the event the instance belongs to.",
-    }),
-    event: InstancesModelsEventSchema.nullable(),
+    get include() {
+      return InstancesModelsShowIncludeFromShowSchema.optional();
+    },
   })
   .register(z.globalRegistry, {
-    description: "Instance data.",
+    description: "Arguments for Event",
   });
 
 /**
- * Instance
+ * ShowIncludeFromShow
  *
- * Instance data.
+ * Relational arguments for Show
  */
-export const CreateResponseInstanceSchema = z
+export const InstancesModelsShowIncludeFromShowSchema = z
   .object({
-    start: InstancesModelsNaiveDatetimeSchema,
-    duration: InstancesModelsTimedeltaSchema,
-    eventId: z.uuid().register(z.globalRegistry, {
-      description: "Identifier of the event the instance belongs to.",
-    }),
-    event: InstancesModelsEventSchema.nullable(),
+    get events() {
+      return z
+        .union([z.boolean(), InstancesModelsFindManyEventArgsFromShowSchema])
+        .optional();
+    },
   })
   .register(z.globalRegistry, {
-    description: "Instance data.",
+    description: "Relational arguments for Show",
   });
 
-export const EventsIdDeleteRequestSchema = z.object({
-  body: z.never().optional(),
-  path: z.object({
-    id: EventsModelsDeleteRequestIdSchema,
-  }),
-  query: z.never().optional(),
+/**
+ * ShowRelationFilter
+ */
+export const InstancesModelsShowRelationFilterSchema = z.object({
+  get is() {
+    return InstancesModelsShowWhereInputSchema.optional();
+  },
+  get isNot() {
+    return InstancesModelsShowWhereInputSchema.optional();
+  },
+});
+
+/**
+ * ShowWhereInput
+ *
+ * Show arguments for searching
+ */
+export const InstancesModelsShowWhereInputSchema = z
+  .object({
+    id: z.union([z.string(), InstancesModelsStringFilterSchema]).optional(),
+    title: z.union([z.string(), InstancesModelsStringFilterSchema]).optional(),
+    description: z
+      .union([z.string(), InstancesModelsStringFilterSchema])
+      .nullish(),
+    get events() {
+      return InstancesModelsEventListRelationFilterSchema.optional();
+    },
+    get and() {
+      return z
+        .array(z.lazy((): any => InstancesModelsShowWhereInputSchema))
+        .optional();
+    },
+    get or() {
+      return z
+        .array(z.lazy((): any => InstancesModelsShowWhereInputSchema))
+        .optional();
+    },
+    get not() {
+      return z
+        .array(z.lazy((): any => InstancesModelsShowWhereInputSchema))
+        .optional();
+    },
+  })
+  .register(z.globalRegistry, {
+    description: "Show arguments for searching",
+  });
+
+export const InstancesModelsUpdateRequestIncludeSchema = z
+  .lazy(() => InstanceIncludeSchema)
+  .nullable();
+
+export const ShowsModelsCreateRequestIncludeSchema = z
+  .lazy(() => ShowIncludeSchema)
+  .nullable();
+
+/**
+ * Event
+ *
+ * Event data.
+ */
+export const ShowsModelsEventSchema = z
+  .object({
+    id: z.uuid().register(z.globalRegistry, {
+      description: "Identifier of the event.",
+    }),
+    type: ShowsModelsEventTypeSchema,
+    showId: z.uuid().nullable(),
+    get show() {
+      return z.lazy((): any => ShowsModelsShowSchema).nullable();
+    },
+    start: ShowsModelsNaiveDatetimeSchema,
+    duration: ShowsModelsTimedeltaSchema,
+    timezone: ShowsModelsTimezoneSchema,
+    recurrence: ShowsModelsRecurrenceSchema.nullish().default(null),
+    include: z.array(ShowsModelsInclusionSchema).nullish().default(null),
+    exclude: z.array(ShowsModelsExclusionSchema).nullish().default(null),
+  })
+  .register(z.globalRegistry, {
+    description: "Event data.",
+  });
+
+/**
+ * EventIncludeFromEvent
+ *
+ * Relational arguments for Event
+ */
+export const ShowsModelsEventIncludeFromEventSchema = z
+  .object({
+    get show() {
+      return z
+        .union([z.boolean(), ShowsModelsShowArgsFromEventSchema])
+        .optional();
+    },
+  })
+  .register(z.globalRegistry, {
+    description: "Relational arguments for Event",
+  });
+
+/**
+ * EventListRelationFilter
+ */
+export const ShowsModelsEventListRelationFilterSchema = z.object({
+  get some() {
+    return ShowsModelsEventWhereInputSchema.optional();
+  },
+  get none() {
+    return ShowsModelsEventWhereInputSchema.optional();
+  },
+  get every() {
+    return ShowsModelsEventWhereInputSchema.optional();
+  },
+});
+
+/**
+ * EventWhereInput
+ *
+ * Event arguments for searching
+ */
+export const ShowsModelsEventWhereInputSchema = z
+  .object({
+    id: z.union([z.string(), ShowsModelsStringFilterSchema]).optional(),
+    type: ShowsModelsEventTypeSchema.optional(),
+    showId: z.union([z.string(), ShowsModelsStringFilterSchema]).nullish(),
+    get show() {
+      return ShowsModelsShowRelationFilterSchema.optional();
+    },
+    get and() {
+      return z
+        .array(z.lazy((): any => ShowsModelsEventWhereInputSchema))
+        .optional();
+    },
+    get or() {
+      return z
+        .array(z.lazy((): any => ShowsModelsEventWhereInputSchema))
+        .optional();
+    },
+    get not() {
+      return z
+        .array(z.lazy((): any => ShowsModelsEventWhereInputSchema))
+        .optional();
+    },
+  })
+  .register(z.globalRegistry, {
+    description: "Event arguments for searching",
+  });
+
+/**
+ * FindManyEventArgsFromShow
+ *
+ * Arguments for Show
+ */
+export const ShowsModelsFindManyEventArgsFromShowSchema = z
+  .object({
+    take: z.int().optional(),
+    skip: z.int().optional(),
+    orderBy: z
+      .union([
+        ShowsModelsEventIdOrderByInputSchema,
+        ShowsModelsEventTypeOrderByInputSchema,
+        ShowsModelsEventShowIdOrderByInputSchema,
+        ShowsModelsEventRelevanceOrderByInputSchema,
+        z.array(
+          z.union([
+            ShowsModelsEventIdOrderByInputSchema,
+            ShowsModelsEventTypeOrderByInputSchema,
+            ShowsModelsEventShowIdOrderByInputSchema,
+            ShowsModelsEventRelevanceOrderByInputSchema,
+          ]),
+        ),
+      ])
+      .optional(),
+    get where() {
+      return z.lazy((): any => ShowsModelsEventWhereInputSchema).optional();
+    },
+    cursor: ShowsModelsEventWhereUniqueIdInputSchema.optional(),
+    distinct: z.array(z.enum(["id", "type", "showId"])).optional(),
+    get include() {
+      return z
+        .lazy((): any => ShowsModelsEventIncludeFromEventSchema)
+        .optional();
+    },
+  })
+  .register(z.globalRegistry, {
+    description: "Arguments for Show",
+  });
+
+export const ShowsModelsGetRequestIncludeSchema = z
+  .lazy(() => ShowIncludeSchema)
+  .nullable();
+
+export const ShowsModelsListRequestIncludeSchema = z
+  .lazy(() => ShowIncludeSchema)
+  .nullable();
+
+export const ShowsModelsListRequestWhereSchema = z
+  .lazy(() => ShowsModelsShowWhereInputSchema)
+  .nullable();
+
+/**
+ * ShowList
+ *
+ * List of shows.
+ */
+export const ShowsModelsListResponseResultsSchema = z
+  .object({
+    count: z.int().register(z.globalRegistry, {
+      description: "Total number of shows that matched the query.",
+    }),
+    limit: z.int().nullable(),
+    offset: z.int().nullable(),
+    get shows() {
+      return z.array(ShowsModelsShowSchema).register(z.globalRegistry, {
+        description: "Shows that matched the request.",
+      });
+    },
+  })
+  .register(z.globalRegistry, {
+    description: "List of shows.",
+  });
+
+/**
+ * Show
+ *
+ * Show data.
+ */
+export const ShowsModelsShowSchema = z
+  .object({
+    id: z.uuid().register(z.globalRegistry, {
+      description: "Identifier of the show.",
+    }),
+    title: z.string().register(z.globalRegistry, {
+      description: "Title of the show.",
+    }),
+    description: z.string().nullable(),
+    get events() {
+      return z.array(ShowsModelsEventSchema).nullable();
+    },
+  })
+  .register(z.globalRegistry, {
+    description: "Show data.",
+  });
+
+/**
+ * ShowArgsFromEvent
+ *
+ * Arguments for Event
+ */
+export const ShowsModelsShowArgsFromEventSchema = z
+  .object({
+    get include() {
+      return ShowsModelsShowIncludeFromShowSchema.optional();
+    },
+  })
+  .register(z.globalRegistry, {
+    description: "Arguments for Event",
+  });
+
+/**
+ * ShowIncludeFromShow
+ *
+ * Relational arguments for Show
+ */
+export const ShowsModelsShowIncludeFromShowSchema = z
+  .object({
+    get events() {
+      return z
+        .union([z.boolean(), ShowsModelsFindManyEventArgsFromShowSchema])
+        .optional();
+    },
+  })
+  .register(z.globalRegistry, {
+    description: "Relational arguments for Show",
+  });
+
+/**
+ * ShowRelationFilter
+ */
+export const ShowsModelsShowRelationFilterSchema = z.object({
+  get is() {
+    return ShowsModelsShowWhereInputSchema.optional();
+  },
+  get isNot() {
+    return ShowsModelsShowWhereInputSchema.optional();
+  },
+});
+
+/**
+ * ShowWhereInput
+ *
+ * Show arguments for searching
+ */
+export const ShowsModelsShowWhereInputSchema = z
+  .object({
+    id: z.union([z.string(), ShowsModelsStringFilterSchema]).optional(),
+    title: z.union([z.string(), ShowsModelsStringFilterSchema]).optional(),
+    description: z.union([z.string(), ShowsModelsStringFilterSchema]).nullish(),
+    get events() {
+      return ShowsModelsEventListRelationFilterSchema.optional();
+    },
+    get and() {
+      return z
+        .array(z.lazy((): any => ShowsModelsShowWhereInputSchema))
+        .optional();
+    },
+    get or() {
+      return z
+        .array(z.lazy((): any => ShowsModelsShowWhereInputSchema))
+        .optional();
+    },
+    get not() {
+      return z
+        .array(z.lazy((): any => ShowsModelsShowWhereInputSchema))
+        .optional();
+    },
+  })
+  .register(z.globalRegistry, {
+    description: "Show arguments for searching",
+  });
+
+export const ShowsModelsUpdateRequestIncludeSchema = z
+  .lazy(() => ShowsModelsShowIncludeFromShowSchema)
+  .nullable();
+
+export const ZEventsIdDeletePath = z.object({
+  id: EventsModelsDeleteRequestIdSchema,
 });
 
 /**
@@ -2210,13 +2357,9 @@ export const EventsIdDeleteResponseSchema = z
     description: "Request fulfilled, nothing follows",
   });
 
-export const InstancesEventidStartDeleteRequestSchema = z.object({
-  body: z.never().optional(),
-  path: z.object({
-    eventId: DeleteRequestEventIdSchema,
-    start: DeleteRequestStartSchema,
-  }),
-  query: z.never().optional(),
+export const ZInstancesEventidStartDeletePath = z.object({
+  eventId: DeleteRequestEventIdSchema,
+  start: DeleteRequestStartSchema,
 });
 
 /**
@@ -2228,23 +2371,11 @@ export const InstancesEventidStartDeleteResponseSchema = z
     description: "Request fulfilled, nothing follows",
   });
 
-export const PingPingRequestSchema = z.object({
-  body: z.never().optional(),
-  path: z.never().optional(),
-  query: z.never().optional(),
-});
-
 /**
  * Request fulfilled, nothing follows
  */
 export const PingPingResponseSchema = z.void().register(z.globalRegistry, {
   description: "Request fulfilled, nothing follows",
-});
-
-export const PingHeadpingRequestSchema = z.object({
-  body: z.never().optional(),
-  path: z.never().optional(),
-  query: z.never().optional(),
 });
 
 /**
@@ -2254,12 +2385,8 @@ export const PingHeadpingResponseSchema = z.void().register(z.globalRegistry, {
   description: "Request fulfilled, nothing follows",
 });
 
-export const ShowsIdDeleteRequestSchema = z.object({
-  body: z.never().optional(),
-  path: z.object({
-    id: ShowsModelsDeleteRequestIdSchema,
-  }),
-  query: z.never().optional(),
+export const ZShowsIdDeletePath = z.object({
+  id: ShowsModelsDeleteRequestIdSchema,
 });
 
 /**
@@ -2269,14 +2396,8 @@ export const ShowsIdDeleteResponseSchema = z.void().register(z.globalRegistry, {
   description: "Request fulfilled, nothing follows",
 });
 
-export const SseSubscribeRequestSchema = z.object({
-  body: z.never().optional(),
-  path: z.never().optional(),
-  query: z
-    .object({
-      types: z.union([SubscribeRequestTypesSchema, z.string()]).nullish(),
-    })
-    .optional(),
+export const ZSseSubscribeQuery = z.object({
+  types: z.union([SubscribeRequestTypesSchema, z.string()]).nullish(),
 });
 
 /**
@@ -2288,14 +2409,8 @@ export const SseSubscribeResponseSchema = z
     description: "Request fulfilled, stream of Server-Sent Events follows",
   });
 
-export const TestTestRequestSchema = z.object({
-  body: z.never().optional(),
-  path: z.never().optional(),
-  query: z
-    .object({
-      parameters: z.union([TestRequestParametersSchema, z.string()]).nullish(),
-    })
-    .optional(),
+export const ZTestTestQuery = z.object({
+  parameters: z.union([TestRequestParametersSchema, z.string()]).nullish(),
 });
 
 /**
@@ -2303,29 +2418,15 @@ export const TestTestRequestSchema = z.object({
  */
 export const TestTestResponseSchema = TestResponseResultSchema;
 
-export const EventsListRequestSchema = z.object({
-  body: z.never().optional(),
-  path: z.never().optional(),
-  query: z
-    .object({
-      limit: z
-        .union([EventsModelsListRequestLimitSchema, z.string()])
-        .nullish(),
-      offset: z
-        .union([EventsModelsListRequestOffsetSchema, z.string()])
-        .nullish(),
-      where: z
-        .union([EventsModelsListRequestWhereSchema, z.string()])
-        .nullish(),
-      query: z.union([ListRequestQuerySchema, z.string()]).nullish(),
-      include: z
-        .union([EventsModelsListRequestIncludeSchema, z.string()])
-        .nullish(),
-      order: z
-        .union([EventsModelsListRequestOrderSchema, z.string()])
-        .nullish(),
-    })
-    .optional(),
+export const ZEventsListQuery = z.object({
+  limit: z.union([EventsModelsListRequestLimitSchema, z.string()]).nullish(),
+  offset: z.union([EventsModelsListRequestOffsetSchema, z.string()]).nullish(),
+  where: z.union([EventsModelsListRequestWhereSchema, z.string()]).nullish(),
+  query: z.union([ListRequestQuerySchema, z.string()]).nullish(),
+  include: z
+    .union([EventsModelsListRequestIncludeSchema, z.string()])
+    .nullish(),
+  order: z.union([EventsModelsListRequestOrderSchema, z.string()]).nullish(),
 });
 
 /**
@@ -2333,54 +2434,42 @@ export const EventsListRequestSchema = z.object({
  */
 export const EventsListResponseSchema = EventsModelsListResponseResultsSchema;
 
-export const EventsCreateRequestSchema = z.object({
-  body: EventsModelsCreateRequestDataSchema,
-  path: z.never().optional(),
-  query: z
-    .object({
-      include: z
-        .union([EventsModelsCreateRequestIncludeSchema, z.string()])
-        .nullish(),
-    })
-    .optional(),
+export const ZEventsCreateBody = EventsModelsCreateRequestDataSchema;
+
+export const ZEventsCreateQuery = z.object({
+  include: z
+    .union([EventsModelsCreateRequestIncludeSchema, z.string()])
+    .nullish(),
 });
 
 /**
  * Document created, URL follows
  */
-export const EventsCreateResponseSchema = EventsModelsEventSchema;
+export const EventsCreateResponseSchema = CreateResponseEventSchema;
 
-export const EventsIdGetRequestSchema = z.object({
-  body: z.never().optional(),
-  path: z.object({
-    id: EventsModelsGetRequestIdSchema,
-  }),
-  query: z
-    .object({
-      include: z
-        .union([EventsModelsGetRequestIncludeSchema, z.string()])
-        .nullish(),
-    })
-    .optional(),
+export const ZEventsIdGetPath = z.object({
+  id: EventsModelsGetRequestIdSchema,
+});
+
+export const ZEventsIdGetQuery = z.object({
+  include: z.union([EventsModelsGetRequestIncludeSchema, z.string()]).nullish(),
 });
 
 /**
  * Request fulfilled, document follows
  */
-export const EventsIdGetResponseSchema = GetResponseEventSchema;
+export const EventsIdGetResponseSchema = EventsModelsEventSchema;
 
-export const EventsIdUpdateRequestSchema = z.object({
-  body: EventsModelsUpdateRequestDataSchema,
-  path: z.object({
-    id: EventsModelsUpdateRequestIdSchema,
-  }),
-  query: z
-    .object({
-      include: z
-        .union([EventsModelsUpdateRequestIncludeSchema, z.string()])
-        .nullish(),
-    })
-    .optional(),
+export const ZEventsIdUpdateBody = EventsModelsUpdateRequestDataSchema;
+
+export const ZEventsIdUpdatePath = z.object({
+  id: EventsModelsUpdateRequestIdSchema,
+});
+
+export const ZEventsIdUpdateQuery = z.object({
+  include: z
+    .union([EventsModelsUpdateRequestIncludeSchema, z.string()])
+    .nullish(),
 });
 
 /**
@@ -2388,16 +2477,14 @@ export const EventsIdUpdateRequestSchema = z.object({
  */
 export const EventsIdUpdateResponseSchema = EventsModelsEventSchema;
 
-export const EventsIdSplitSplitRequestSchema = z.object({
-  body: SplitRequestDataSchema,
-  path: z.object({
-    id: SplitRequestIdSchema,
-  }),
-  query: z
-    .object({
-      include: z.union([SplitRequestIncludeSchema, z.string()]).nullish(),
-    })
-    .optional(),
+export const ZEventsIdSplitSplitBody = SplitRequestDataSchema;
+
+export const ZEventsIdSplitSplitPath = z.object({
+  id: SplitRequestIdSchema,
+});
+
+export const ZEventsIdSplitSplitQuery = z.object({
+  include: z.union([SplitRequestIncludeSchema, z.string()]).nullish(),
 });
 
 /**
@@ -2405,24 +2492,14 @@ export const EventsIdSplitSplitRequestSchema = z.object({
  */
 export const EventsIdSplitSplitResponseSchema = SplitResponseResultSchema;
 
-export const InstancesListRequestSchema = z.object({
-  body: z.never().optional(),
-  path: z.never().optional(),
-  query: z
-    .object({
-      start: z.union([ListRequestStartSchema, z.string()]).nullish(),
-      end: z.union([ListRequestEndSchema, z.string()]).nullish(),
-      where: z
-        .union([InstancesModelsListRequestWhereSchema, z.string()])
-        .nullish(),
-      include: z
-        .union([InstancesModelsListRequestIncludeSchema, z.string()])
-        .nullish(),
-      order: z
-        .union([InstancesModelsListRequestOrderSchema, z.string()])
-        .nullish(),
-    })
-    .optional(),
+export const ZInstancesListQuery = z.object({
+  start: z.union([ListRequestStartSchema, z.string()]).nullish(),
+  end: z.union([ListRequestEndSchema, z.string()]).nullish(),
+  where: z.union([InstancesModelsListRequestWhereSchema, z.string()]).nullish(),
+  include: z
+    .union([InstancesModelsListRequestIncludeSchema, z.string()])
+    .nullish(),
+  order: z.union([InstancesModelsListRequestOrderSchema, z.string()]).nullish(),
 });
 
 /**
@@ -2431,16 +2508,12 @@ export const InstancesListRequestSchema = z.object({
 export const InstancesListResponseSchema =
   InstancesModelsListResponseResultsSchema;
 
-export const InstancesCreateRequestSchema = z.object({
-  body: InstancesModelsCreateRequestDataSchema,
-  path: z.never().optional(),
-  query: z
-    .object({
-      include: z
-        .union([InstancesModelsCreateRequestIncludeSchema, z.string()])
-        .nullish(),
-    })
-    .optional(),
+export const ZInstancesCreateBody = InstancesModelsCreateRequestDataSchema;
+
+export const ZInstancesCreateQuery = z.object({
+  include: z
+    .union([InstancesModelsCreateRequestIncludeSchema, z.string()])
+    .nullish(),
 });
 
 /**
@@ -2448,19 +2521,15 @@ export const InstancesCreateRequestSchema = z.object({
  */
 export const InstancesCreateResponseSchema = CreateResponseInstanceSchema;
 
-export const InstancesEventidStartGetRequestSchema = z.object({
-  body: z.never().optional(),
-  path: z.object({
-    eventId: GetRequestEventIdSchema,
-    start: GetRequestStartSchema,
-  }),
-  query: z
-    .object({
-      include: z
-        .union([InstancesModelsGetRequestIncludeSchema, z.string()])
-        .nullish(),
-    })
-    .optional(),
+export const ZInstancesEventidStartGetPath = z.object({
+  eventId: GetRequestEventIdSchema,
+  start: GetRequestStartSchema,
+});
+
+export const ZInstancesEventidStartGetQuery = z.object({
+  include: z
+    .union([InstancesModelsGetRequestIncludeSchema, z.string()])
+    .nullish(),
 });
 
 /**
@@ -2468,19 +2537,18 @@ export const InstancesEventidStartGetRequestSchema = z.object({
  */
 export const InstancesEventidStartGetResponseSchema = GetResponseInstanceSchema;
 
-export const InstancesEventidStartUpdateRequestSchema = z.object({
-  body: InstancesModelsUpdateRequestDataSchema,
-  path: z.object({
-    eventId: UpdateRequestEventIdSchema,
-    start: UpdateRequestStartSchema,
-  }),
-  query: z
-    .object({
-      include: z
-        .union([InstancesModelsUpdateRequestIncludeSchema, z.string()])
-        .nullish(),
-    })
-    .optional(),
+export const ZInstancesEventidStartUpdateBody =
+  InstancesModelsUpdateRequestDataSchema;
+
+export const ZInstancesEventidStartUpdatePath = z.object({
+  eventId: UpdateRequestEventIdSchema,
+  start: UpdateRequestStartSchema,
+});
+
+export const ZInstancesEventidStartUpdateQuery = z.object({
+  include: z
+    .union([InstancesModelsUpdateRequestIncludeSchema, z.string()])
+    .nullish(),
 });
 
 /**
@@ -2489,22 +2557,12 @@ export const InstancesEventidStartUpdateRequestSchema = z.object({
 export const InstancesEventidStartUpdateResponseSchema =
   UpdateResponseInstanceSchema;
 
-export const ShowsListRequestSchema = z.object({
-  body: z.never().optional(),
-  path: z.never().optional(),
-  query: z
-    .object({
-      limit: z.union([ShowsModelsListRequestLimitSchema, z.string()]).nullish(),
-      offset: z
-        .union([ShowsModelsListRequestOffsetSchema, z.string()])
-        .nullish(),
-      where: z.union([ShowsModelsListRequestWhereSchema, z.string()]).nullish(),
-      include: z
-        .union([ShowsModelsListRequestIncludeSchema, z.string()])
-        .nullish(),
-      order: z.union([ShowsModelsListRequestOrderSchema, z.string()]).nullish(),
-    })
-    .optional(),
+export const ZShowsListQuery = z.object({
+  limit: z.union([ShowsModelsListRequestLimitSchema, z.string()]).nullish(),
+  offset: z.union([ShowsModelsListRequestOffsetSchema, z.string()]).nullish(),
+  where: z.union([ShowsModelsListRequestWhereSchema, z.string()]).nullish(),
+  include: z.union([ShowsModelsListRequestIncludeSchema, z.string()]).nullish(),
+  order: z.union([ShowsModelsListRequestOrderSchema, z.string()]).nullish(),
 });
 
 /**
@@ -2512,57 +2570,165 @@ export const ShowsListRequestSchema = z.object({
  */
 export const ShowsListResponseSchema = ShowsModelsListResponseResultsSchema;
 
-export const ShowsCreateRequestSchema = z.object({
-  body: ShowsModelsCreateRequestDataSchema,
-  path: z.never().optional(),
-  query: z
-    .object({
-      include: z
-        .union([ShowsModelsCreateRequestIncludeSchema, z.string()])
-        .nullish(),
-    })
-    .optional(),
+export const ZShowsCreateBody = ShowsModelsCreateRequestDataSchema;
+
+export const ZShowsCreateQuery = z.object({
+  include: z
+    .union([ShowsModelsCreateRequestIncludeSchema, z.string()])
+    .nullish(),
 });
 
 /**
  * Document created, URL follows
  */
-export const ShowsCreateResponseSchema = ShowsModelsShowSchema;
+export const ShowsCreateResponseSchema = CreateResponseShowSchema;
 
-export const ShowsIdGetRequestSchema = z.object({
-  body: z.never().optional(),
-  path: z.object({
-    id: ShowsModelsGetRequestIdSchema,
-  }),
-  query: z
-    .object({
-      include: z
-        .union([ShowsModelsGetRequestIncludeSchema, z.string()])
-        .nullish(),
-    })
-    .optional(),
+export const ZShowsIdGetPath = z.object({
+  id: ShowsModelsGetRequestIdSchema,
+});
+
+export const ZShowsIdGetQuery = z.object({
+  include: z.union([ShowsModelsGetRequestIncludeSchema, z.string()]).nullish(),
 });
 
 /**
  * Request fulfilled, document follows
  */
-export const ShowsIdGetResponseSchema = GetResponseShowSchema;
+export const ShowsIdGetResponseSchema = ShowsModelsShowSchema;
 
-export const ShowsIdUpdateRequestSchema = z.object({
-  body: ShowsModelsUpdateRequestDataSchema,
-  path: z.object({
-    id: ShowsModelsUpdateRequestIdSchema,
-  }),
-  query: z
-    .object({
-      include: z
-        .union([ShowsModelsUpdateRequestIncludeSchema, z.string()])
-        .nullish(),
-    })
-    .optional(),
+export const ZShowsIdUpdateBody = ShowsModelsUpdateRequestDataSchema;
+
+export const ZShowsIdUpdatePath = z.object({
+  id: ShowsModelsUpdateRequestIdSchema,
+});
+
+export const ZShowsIdUpdateQuery = z.object({
+  include: z
+    .union([ShowsModelsUpdateRequestIncludeSchema, z.string()])
+    .nullish(),
 });
 
 /**
  * Request fulfilled, document follows
  */
 export const ShowsIdUpdateResponseSchema = ShowsModelsShowSchema;
+
+export const EventsListRequestSchema = z.object({
+  body: z.never().optional(),
+  path: z.never().optional(),
+  query: ZEventsListQuery.optional(),
+});
+
+export const EventsCreateRequestSchema = z.object({
+  body: ZEventsCreateBody,
+  path: z.never().optional(),
+  query: ZEventsCreateQuery.optional(),
+});
+
+export const EventsIdDeleteRequestSchema = z.object({
+  body: z.never().optional(),
+  path: ZEventsIdDeletePath,
+  query: z.never().optional(),
+});
+
+export const EventsIdGetRequestSchema = z.object({
+  body: z.never().optional(),
+  path: ZEventsIdGetPath,
+  query: ZEventsIdGetQuery.optional(),
+});
+
+export const EventsIdUpdateRequestSchema = z.object({
+  body: ZEventsIdUpdateBody,
+  path: ZEventsIdUpdatePath,
+  query: ZEventsIdUpdateQuery.optional(),
+});
+
+export const EventsIdSplitSplitRequestSchema = z.object({
+  body: ZEventsIdSplitSplitBody,
+  path: ZEventsIdSplitSplitPath,
+  query: ZEventsIdSplitSplitQuery.optional(),
+});
+
+export const InstancesListRequestSchema = z.object({
+  body: z.never().optional(),
+  path: z.never().optional(),
+  query: ZInstancesListQuery.optional(),
+});
+
+export const InstancesCreateRequestSchema = z.object({
+  body: ZInstancesCreateBody,
+  path: z.never().optional(),
+  query: ZInstancesCreateQuery.optional(),
+});
+
+export const InstancesEventidStartDeleteRequestSchema = z.object({
+  body: z.never().optional(),
+  path: ZInstancesEventidStartDeletePath,
+  query: z.never().optional(),
+});
+
+export const InstancesEventidStartGetRequestSchema = z.object({
+  body: z.never().optional(),
+  path: ZInstancesEventidStartGetPath,
+  query: ZInstancesEventidStartGetQuery.optional(),
+});
+
+export const InstancesEventidStartUpdateRequestSchema = z.object({
+  body: ZInstancesEventidStartUpdateBody,
+  path: ZInstancesEventidStartUpdatePath,
+  query: ZInstancesEventidStartUpdateQuery.optional(),
+});
+
+export const PingPingRequestSchema = z.object({
+  body: z.never().optional(),
+  path: z.never().optional(),
+  query: z.never().optional(),
+});
+
+export const PingHeadpingRequestSchema = z.object({
+  body: z.never().optional(),
+  path: z.never().optional(),
+  query: z.never().optional(),
+});
+
+export const ShowsListRequestSchema = z.object({
+  body: z.never().optional(),
+  path: z.never().optional(),
+  query: ZShowsListQuery.optional(),
+});
+
+export const ShowsCreateRequestSchema = z.object({
+  body: ZShowsCreateBody,
+  path: z.never().optional(),
+  query: ZShowsCreateQuery.optional(),
+});
+
+export const ShowsIdDeleteRequestSchema = z.object({
+  body: z.never().optional(),
+  path: ZShowsIdDeletePath,
+  query: z.never().optional(),
+});
+
+export const ShowsIdGetRequestSchema = z.object({
+  body: z.never().optional(),
+  path: ZShowsIdGetPath,
+  query: ZShowsIdGetQuery.optional(),
+});
+
+export const ShowsIdUpdateRequestSchema = z.object({
+  body: ZShowsIdUpdateBody,
+  path: ZShowsIdUpdatePath,
+  query: ZShowsIdUpdateQuery.optional(),
+});
+
+export const SseSubscribeRequestSchema = z.object({
+  body: z.never().optional(),
+  path: z.never().optional(),
+  query: ZSseSubscribeQuery.optional(),
+});
+
+export const TestTestRequestSchema = z.object({
+  body: z.never().optional(),
+  path: z.never().optional(),
+  query: ZTestTestQuery.optional(),
+});
