@@ -64,3 +64,27 @@ You can configure the app at runtime using various environment variables:
 - `MAGNOLIA__SERVER__PORT` -
   port to run the server on
   (default: `10720`)
+- `MAGNOLIA__URLS__ORCHID__HOST` -
+  host of the public URL of the orchid app
+  (default: `localhost`)
+- `MAGNOLIA__URLS__ORCHID__PATH` -
+  path of the public URL of the orchid app
+  (default: ``)
+- `MAGNOLIA__URLS__ORCHID__PORT` -
+  port of the public URL of the orchid app
+  (default: `20120`)
+- `MAGNOLIA__URLS__ORCHID__SCHEME` -
+  scheme of the public URL of the orchid app
+  (default: `http`)
+- `MAGNOLIA__URLS__SUNFLOWER__HOST` -
+  host of the public URL of the sunflower app
+  (default: `localhost`)
+- `MAGNOLIA__URLS__SUNFLOWER__PATH` -
+  path of the public URL of the sunflower app
+  (default: ``)
+- `MAGNOLIA__URLS__SUNFLOWER__PORT` -
+  port of the public URL of the sunflower app
+  (default: `30000`)
+- `MAGNOLIA__URLS__SUNFLOWER__SCHEME` -
+  scheme of the public URL of the sunflower app
+  (default: `http`)

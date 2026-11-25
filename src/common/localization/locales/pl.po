@@ -17,10 +17,18 @@ msgstr ""
 msgid "{remaining, plural, other {...and # more.}}"
 msgstr "{remaining, plural, other {...i # więcej.}}"
 
+#: src/isomorphic/identity/components/identity-widget/main.tsx:59
+msgid "Account"
+msgstr "Konto"
+
 #: src/client/core/components/list-recordings-widget/main.tsx:94
 #: src/client/test/components/test-widget/main.tsx:50
 msgid "An unexpected error occurred"
 msgstr "Wystąpił nieoczekiwany błąd"
+
+#: src/isomorphic/identity/components/identity-widget/main.tsx:54
+msgid "Apps"
+msgstr "Aplikacje"
 
 #: src/app/(root)/layout.tsx:37
 msgid "Broadcast recordings app 📼"
@@ -55,7 +63,7 @@ msgstr "Informacja"
 msgid "Invalid input"
 msgstr "Nieprawidłowe dane wejściowe"
 
-#: src/isomorphic/identity/components/identity-widget/main.tsx:24
+#: src/isomorphic/identity/components/identity-widget/main.tsx:65
 msgid "Logout"
 msgstr "Wyloguj się"
 
