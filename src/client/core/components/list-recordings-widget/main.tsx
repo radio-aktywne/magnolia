@@ -6,7 +6,6 @@ import { msg, plural } from "@lingui/core/macro";
 import { Group, Stack, Text, Title } from "@mantine/core";
 import { List } from "@radio-aktywne/ui";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { useRouter } from "next/navigation";
 import { useCallback, useMemo, useState } from "react";
 import { useDeepCompareMemo } from "use-deep-compare";
 
@@ -17,6 +16,7 @@ import { createUrl } from "../../../../common/generic/lib/create-url";
 import { isOrpcDefinedError } from "../../../../common/orpc/lib/is-orpc-defined-error";
 import { useLocalization } from "../../../../isomorphic/localization/hooks/use-localization";
 import { useNotifications } from "../../../../isomorphic/notifications/hooks/use-notifications";
+import { useLocalizedRouter } from "../../../../isomorphic/routing/hooks/use-localized-router";
 import { orpcClientSideQueryClient } from "../../../orpc/vars/clients";
 import { RangeFilter } from "./components/range-filter";
 import { RecordingItem } from "./components/recording-item";
@@ -25,7 +25,7 @@ import { ShowFilter } from "./components/show-filter";
 export function ListRecordingsWidget({ show }: ListRecordingsWidgetInput) {
   const [range, setRange] = useState<[Dayjs, Dayjs] | null>(null);
 
-  const router = useRouter();
+  const { router } = useLocalizedRouter();
 
   const { localization } = useLocalization();
   const { notifications } = useNotifications();
@@ -63,7 +63,7 @@ export function ListRecordingsWidget({ show }: ListRecordingsWidgetInput) {
     (value: null | string) => {
       router.push(
         createUrl({
-          path: "/recordings",
+          path: "/",
           query: value ? { show: value } : undefined,
         }).url,
       );

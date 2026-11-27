@@ -17,12 +17,16 @@ msgstr ""
 msgid "{remaining, plural, other {...and # more.}}"
 msgstr "{remaining, plural, other {...and # more.}}"
 
+#: src/common/routing/constants.ts:5
+msgid "/"
+msgstr "/"
+
 #: src/isomorphic/identity/components/identity-widget/main.tsx:59
 msgid "Account"
 msgstr "Account"
 
 #: src/client/core/components/list-recordings-widget/main.tsx:94
-#: src/client/test/components/test-widget/main.tsx:50
+#: src/client/example/components/example-widget/main.tsx:50
 msgid "An unexpected error occurred"
 msgstr "An unexpected error occurred"
 
@@ -30,11 +34,11 @@ msgstr "An unexpected error occurred"
 msgid "Apps"
 msgstr "Apps"
 
-#: src/app/(root)/layout.tsx:37
+#: src/app/(root)/layout.tsx:39
 msgid "Broadcast recordings app 📼"
 msgstr "Broadcast recordings app 📼"
 
-#: src/client/test/components/test-widget/components/test-form/main.tsx:30
+#: src/client/example/components/example-widget/components/example-form/main.tsx:34
 msgid "Enter some value"
 msgstr "Enter some value"
 
@@ -58,8 +62,8 @@ msgstr "Forbidden • magnolia"
 msgid "Info"
 msgstr "Info"
 
-#: src/client/test/components/test-widget/main.tsx:39
-#: src/client/test/components/test-widget/main.tsx:60
+#: src/client/example/components/example-widget/main.tsx:39
+#: src/client/example/components/example-widget/main.tsx:60
 msgid "Invalid input"
 msgstr "Invalid input"
 
@@ -67,7 +71,7 @@ msgstr "Invalid input"
 msgid "Logout"
 msgstr "Logout"
 
-#: src/app/(root)/layout.tsx:43
+#: src/app/(root)/layout.tsx:45
 msgid "magnolia"
 msgstr "magnolia"
 
@@ -99,11 +103,11 @@ msgstr "Recording deleted"
 msgid "Recordings"
 msgstr "Recordings"
 
-#: src/app/(root)/(main)/recordings/page.tsx:45
+#: src/app/(root)/(main)/(home)/page.tsx:46
 msgid "Recordings • {showTitle} • magnolia"
 msgstr "Recordings • {showTitle} • magnolia"
 
-#: src/app/(root)/(main)/recordings/page.tsx:24
+#: src/app/(root)/(main)/(home)/page.tsx:25
 msgid "Recordings • magnolia"
 msgstr "Recordings • magnolia"
 
@@ -119,7 +123,7 @@ msgstr "Select show"
 msgid "Something went wrong"
 msgstr "Something went wrong"
 
-#: src/client/test/components/test-widget/components/test-form/main.tsx:36
+#: src/client/example/components/example-widget/components/example-form/main.tsx:40
 msgid "Submit"
 msgstr "Submit"
 
@@ -131,7 +135,7 @@ msgstr "Success"
 msgid "Warning"
 msgstr "Warning"
 
-#: src/server/orpc/vars/procedures/vars/test/vars/validate/main.ts:29
+#: src/server/orpc/vars/procedures/vars/example/vars/validate/main.ts:29
 msgid "Why did the chicken cross the road? To get to the other side."
 msgstr "Why did the chicken cross the road? To get to the other side."
 
